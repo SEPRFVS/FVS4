@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import fvs.taxe.controller.*;
 import fvs.taxe.dialog.DialogEndGame;
@@ -38,7 +38,7 @@ public class GameScreen extends ScreenAdapter {
 
     public GameScreen(TaxeGame game) {
         this.game = game;
-        stage = new Stage(new StretchViewport(TaxeGame.WIDTH, TaxeGame.HEIGHT));
+        stage = new Stage(new FitViewport(TaxeGame.WIDTH, TaxeGame.HEIGHT));
 
         //Sets the skin
         skin = new Skin(Gdx.files.internal("data/uiskin.json"));

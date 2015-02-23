@@ -9,9 +9,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class MainMenuScreen extends ScreenAdapter {
+	private Stage stage;
     TaxeGame game;
     OrthographicCamera camera;
     Rectangle playBounds;
@@ -24,6 +27,7 @@ public class MainMenuScreen extends ScreenAdapter {
         //This sets all the relevant variables for the menu screen
         //Did not understand this fully so did not change anything
         this.game = game;
+        stage = new Stage(new FitViewport(TaxeGame.WIDTH, TaxeGame.HEIGHT));
         camera = new OrthographicCamera(TaxeGame.WIDTH, TaxeGame.HEIGHT);
         camera.setToOrtho(false);
 
@@ -92,5 +96,10 @@ public class MainMenuScreen extends ScreenAdapter {
     public void render(float delta) {
         update();
         draw();
+    }
+    
+    @Override
+    public void resize(int width, int height) {
+    	stage.getViewport().update(width, height);
     }
 }
