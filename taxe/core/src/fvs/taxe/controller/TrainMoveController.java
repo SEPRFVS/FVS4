@@ -92,7 +92,7 @@ public class TrainMoveController {
                 //This informs the user that their train has completed a goal, if it has
                 ArrayList<String> completedGoals = context.getGameLogic().getGoalManager().trainArrived(train, train.getPlayer());
                 for (String message : completedGoals) {
-                    context.getTopBarController().displayFlashMessage(message, Color.WHITE, 2);
+                    context.getSideBarController().displayFlashMessage(message, Color.WHITE, 2);
                 }
 
                 //Sets the train's position to be equal to its final destination's position so that it is appropriately hidden and linked to the station

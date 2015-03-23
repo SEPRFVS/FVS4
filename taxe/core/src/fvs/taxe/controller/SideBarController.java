@@ -14,7 +14,7 @@ import gameLogic.GameState;
 import gameLogic.listeners.GameStateListener;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
-public class TopBarController {
+public class SideBarController {
     //This class controls what is displayed in the topBar, the primary method of informing the players of events that occur in game
     //It's very possible to move away from a topBar orientated design and more to dialogs as we have done, but we decided not to entirely due to the work required.
     public final static int CONTROLS_WIDTH = 250;
@@ -24,7 +24,7 @@ public class TopBarController {
     private TextButton endTurnButton;
     private Label flashMessage;
 
-    public TopBarController(Context context) {
+    public SideBarController(Context context) {
         this.context = context;
         //This creates a listener that changes the bar colour based on the state that the game is in
         context.getGameLogic().subscribeStateChanged(new GameStateListener() {

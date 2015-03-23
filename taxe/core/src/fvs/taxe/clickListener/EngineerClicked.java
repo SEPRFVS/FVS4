@@ -45,7 +45,7 @@ public class EngineerClicked extends ClickListener {
         if (!displayingMessage) {
             displayingMessage = true;
             if (Game.getInstance().getState() == GameState.NORMAL) {
-                context.getTopBarController().displayMessage("Your Engineer. Used to fix damaged connections.", Color.BLACK);
+                context.getSideBarController().displayMessage("Your Engineer. Used to fix damaged connections.", Color.BLACK);
 
 
             }
@@ -60,7 +60,7 @@ public class EngineerClicked extends ClickListener {
             displayingMessage = false;
             if (Game.getInstance().getState() == GameState.NORMAL) {
                 //If the game state is normal then the topBar is cleared by passing it an empty string to display for 0 seconds
-                context.getTopBarController().clearMessage();
+                context.getSideBarController().clearMessage();
             }
         }
     }

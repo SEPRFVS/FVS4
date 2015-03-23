@@ -110,7 +110,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                     public void clicked(Station station) {
                         //Checks whether a node is a junction or not. If it is then the train cannot be placed there and the user is informed
                         if (station instanceof CollisionStation) {
-                            context.getTopBarController().displayFlashMessage("Trains cannot be placed at junctions.", Color.RED);
+                            context.getSideBarController().displayFlashMessage("Trains cannot be placed at junctions.", Color.RED);
 
                         } else {
                             //This puts the train at the station that the user clicks and adds it to the trains visited history
@@ -194,7 +194,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                 Game.getInstance().setState(GameState.PLACING_RESOURCE);
                 final TrainController trainController = new TrainController(context);
                 trainController.setTrainsVisible(null, false);
-                context.getTopBarController().displayMessage("Placing Obstacle", Color.BLACK);
+                context.getSideBarController().displayMessage("Placing Obstacle", Color.BLACK);
 
                 //Creates a clickListener for when a station is clicked
                 final StationClickListener stationListener = new StationClickListener() {
@@ -238,7 +238,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                             //This code runs regardless of whether the placement was successful, this returns the game to its normal state
 
                             //Resets the topBar
-                            context.getTopBarController().displayFlashMessage("", Color.BLACK);
+                            context.getSideBarController().displayFlashMessage("", Color.BLACK);
 
                             //Unsubscribes from the StationClickListener as this would cause a lot of errors and unexpected behaviour is not called from the correct context
                             StationController.unsubscribeStationClick(this);
@@ -269,7 +269,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                             Game.getInstance().setState(GameState.NORMAL);
 
                             //Resets the topBar
-                            context.getTopBarController().clearMessage();
+                            context.getSideBarController().clearMessage();
 
                             //Removes itself from the keylisteners of the game as otherwise there would be a lot of null pointer exceptions and unintended behaviour
                             context.getStage().removeListener(this);
@@ -299,7 +299,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                 //Hides all trains
                 final TrainController trainController = new TrainController(context);
                 trainController.setTrainsVisible(null, false);
-                context.getTopBarController().displayMessage("Placing Engineer", Color.BLACK);
+                context.getSideBarController().displayMessage("Placing Engineer", Color.BLACK);
 
                 //Adds a station click listener that handles all the logic
                 final StationClickListener stationListener = new StationClickListener() {
@@ -340,7 +340,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                                 engineer.setStation2(null);
                             }
                             //This resets all relevant values and unsubscribes from the listeners created for placing engineers
-                            context.getTopBarController().clearMessage();
+                            context.getSideBarController().clearMessage();
                             StationController.unsubscribeStationClick(this);
                             Gdx.input.setCursorImage(null, 0, 0);
                             context.getGameLogic().setState(GameState.NORMAL);
@@ -367,7 +367,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                             Game.getInstance().setState(GameState.NORMAL);
 
                             //Resets the topBar
-                            context.getTopBarController().clearMessage();
+                            context.getSideBarController().clearMessage();
 
                             //Removes itself from the keylisteners of the game as otherwise there would be a lot of null pointer exceptions and unintended behaviour
                             context.getStage().removeListener(this);

@@ -47,7 +47,7 @@ public class SkipClicked extends ClickListener {
         if (!displayingMessage) {
             displayingMessage = true;
             if (Game.getInstance().getState() == GameState.NORMAL) {
-                context.getTopBarController().displayMessage("Force your opponent to skip a turn.", Color.BLACK);
+                context.getSideBarController().displayMessage("Force your opponent to skip a turn.", Color.BLACK);
 
 
             }
@@ -62,7 +62,7 @@ public class SkipClicked extends ClickListener {
             displayingMessage = false;
             if (Game.getInstance().getState() == GameState.NORMAL) {
                 //If the game state is normal then the topBar is cleared by passing it an empty string to display for 0 seconds
-                context.getTopBarController().clearMessage();
+                context.getSideBarController().clearMessage();
             }
         }
     }

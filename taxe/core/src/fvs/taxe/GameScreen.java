@@ -31,7 +31,7 @@ public class GameScreen extends ScreenAdapter {
     private Context context;
 
     private StationController stationController;
-    private TopBarController topBarController;
+    private SideBarController sideBarController;
     private ResourceController resourceController;
     private GoalController goalController;
     private RouteController routeController;
@@ -57,12 +57,12 @@ public class GameScreen extends ScreenAdapter {
 
         //Initialises all of the controllers for the UI
         stationController = new StationController(context, tooltip);
-        topBarController = new TopBarController(context);
+        sideBarController = new SideBarController(context);
         resourceController = new ResourceController(context);
         goalController = new GoalController(context);
         routeController = new RouteController(context);
         context.setRouteController(routeController);
-        context.setTopBarController(topBarController);
+        context.setSideBarController(sideBarController);
 
         //Adds a listener that displays a flash message whenever the turn ends
         gameLogic.getPlayerManager().subscribeTurnChanged(new TurnListener() {
@@ -71,7 +71,7 @@ public class GameScreen extends ScreenAdapter {
                 //The game will not be set into the animating state for the first turn to prevent player 1 from gaining an inherent advantage by gaining an extra turn of movement.
                 if (context.getGameLogic().getPlayerManager().getTurnNumber()!=1) {
                     gameLogic.setState(GameState.ANIMATING);
-                    topBarController.displayFlashMessage("Time is passing...", Color.BLACK);
+                    sideBarController.displayFlashMessage("Time is passing...", Color.BLACK);
                 }
             }
         });
@@ -105,10 +105,10 @@ public class GameScreen extends ScreenAdapter {
         game.batch.begin();
 
         //Draws the map background
-        game.batch.draw(mapTexture, 0, 0, TaxeGame.WIDTH - TopBarController.CONTROLS_WIDTH, TaxeGame.HEIGHT);
+        game.batch.draw(mapTexture, 0, 0, TaxeGame.WIDTH - SideBarController.CONTROLS_WIDTH, TaxeGame.HEIGHT);
         game.batch.end();
 
-        topBarController.drawBackground();
+        sideBarController.drawBackground();
 
         stationController.renderConnections(map.getConnections(), Color.GRAY);
         if (gameLogic.getState() == GameState.PLACING_TRAIN || gameLogic.getState() == GameState
@@ -141,7 +141,7 @@ public class GameScreen extends ScreenAdapter {
 
         stage.draw();
 
-        topBarController.drawContent();
+        sideBarController.drawContent();
 
         resourceController.drawHeaderText();
         goalController.drawHeaderText();
@@ -159,7 +159,7 @@ public class GameScreen extends ScreenAdapter {
         //Initially some of this functionality was in the draw() routine, but it was found that when the player clicked on a button a new one was rendered before the input could be handled
         //This is why the header texts and the buttons are rendered separately, to prevent these issues from occuring
         stationController.renderStations();
-        topBarController.addEndTurnButton();
+        sideBarController.addEndTurnButton();
         goalController.showCurrentPlayerGoals();
         resourceController.drawPlayerResources(gameLogic.getPlayerManager().getCurrentPlayer());
     }

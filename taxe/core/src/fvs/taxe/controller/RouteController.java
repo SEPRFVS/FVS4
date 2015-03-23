@@ -88,7 +88,7 @@ public class RouteController {
                      //Sets the relevant boolean checking if the last node on the route is a junction or not
                      canEndRouting = !(station instanceof CollisionStation);
                  }else {
-                     context.getTopBarController().displayFlashMessage("This connection doesn't exist", Color.RED);
+                     context.getSideBarController().displayFlashMessage("This connection doesn't exist", Color.RED);
                  }
              }else {
                  Station lastStation = train.getLastStation();
@@ -100,7 +100,7 @@ public class RouteController {
                      //Sets the relevant boolean checking if the last node on the route is a junction or not
                      canEndRouting = !(station instanceof CollisionStation);
                  } else {
-                     context.getTopBarController().displayFlashMessage("This connection doesn't exist", Color.RED);
+                     context.getSideBarController().displayFlashMessage("This connection doesn't exist", Color.RED);
                  }
              }
          }else{
@@ -117,13 +117,13 @@ public class RouteController {
 
             if (!hasConnection) {
                 //If the connection doesn't exist then this informs the user
-                context.getTopBarController().displayFlashMessage("This connection doesn't exist", Color.RED);
+                context.getSideBarController().displayFlashMessage("This connection doesn't exist", Color.RED);
 
             } else {
                 distance+= context.getGameLogic().getMap().getDistance(lastStation, station);
                 DecimalFormat integer = new DecimalFormat("0");
 
-                context.getTopBarController().displayMessage("Total Distance: " + integer.format(distance) + ". Will take " + integer.format(Math.ceil(distance / train.getSpeed() / 2)) + " turns.", Color.BLACK);
+                context.getSideBarController().displayMessage("Total Distance: " + integer.format(distance) + ". Will take " + integer.format(Math.ceil(distance / train.getSpeed() / 2)) + " turns.", Color.BLACK);
                 //If the connection exists then the station passed to the method is added to the route
                 positions.add(station.getLocation());
                 //Sets the relevant boolean checking if the last node on the route is a junction or not
@@ -136,7 +136,7 @@ public class RouteController {
         TextButton doneRouting = new TextButton("Route Complete", context.getSkin());
         TextButton cancel = new TextButton("Cancel", context.getSkin());
 
-        doneRouting.setPosition(TaxeGame.WIDTH - TopBarController.CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 10.0f);
+        doneRouting.setPosition(TaxeGame.WIDTH - SideBarController.CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 10.0f);
         cancel.setPosition(TaxeGame.WIDTH - 100, TaxeGame.HEIGHT - 33);
 
         //If the cancel button is clicked then the routing is ended but none of the positions are saved as a route in the backend
@@ -154,7 +154,7 @@ public class RouteController {
                 //Checks whether or not the route is legal and can end
                 if (!canEndRouting) {
                     //If not, informs the user of what they must do to make the route legal
-                    context.getTopBarController().displayFlashMessage("Your route must end at a station", Color.RED);
+                    context.getSideBarController().displayFlashMessage("Your route must end at a station", Color.RED);
 
                 } else {
                     //If the route is legal then the route is saved and routing ended
@@ -189,7 +189,7 @@ public class RouteController {
         isRouting = false;
         editingRoute = false;
         distance = 0;
-        context.getTopBarController().clearMessage();
+        context.getSideBarController().clearMessage();
         //This sets all trains currently travelling along their route to be set to visible.
         TrainController trainController = new TrainController(context);
         trainController.setTrainsVisible(train, true);
@@ -262,7 +262,7 @@ public class RouteController {
             if (prevStation!=null) {
                 distance += context.getGameLogic().getMap().getDistance(station,prevStation);
                 DecimalFormat integer = new DecimalFormat("0");
-                context.getTopBarController().displayMessage("Total Distance: " + integer.format(distance) + ". Will take " + integer.format(Math.ceil(distance / train.getSpeed() / 2)) + " turns.", Color.BLACK);
+                context.getSideBarController().displayMessage("Total Distance: " + integer.format(distance) + ". Will take " + integer.format(Math.ceil(distance / train.getSpeed() / 2)) + " turns.", Color.BLACK);
             }
             prevStation = station;
         }
@@ -278,7 +278,7 @@ public class RouteController {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 context.getGameLogic().setState(GameState.NORMAL);
-                context.getTopBarController().clearMessage();
+                context.getSideBarController().clearMessage();
                 routingButtons.remove();
                 distance = 0;
 

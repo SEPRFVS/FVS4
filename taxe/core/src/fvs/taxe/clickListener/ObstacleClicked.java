@@ -45,7 +45,7 @@ public class ObstacleClicked extends ClickListener {
         if (!displayingMessage) {
             displayingMessage = true;
             if (Game.getInstance().getState() == GameState.NORMAL) {
-                context.getTopBarController().displayMessage("Place an obstacle on a connection on the map", Color.BLACK);
+                context.getSideBarController().displayMessage("Place an obstacle on a connection on the map", Color.BLACK);
 
 
             }
@@ -60,7 +60,7 @@ public class ObstacleClicked extends ClickListener {
             displayingMessage = false;
             if (Game.getInstance().getState() == GameState.NORMAL) {
                 //If the game state is normal then the topBar is cleared by passing it an empty string to display for 0 seconds
-                context.getTopBarController().clearMessage();
+                context.getSideBarController().clearMessage();
             }
         }
     }

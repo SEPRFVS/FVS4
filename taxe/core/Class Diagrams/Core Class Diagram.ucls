@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.8" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true">  
-  <interface id="1" language="java" name="fvs.taxe.RouteConfirmedListener" project="taxe-core" 
-    file="/taxe-core/src/fvs/taxe/RouteConfirmedListener.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="81" width="163" x="130" y="-42"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </interface>  
-  <class id="2" language="java" name="fvs.taxe.MainMenuScreen" project="taxe-core" 
+  <class id="1" language="java" name="fvs.taxe.MainMenuScreen" project="taxe-core" 
     file="/taxe-core/src/fvs/taxe/MainMenuScreen.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="243" width="168" x="333" y="-42"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -19,7 +10,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="3" language="java" name="fvs.taxe.Button" project="taxe-core" 
+  <enumeration id="2" language="java" name="fvs.taxe.Button" project="taxe-core" 
     file="/taxe-core/src/fvs/taxe/Button.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="135" width="133" x="541" y="-42"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -28,7 +19,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <class id="4" language="java" name="fvs.taxe.TaxeGame" project="taxe-core" 
+  <class id="3" language="java" name="fvs.taxe.TaxeGame" project="taxe-core" 
     file="/taxe-core/src/fvs/taxe/TaxeGame.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="243" width="183" x="491" y="367"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -37,8 +28,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="5" language="java" name="fvs.taxe.clickListener.StationClickListener" project="taxe-core"
-    file="/taxe-core/src/fvs/taxe/StationClickListener.java" binary="false" corner="BOTTOM_RIGHT">    
+  <interface id="4" language="java" name="fvs.taxe.clickListener.StationClickListener" project="taxe-core" 
+    file="/taxe-core/src/fvs/taxe/clickListener/StationClickListener.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="81" width="139" x="969" y="-42"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -46,7 +37,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="6" language="java" name="fvs.taxe.GameScreen" project="taxe-core" 
+  <class id="5" language="java" name="fvs.taxe.GameScreen" project="taxe-core" 
     file="/taxe-core/src/fvs/taxe/GameScreen.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="369" width="215" x="714" y="-42"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -55,7 +46,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="fvs.taxe.Tooltip" project="taxe-core" file="/taxe-core/src/fvs/taxe/Tooltip.java" 
+  <class id="6" language="java" name="fvs.taxe.Tooltip" project="taxe-core" file="/taxe-core/src/fvs/taxe/Tooltip.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="117" width="113" x="714" y="367"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -64,7 +55,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="fvs.taxe.actor.CollisionStationActor" project="taxe-core" 
+  <class id="7" language="java" name="fvs.taxe.actor.CollisionStationActor" project="taxe-core" 
     file="/taxe-core/src/fvs/taxe/actor/CollisionStationActor.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-50" y="289"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -73,7 +64,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="fvs.taxe.actor.TrainActor" project="taxe-core" 
+  <class id="8" language="java" name="fvs.taxe.actor.TrainActor" project="taxe-core" 
     file="/taxe-core/src/fvs/taxe/actor/TrainActor.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="168" y="379"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -82,7 +73,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="fvs.taxe.actor.StationActor" project="taxe-core" 
+  <class id="9" language="java" name="fvs.taxe.actor.StationActor" project="taxe-core" 
     file="/taxe-core/src/fvs/taxe/actor/StationActor.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="366" y="289"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -91,7 +82,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="fvs.taxe.controller.GoalController" project="taxe-core" 
+  <class id="10" language="java" name="fvs.taxe.controller.GoalController" project="taxe-core" 
     file="/taxe-core/src/fvs/taxe/controller/GoalController.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="135" width="180" x="40" y="-16"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -100,7 +91,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="fvs.taxe.controller.TrainController" project="taxe-core" 
+  <class id="11" language="java" name="fvs.taxe.controller.TrainController" project="taxe-core" 
     file="/taxe-core/src/fvs/taxe/controller/TrainController.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="135" width="199" x="260" y="-16"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -109,7 +100,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="fvs.taxe.controller.Context" project="taxe-core" 
+  <class id="12" language="java" name="fvs.taxe.controller.Context" project="taxe-core" 
     file="/taxe-core/src/fvs/taxe/controller/Context.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="315" width="232" x="779" y="303"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -118,8 +109,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="fvs.taxe.controller.TopBarController" project="taxe-core" 
-    file="/taxe-core/src/fvs/taxe/controller/TopBarController.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="13" language="java" name="fvs.taxe.controller.SideBarController" project="taxe-core" 
+    file="/taxe-core/src/fvs/taxe/controller/SideBarController.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="243" width="240" x="499" y="-16"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -127,7 +118,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="15" language="java" name="fvs.taxe.controller.StationController" project="taxe-core" 
+  <class id="14" language="java" name="fvs.taxe.controller.StationController" project="taxe-core" 
     file="/taxe-core/src/fvs/taxe/controller/StationController.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="261" width="266" x="779" y="-16"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -136,7 +127,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="16" language="java" name="fvs.taxe.controller.RouteController" project="taxe-core" 
+  <class id="15" language="java" name="fvs.taxe.controller.RouteController" project="taxe-core" 
     file="/taxe-core/src/fvs/taxe/controller/RouteController.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="279" width="180" x="1085" y="-16"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -145,7 +136,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="17" language="java" name="fvs.taxe.controller.ResourceController" project="taxe-core" 
+  <class id="16" language="java" name="fvs.taxe.controller.ResourceController" project="taxe-core" 
     file="/taxe-core/src/fvs/taxe/controller/ResourceController.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="135" width="196" x="1305" y="-16"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -154,7 +145,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="18" language="java" name="fvs.taxe.dialog.DialogStationMultitrain" project="taxe-core" 
+  <class id="17" language="java" name="fvs.taxe.dialog.DialogStationMultitrain" project="taxe-core" 
     file="/taxe-core/src/fvs/taxe/dialog/DialogStationMultitrain.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="171" width="234" x="-20" y="155"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -163,8 +154,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="19" language="java" name="fvs.taxe.clickListener.TrainClicked" project="taxe-core"
-    file="/taxe-core/src/fvs/taxe/dialog/TrainClicked.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="18" language="java" name="fvs.taxe.clickListener.TrainClicked" project="taxe-core" 
+    file="/taxe-core/src/fvs/taxe/clickListener/TrainClicked.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="117" width="188" x="254" y="155"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -172,8 +163,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="20" language="java" name="fvs.taxe.clickListener.DialogButtonClicked" project="taxe-core"
-    file="/taxe-core/src/fvs/taxe/dialog/DialogButtonClicked.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="19" language="java" name="fvs.taxe.clickListener.DialogButtonClicked" project="taxe-core" 
+    file="/taxe-core/src/fvs/taxe/clickListener/DialogButtonClicked.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="135" width="224" x="482" y="155"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -181,8 +172,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="21" language="java" name="fvs.taxe.clickListener.ResourceDialogClickListener" project="taxe-core"
-    file="/taxe-core/src/fvs/taxe/dialog/ResourceDialogClickListener.java" binary="false" corner="BOTTOM_RIGHT">    
+  <interface id="20" language="java" name="fvs.taxe.clickListener.ResourceDialogClickListener" project="taxe-core" 
+    file="/taxe-core/src/fvs/taxe/clickListener/ResourceDialogClickListener.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="81" width="189" x="614" y="366"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -190,7 +181,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="22" language="java" name="fvs.taxe.dialog.DialogResourceTrain" project="taxe-core" 
+  <class id="21" language="java" name="fvs.taxe.dialog.DialogResourceTrain" project="taxe-core" 
     file="/taxe-core/src/fvs/taxe/dialog/DialogResourceTrain.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="171" width="264" x="746" y="155"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -199,7 +190,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="23" language="java" name="gameLogic.Game" project="taxe-core" file="/taxe-core/src/gameLogic/Game.java" 
+  <class id="22" language="java" name="gameLogic.Game" project="taxe-core" file="/taxe-core/src/gameLogic/Game.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="333" width="265" x="112" y="121"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -208,7 +199,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="24" language="java" name="gameLogic.GameState" project="taxe-core" 
+  <enumeration id="23" language="java" name="gameLogic.GameState" project="taxe-core" 
     file="/taxe-core/src/gameLogic/GameState.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="153" width="140" x="-68" y="504"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -217,8 +208,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <interface id="25" language="java" name="gameLogic.listeners.PlayerChangedListener" project="taxe-core"
-    file="/taxe-core/src/gameLogic/PlayerChangedListener.java" binary="false" corner="BOTTOM_RIGHT">    
+  <interface id="24" language="java" name="gameLogic.listeners.PlayerChangedListener" project="taxe-core" 
+    file="/taxe-core/src/gameLogic/listeners/PlayerChangedListener.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="81" width="157" x="58" y="823"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -226,8 +217,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="26" language="java" name="gameLogic.listeners.GameStateListener" project="taxe-core"
-    file="/taxe-core/src/gameLogic/GameStateListener.java" binary="false" corner="BOTTOM_RIGHT">    
+  <interface id="25" language="java" name="gameLogic.listeners.GameStateListener" project="taxe-core" 
+    file="/taxe-core/src/gameLogic/listeners/GameStateListener.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="81" width="152" x="112" y="504"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -235,8 +226,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="27" language="java" name="gameLogic.listeners.TurnListener" project="taxe-core"
-    file="/taxe-core/src/gameLogic/TurnListener.java" binary="false" corner="BOTTOM_RIGHT">    
+  <interface id="26" language="java" name="gameLogic.listeners.TurnListener" project="taxe-core" 
+    file="/taxe-core/src/gameLogic/listeners/TurnListener.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="81" width="103" x="255" y="823"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -244,8 +235,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="28" language="java" name="gameLogic.player.Player" project="taxe-core" file="/taxe-core/src/gameLogic/Player.java"
-    binary="false" corner="BOTTOM_RIGHT">    
+  <class id="27" language="java" name="gameLogic.player.Player" project="taxe-core" 
+    file="/taxe-core/src/gameLogic/player/Player.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="297" width="196" x="398" y="823"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -253,8 +244,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="29" language="java" name="gameLogic.player.PlayerManager" project="taxe-core"
-    file="/taxe-core/src/gameLogic/PlayerManager.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="28" language="java" name="gameLogic.player.PlayerManager" project="taxe-core" 
+    file="/taxe-core/src/gameLogic/player/PlayerManager.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="279" width="290" x="304" y="504"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -262,7 +253,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="30" language="java" name="gameLogic.Disposable" project="taxe-core" 
+  <interface id="29" language="java" name="gameLogic.Disposable" project="taxe-core" 
     file="/taxe-core/src/gameLogic/Disposable.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="81" width="103" x="459" y="121"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -271,16 +262,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="31" language="java" name="gameLogic.goal.GoalListener" project="taxe-core" 
-    file="/taxe-core/src/gameLogic/goal/GoalListener.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="81" width="263" x="185" y="128"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </interface>  
-  <class id="32" language="java" name="gameLogic.goal.Goal" project="taxe-core" 
+  <class id="30" language="java" name="gameLogic.goal.Goal" project="taxe-core" 
     file="/taxe-core/src/gameLogic/goal/Goal.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="261" width="183" x="488" y="128"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -289,7 +271,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="33" language="java" name="gameLogic.goal.GoalManager" project="taxe-core" 
+  <class id="31" language="java" name="gameLogic.goal.GoalManager" project="taxe-core" 
     file="/taxe-core/src/gameLogic/goal/GoalManager.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="153" width="236" x="711" y="128"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -298,7 +280,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="34" language="java" name="gameLogic.map.CollisionStation" project="taxe-core" 
+  <class id="32" language="java" name="gameLogic.map.CollisionStation" project="taxe-core" 
     file="/taxe-core/src/gameLogic/map/CollisionStation.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="81" width="196" x="144" y="963"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -307,7 +289,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="35" language="java" name="gameLogic.map.Connection" project="taxe-core" 
+  <class id="33" language="java" name="gameLogic.map.Connection" project="taxe-core" 
     file="/taxe-core/src/gameLogic/map/Connection.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="225" width="157" x="144" y="451"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -316,7 +298,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="36" language="java" name="gameLogic.map.IPositionable" project="taxe-core" 
+  <class id="34" language="java" name="gameLogic.map.IPositionable" project="taxe-core" 
     file="/taxe-core/src/gameLogic/map/IPositionable.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="171" width="144" x="380" y="963"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -325,7 +307,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="37" language="java" name="gameLogic.map.Map" project="taxe-core" 
+  <class id="35" language="java" name="gameLogic.map.Map" project="taxe-core" 
     file="/taxe-core/src/gameLogic/map/Map.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="315" width="285" x="149" y="96"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -334,7 +316,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="38" language="java" name="gameLogic.map.Position" project="taxe-core" 
+  <class id="36" language="java" name="gameLogic.map.Position" project="taxe-core" 
     file="/taxe-core/src/gameLogic/map/Position.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="207" width="138" x="380" y="1174"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -343,7 +325,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="39" language="java" name="gameLogic.map.Station" project="taxe-core" 
+  <class id="37" language="java" name="gameLogic.map.Station" project="taxe-core" 
     file="/taxe-core/src/gameLogic/map/Station.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="207" width="172" x="242" y="716"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -352,25 +334,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="40" language="java" name="gameLogic.map.StationHelper" project="taxe-core" 
-    file="/taxe-core/src/gameLogic/map/StationHelper.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="189" width="312" x="474" y="96"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="41" language="java" name="gameLogic.resource.TrainHelper" project="taxe-core" 
-    file="/taxe-core/src/gameLogic/resource/TrainHelper.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="135" width="241" x="85" y="218"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="42" language="java" name="gameLogic.resource.ResourceManager" project="taxe-core" 
+  <class id="38" language="java" name="gameLogic.resource.ResourceManager" project="taxe-core" 
     file="/taxe-core/src/gameLogic/resource/ResourceManager.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="171" width="242" x="366" y="218"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -379,7 +343,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="43" language="java" name="gameLogic.resource.Train" project="taxe-core" 
+  <class id="39" language="java" name="gameLogic.resource.Train" project="taxe-core" 
     file="/taxe-core/src/gameLogic/resource/Train.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="459" width="217" x="458" y="447"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -388,7 +352,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="44" language="java" name="gameLogic.resource.Resource" project="taxe-core" 
+  <class id="40" language="java" name="gameLogic.resource.Resource" project="taxe-core" 
     file="/taxe-core/src/gameLogic/resource/Resource.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="189" width="162" x="648" y="218"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -397,16 +361,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="45" language="java" name="gameLogic.resource.PowerUp" project="taxe-core" 
-    file="/taxe-core/src/gameLogic/resource/PowerUp.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="95" x="715" y="447"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="46" language="java" name="Util.Tuple" project="taxe-core" file="/taxe-core/src/Util/Tuple.java" 
+  <class id="41" language="java" name="Util.Tuple" project="taxe-core" file="/taxe-core/src/Util/Tuple.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="153" width="87" x="51" y="145"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -415,549 +370,745 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="47">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="48" name="tooltip"/>      
-      <multiplicity id="49" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="50">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="51" name="game"/>      
-      <multiplicity id="52" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="53">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="54" name="context"/>      
-      <multiplicity id="55" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="56">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="57" name="stationClickListeners"/>      
-      <multiplicity id="58" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="59">    
-    <end type="SOURCE" refId="23" navigable="false">      
-      <attribute id="60" name="instance"/>      
-      <multiplicity id="61" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="23" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="62">    
-    <end type="SOURCE" refId="40" navigable="false">      
-      <attribute id="63" name="connections"/>      
-      <multiplicity id="64" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="46" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="65">    
-    <end type="SOURCE" refId="28" navigable="false">      
-      <attribute id="66" name="goals"/>      
-      <multiplicity id="67" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="32" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="68">    
-    <end type="SOURCE" refId="20" navigable="false">      
-      <attribute id="69" name="context"/>      
-      <multiplicity id="70" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="71">    
+  <association id="42">    
     <end type="SOURCE" refId="39" navigable="false">      
-      <attribute id="72" name="actor"/>      
-      <multiplicity id="73" minimum="0" maximum="1"/>    
+      <attribute id="43" name="history">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="44" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
+    <end type="TARGET" refId="41" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="74">    
-    <end type="SOURCE" refId="23" navigable="false">      
-      <attribute id="75" name="resourceManager"/>      
-      <multiplicity id="76" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="42" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="77">    
-    <end type="SOURCE" refId="39" navigable="false">      
-      <attribute id="78" name="location"/>      
-      <multiplicity id="79" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="36" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="80">    
-    <end type="SOURCE" refId="43"/>    
-    <end type="TARGET" refId="44"/>  
-  </generalization>  
-  <association id="81">    
-    <end type="SOURCE" refId="32" navigable="false">      
-      <attribute id="82" name="destination"/>      
-      <multiplicity id="83" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="39" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="84">    
-    <end type="SOURCE" refId="35" navigable="false">      
-      <attribute id="85" name="station1"/>      
-      <multiplicity id="86" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="39" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="87">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="88" name="topBarController"/>      
-      <multiplicity id="89" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="90">    
+  <association id="45">    
     <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="91" name="gameLogic"/>      
-      <multiplicity id="92" minimum="0" maximum="1"/>    
+      <attribute id="46" name="context">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="47" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="23" navigable="true"/>    
+    <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="93">    
-    <end type="SOURCE" refId="29" navigable="false">      
-      <attribute id="94" name="turnListeners"/>      
-      <multiplicity id="95" minimum="0" maximum="2147483647"/>    
+  <association id="48">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="49" name="resourceController">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="50" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="51">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="52" name="resourceManager">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="53" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="54">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="55" name="station2">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="56" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="57">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="58" name="tooltip">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="59" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="60">    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="61" name="pm">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="62" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="63">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="64" name="context">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="65" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="66">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="67" name="goalManager">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="68" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="69">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="70" name="positions">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="71" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="72">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <association id="73">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="74" name="context">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="75" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="76">    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="77" name="resources">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="78" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="79">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="80" name="position">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="81" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="82">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="83" name="players">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="84" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="27" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="96">    
-    <end type="SOURCE" refId="45"/>    
-    <end type="TARGET" refId="44"/>  
-  </generalization>  
+  <association id="85">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="86" name="game">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="87" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="88">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="89" name="topBarController">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="90" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="91">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="92" name="location">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="93" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="94">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="95" name="train">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="96" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="39" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <association id="97">    
-    <end type="SOURCE" refId="29" navigable="false">      
-      <attribute id="98" name="playerListeners"/>      
-      <multiplicity id="99" minimum="0" maximum="2147483647"/>    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="98" name="gameStateListeners">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="99" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="25" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="100">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="101" name="context"/>      
-      <multiplicity id="102" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="103">    
-    <end type="SOURCE" refId="23" navigable="false">      
-      <attribute id="104" name="state"/>      
-      <multiplicity id="105" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="24" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="106">    
-    <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="107" name="train"/>      
-      <multiplicity id="108" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="43" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="109">    
-    <end type="SOURCE" refId="29" navigable="false">      
-      <attribute id="110" name="players"/>      
-      <multiplicity id="111" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="28" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="112">    
-    <end type="SOURCE" refId="43" navigable="false">      
-      <attribute id="113" name="actor"/>      
-      <multiplicity id="114" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="115">    
-    <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="116" name="positions"/>      
-      <multiplicity id="117" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="36" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="118">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="119" name="routeController"/>      
-      <multiplicity id="120" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="16" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="121">    
-    <end type="SOURCE" refId="28" navigable="false">      
-      <attribute id="122" name="pm"/>      
-      <multiplicity id="123" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="29" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="124">    
-    <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="125" name="context"/>      
-      <multiplicity id="126" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="127">    
-    <end type="SOURCE" refId="23" navigable="false">      
-      <attribute id="128" name="playerManager"/>      
-      <multiplicity id="129" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="29" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="130">    
-    <end type="SOURCE" refId="43" navigable="false">      
-      <attribute id="131" name="finalDestination"/>      
-      <multiplicity id="132" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="39" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="133">    
-    <end type="SOURCE" refId="38"/>    
-    <end type="TARGET" refId="36"/>  
-  </generalization>  
-  <association id="134">    
-    <end type="SOURCE" refId="19" navigable="false">      
-      <attribute id="135" name="train"/>      
-      <multiplicity id="136" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="43" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="137">    
-    <end type="SOURCE" refId="28" navigable="false">      
-      <attribute id="138" name="resources"/>      
-      <multiplicity id="139" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="44" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="140">    
-    <end type="SOURCE" refId="35" navigable="false">      
-      <attribute id="141" name="users"/>      
-      <multiplicity id="142" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="43" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="143">    
-    <end type="SOURCE" refId="23" navigable="false">      
-      <attribute id="144" name="gameStateListeners"/>      
-      <multiplicity id="145" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="26" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="146">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="147" name="stationController"/>      
-      <multiplicity id="148" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="149">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="150" name="map"/>      
-      <multiplicity id="151" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="101" name="origin">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="102" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="37" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="152">    
-    <end type="SOURCE" refId="43" navigable="false">      
-      <attribute id="153" name="history"/>      
-      <multiplicity id="154" minimum="0" maximum="2147483647"/>    
+  <generalization id="103">    
+    <end type="SOURCE" refId="36"/>    
+    <end type="TARGET" refId="34"/>  
+  </generalization>  
+  <association id="104">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="105" name="routeController">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="106" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="46" navigable="true"/>    
+    <end type="TARGET" refId="15" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="155">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="156" name="tooltip"/>      
-      <multiplicity id="157" minimum="0" maximum="1"/>    
+  <association id="107">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="108" name="destination">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="109" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
+    <end type="TARGET" refId="37" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="158">    
-    <end type="SOURCE" refId="43" navigable="false">      
-      <attribute id="159" name="position"/>      
-      <multiplicity id="160" minimum="0" maximum="1"/>    
+  <association id="110">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="111" name="finalDestination">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="112" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="36" navigable="true"/>    
+    <end type="TARGET" refId="37" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="161">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="162" name="context"/>      
-      <multiplicity id="163" minimum="0" maximum="1"/>    
+  <association id="113">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="114" name="playerManager">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="115" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
+    <end type="TARGET" refId="28" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="164">    
-    <bendpoint x="331" y="451"/>    
-    <end type="SOURCE" refId="37" navigable="false">      
-      <attribute id="165" name="stations"/>      
-      <multiplicity id="166" minimum="0" maximum="2147483647"/>    
+  <association id="116">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="117" name="game">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="118" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="39" navigable="true"/>    
+    <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="167">    
-    <end type="SOURCE" refId="40" navigable="false">      
-      <attribute id="168" name="stations"/>      
-      <multiplicity id="169" minimum="0" maximum="2147483647"/>    
+  <association id="119">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="120" name="goalController">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="121" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="46" navigable="true"/>    
+    <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="170">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="171" name="gameLogic"/>      
-      <multiplicity id="172" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="23" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="173">    
-    <end type="SOURCE" refId="23" navigable="false">      
-      <attribute id="174" name="goalManager"/>      
-      <multiplicity id="175" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="33" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="176">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="177" name="context"/>      
-      <multiplicity id="178" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="179">    
-    <end type="SOURCE" refId="37" navigable="false">      
-      <attribute id="180" name="connections"/>      
-      <multiplicity id="181" minimum="0" maximum="2147483647"/>    
+  <association id="122">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="123" name="map">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="124" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="35" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="182">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="183" name="resourceController"/>      
-      <multiplicity id="184" minimum="0" maximum="1"/>    
+  <association id="125">    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="126" name="player">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="127" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="17" navigable="true"/>    
+    <end type="TARGET" refId="27" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="185">    
-    <end type="SOURCE" refId="32" navigable="false">      
-      <attribute id="186" name="origin"/>      
-      <multiplicity id="187" minimum="0" maximum="1"/>    
+  <association id="128">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="129" name="context">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="130" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="39" navigable="true"/>    
+    <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="188">    
-    <end type="SOURCE" refId="44"/>    
-    <end type="TARGET" refId="30"/>  
-  </realization>  
-  <association id="189">    
+  <association id="131">    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="132" name="goals">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="133" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="134">    
     <end type="SOURCE" refId="22" navigable="false">      
-      <attribute id="190" name="clickListeners"/>      
-      <multiplicity id="191" minimum="0" maximum="2147483647"/>    
+      <attribute id="135" name="instance">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="136" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="21" navigable="true"/>    
+    <end type="TARGET" refId="22" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="192">    
-    <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="193" name="context"/>      
-      <multiplicity id="194" minimum="0" maximum="1"/>    
+  <association id="137">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="138" name="train">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="139" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
+    <end type="TARGET" refId="39" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="195">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="196" name="game"/>      
-      <multiplicity id="197" minimum="0" maximum="1"/>    
+  <association id="140">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="141" name="actor">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="142" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="198">    
-    <end type="SOURCE" refId="34"/>    
-    <end type="TARGET" refId="39"/>  
-  </generalization>  
-  <association id="199">    
-    <end type="SOURCE" refId="44" navigable="false">      
-      <attribute id="200" name="player"/>      
-      <multiplicity id="201" minimum="0" maximum="1"/>    
+  <association id="143">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="144" name="map">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="145" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="28" navigable="true"/>    
+    <end type="TARGET" refId="35" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="202">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="203" name="train"/>      
-      <multiplicity id="204" minimum="0" maximum="1"/>    
+  <association id="146">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="147" name="clickListeners">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="148" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="43" navigable="true"/>    
+    <end type="TARGET" refId="20" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="205">    
-    <end type="SOURCE" refId="41" navigable="false">      
-      <attribute id="206" name="trains"/>      
-      <multiplicity id="207" minimum="0" maximum="2147483647"/>    
+  <association id="149">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="150" name="turnListeners">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="151" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="46" navigable="true"/>    
+    <end type="TARGET" refId="26" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="208">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="209" name="stationController"/>      
-      <multiplicity id="210" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="211">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="212" name="routeController"/>      
-      <multiplicity id="213" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="16" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="214">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="215" name="taxeGame"/>      
-      <multiplicity id="216" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="217">    
+  <association id="152">    
     <end type="SOURCE" refId="17" navigable="false">      
-      <attribute id="218" name="context"/>      
-      <multiplicity id="219" minimum="0" maximum="1"/>    
+      <attribute id="153" name="context">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="154" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
+    <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="220">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="221" name="topBarController"/>      
-      <multiplicity id="222" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="223">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="224" name="goalController"/>      
-      <multiplicity id="225" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="226">    
-    <end type="SOURCE" refId="35" navigable="false">      
-      <attribute id="227" name="station2"/>      
-      <multiplicity id="228" minimum="0" maximum="1"/>    
+  <association id="155">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="156" name="train">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="157" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="39" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="229">    
-    <end type="SOURCE" refId="43" navigable="false">      
-      <attribute id="230" name="route"/>      
-      <multiplicity id="231" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="39" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="232">    
+  <association id="158">    
     <end type="SOURCE" refId="19" navigable="false">      
-      <attribute id="233" name="context"/>      
-      <multiplicity id="234" minimum="0" maximum="1"/>    
+      <attribute id="159" name="train">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="160" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="39" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="161">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="37"/>  
+  </generalization>  
+  <association id="162">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="163" name="topBarController">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="164" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="13" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="235">    
-    <end type="SOURCE" refId="23" navigable="false">      
-      <attribute id="236" name="map"/>      
-      <multiplicity id="237" minimum="0" maximum="1"/>    
+  <association id="165">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="166" name="currentPlayer">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="167" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="168">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="169" name="gameLogic">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="170" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="171">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="172" name="actor">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="173" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="174">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="175" name="station1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="176" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="37" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="238">    
-    <end type="SOURCE" refId="20" navigable="false">      
-      <attribute id="239" name="currentPlayer"/>      
-      <multiplicity id="240" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="28" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="241">    
-    <end type="SOURCE" refId="20" navigable="false">      
-      <attribute id="242" name="train"/>      
-      <multiplicity id="243" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="43" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="244">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="21"/>  
-  </realization>  
-  <association id="245">    
+  <association id="177">    
     <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="246" name="context"/>      
-      <multiplicity id="247" minimum="0" maximum="1"/>    
+      <attribute id="178" name="context">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="179" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="180">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="181" name="stationController">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="182" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="183">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="184" name="context">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="185" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="186">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="187" name="context">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="188" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="189">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="190" name="stationClickListeners">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="191" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="192">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="193" name="tooltip">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="194" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="195">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="196" name="gameLogic">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="197" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="198">    
+    <bendpoint x="331" y="451"/>    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="199" name="stations">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="200" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="201">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="202" name="context">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="203" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="204">    
+    <end type="SOURCE" refId="40"/>    
+    <end type="TARGET" refId="29"/>  
+  </realization>  
+  <association id="205">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="206" name="connections">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="207" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="208">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="209" name="route">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="210" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="211">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="212" name="taxeGame">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="213" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="214">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="215" name="state">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="216" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="217">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="40"/>  
+  </generalization>  
+  <association id="218">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="219" name="routeController">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="220" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="221">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="222" name="context">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="223" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="224">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="225" name="playerListeners">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="226" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
