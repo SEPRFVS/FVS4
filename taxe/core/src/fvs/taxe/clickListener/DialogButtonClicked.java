@@ -194,7 +194,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                 Game.getInstance().setState(GameState.PLACING_RESOURCE);
                 final TrainController trainController = new TrainController(context);
                 trainController.setTrainsVisible(null, false);
-                context.getSideBarController().displayMessage("Placing Obstacle", Color.BLACK);
+                context.getSideBarController().displayMessage("Placing Obstacle");
 
                 //Creates a clickListener for when a station is clicked
                 final StationClickListener stationListener = new StationClickListener() {
@@ -238,7 +238,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                             //This code runs regardless of whether the placement was successful, this returns the game to its normal state
 
                             //Resets the topBar
-                            context.getSideBarController().displayFlashMessage("", Color.BLACK);
+                            context.getSideBarController().displayFlashMessage("");
 
                             //Unsubscribes from the StationClickListener as this would cause a lot of errors and unexpected behaviour is not called from the correct context
                             StationController.unsubscribeStationClick(this);
@@ -299,7 +299,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                 //Hides all trains
                 final TrainController trainController = new TrainController(context);
                 trainController.setTrainsVisible(null, false);
-                context.getSideBarController().displayMessage("Placing Engineer", Color.BLACK);
+                context.getSideBarController().displayMessage("Placing Engineer");
 
                 //Adds a station click listener that handles all the logic
                 final StationClickListener stationListener = new StationClickListener() {

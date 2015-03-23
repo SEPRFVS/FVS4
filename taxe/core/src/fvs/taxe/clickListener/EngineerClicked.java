@@ -45,7 +45,7 @@ public class EngineerClicked extends ClickListener {
         if (!displayingMessage) {
             displayingMessage = true;
             if (Game.getInstance().getState() == GameState.NORMAL) {
-                context.getSideBarController().displayMessage("Your Engineer. Used to fix damaged connections.", Color.BLACK);
+                context.getSideBarController().displayMessage("Your Engineer. Used to fix damaged connections.");
 
 
             }

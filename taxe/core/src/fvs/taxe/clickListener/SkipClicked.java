@@ -47,7 +47,7 @@ public class SkipClicked extends ClickListener {
         if (!displayingMessage) {
             displayingMessage = true;
             if (Game.getInstance().getState() == GameState.NORMAL) {
-                context.getSideBarController().displayMessage("Force your opponent to skip a turn.", Color.BLACK);
+                context.getSideBarController().displayMessage("Force your opponent to skip a turn.");
 
 
             }

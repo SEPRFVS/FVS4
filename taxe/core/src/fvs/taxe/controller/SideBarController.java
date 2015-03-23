@@ -55,6 +55,11 @@ public class SideBarController {
         flashMessage.setAlignment(Align.bottom);
         context.getStage().addActor(flashMessage);
     }
+    
+    public void displayFlashMessage(String message) {
+    	//use default color for message
+    	displayFlashMessage(message, Color.WHITE);
+    }
 
     public void displayFlashMessage(String message, Color color) {
         //This method displays a message in the topBar for the default 1.75 seconds
@@ -67,14 +72,19 @@ public class SideBarController {
         flashMessage.setColor(color);
         flashMessage.addAction(sequence(delay(time), fadeOut(0.25f)));
     }
+    
+    public void displayMessage(String message) {
+    	//Use default color
+    	displayMessage(message, Color.WHITE);
+    }
 
-    public void displayMessage(String message, Color color){
+    public void displayMessage(String message, Color color) {
         //This method sets a permanent message until it is overwritten
         flashMessage.setText(message);
         flashMessage.setColor(color);
     }
 
-    public void clearMessage(){
+    public void clearMessage() {
         //This method clears the current message
         flashMessage.setText("");
         flashMessage.setColor(Color.LIGHT_GRAY);
@@ -92,32 +102,34 @@ public class SideBarController {
     public void drawContent() {
     	Game gameLogic = context.getGameLogic();
 		TaxeGame game = context.getTaxeGame();
+    	game.batch.begin();
+    	game.font.setColor(Color.WHITE);
+    	game.fontSmall.setColor(Color.WHITE);
+    	game.fontTiny.setColor(Color.WHITE);
     	if (gameLogic.getState() != GameState.ROUTING) {
-    		game.batch.begin();
-    		game.fontSmall.setColor(Color.WHITE);
-        	//If statement checks whether the turn is above 30, if it is then display 30 anyway
-        	game.fontSmall.draw(game.batch, "Turn " + ((gameLogic.getPlayerManager().getTurnNumber() + 1 < gameLogic.TOTAL_TURNS) ? gameLogic.getPlayerManager().getTurnNumber() + 1 : gameLogic.TOTAL_TURNS) + "/" + gameLogic.TOTAL_TURNS, (float) TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 14.0f);
-        	//Give Current Player
-        	game.font.draw(game.batch, "Player " + gameLogic.getPlayerManager().getCurrentPlayer().getPlayerNumber(), TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 40.0f);
-        	//Headings
-        	game.fontSmall.draw(game.batch, "Goals", TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 90.0f);
-        	game.fontSmall.draw(game.batch, "Unplaced Resources", TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 260.0f);
-        	//Draw Scores (Restricted to only 2 players)
-        	//TODO Allow more players
-        	game.fontTiny.draw(game.batch, "Player " + gameLogic.getPlayerManager().getAllPlayers().get(0).getPlayerNumber(), TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, 24.0f);
-        	game.fontTiny.draw(game.batch, "Player " + gameLogic.getPlayerManager().getAllPlayers().get(1).getPlayerNumber(), TaxeGame.WIDTH - (CONTROLS_WIDTH/2) + 10.0f, 24.0f);
-        	DecimalFormat integer = new DecimalFormat("0");
-        	game.font.draw(game.batch, integer.format(gameLogic.getPlayerManager().getAllPlayers().get(0).getScore()), TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, 74.0f);
-        	game.font.draw(game.batch, integer.format(gameLogic.getPlayerManager().getAllPlayers().get(1).getScore()), TaxeGame.WIDTH - (CONTROLS_WIDTH/2) + 10.0f, 74.0f);
-        	
-        	game.batch.end();
+    		//If statement checks whether the turn is above 30, if it is then display 30 anyway
+    		game.fontSmall.draw(game.batch, "Turn " + ((gameLogic.getPlayerManager().getTurnNumber() + 1 < gameLogic.TOTAL_TURNS) ? gameLogic.getPlayerManager().getTurnNumber() + 1 : gameLogic.TOTAL_TURNS) + "/" + gameLogic.TOTAL_TURNS, (float) TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 14.0f);
     	}
+        //Give Current Player
+        game.font.draw(game.batch, "Player " + gameLogic.getPlayerManager().getCurrentPlayer().getPlayerNumber(), TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 40.0f);
+        //Headings
+        game.fontSmall.draw(game.batch, "Goals", TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 90.0f);
+        game.fontSmall.draw(game.batch, "Unplaced Resources", TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 260.0f);
+        //Draw Scores (Restricted to only 2 players)
+        //TODO Allow more players
+        game.fontTiny.draw(game.batch, "Player " + gameLogic.getPlayerManager().getAllPlayers().get(0).getPlayerNumber(), TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, 24.0f);
+        game.fontTiny.draw(game.batch, "Player " + gameLogic.getPlayerManager().getAllPlayers().get(1).getPlayerNumber(), TaxeGame.WIDTH - (CONTROLS_WIDTH/2) + 10.0f, 24.0f);
+        DecimalFormat integer = new DecimalFormat("0");
+        game.font.draw(game.batch, integer.format(gameLogic.getPlayerManager().getAllPlayers().get(0).getScore()), TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, 74.0f);
+        game.font.draw(game.batch, integer.format(gameLogic.getPlayerManager().getAllPlayers().get(1).getScore()), TaxeGame.WIDTH - (CONTROLS_WIDTH/2) + 10.0f, 74.0f);
+        
+        game.batch.end();
     }
 
     public void addEndTurnButton() {
         //This method adds an endTurn button to the topBar which allows the user to end their turn
         endTurnButton = new TextButton("End Turn", context.getSkin());
-        endTurnButton.setPosition(TaxeGame.WIDTH - 100.0f, TaxeGame.HEIGHT - 33.0f);
+        endTurnButton.setPosition(TaxeGame.WIDTH - endTurnButton.getWidth() - 10.0f, TaxeGame.HEIGHT - 33.0f);
         endTurnButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

@@ -133,12 +133,12 @@ public class TrainClicked extends ClickListener {
                 } else if (train.getFinalDestination() == null) {
                     //If the train is not placed then the name and speed of the train are displayed
                     //By passing the displayFlashMessage a very large value for time, this acts almost as a permanent message until it is cleared (suitable for mouseover)
-                    context.getSideBarController().displayMessage("Your " + train.getName() + ". Speed: " + train.getSpeed(), Color.BLACK);
+                    context.getSideBarController().displayMessage("Your " + train.getName() + ". Speed: " + train.getSpeed());
 
                 } else {
                     //If the train is the player's and placed then the name, speed and destination of the train are all displayed
                     //By passing the displayFlashMessage a very large value for time, this acts almost as a permanent message until it is cleared (suitable for mouseover)
-                    context.getSideBarController().displayMessage("Your " + train.getName() + ". Speed: " + train.getSpeed() + ". Destination: " + train.getFinalDestination().getName(), Color.BLACK);
+                    context.getSideBarController().displayMessage("Your " + train.getName() + ". Speed: " + train.getSpeed() + ". Destination: " + train.getFinalDestination().getName());
                 }
             }
         }

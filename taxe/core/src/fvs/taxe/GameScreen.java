@@ -71,7 +71,7 @@ public class GameScreen extends ScreenAdapter {
                 //The game will not be set into the animating state for the first turn to prevent player 1 from gaining an inherent advantage by gaining an extra turn of movement.
                 if (context.getGameLogic().getPlayerManager().getTurnNumber()!=1) {
                     gameLogic.setState(GameState.ANIMATING);
-                    sideBarController.displayFlashMessage("Time is passing...", Color.BLACK);
+                    sideBarController.displayFlashMessage("Time is passing...");
                 }
             }
         });

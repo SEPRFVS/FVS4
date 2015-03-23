@@ -123,7 +123,7 @@ public class RouteController {
                 distance+= context.getGameLogic().getMap().getDistance(lastStation, station);
                 DecimalFormat integer = new DecimalFormat("0");
 
-                context.getSideBarController().displayMessage("Total Distance: " + integer.format(distance) + ". Will take " + integer.format(Math.ceil(distance / train.getSpeed() / 2)) + " turns.", Color.BLACK);
+                context.getSideBarController().displayMessage("Total Distance: " + integer.format(distance) + ". Will take " + integer.format(Math.ceil(distance / train.getSpeed() / 2)) + " turns.");
                 //If the connection exists then the station passed to the method is added to the route
                 positions.add(station.getLocation());
                 //Sets the relevant boolean checking if the last node on the route is a junction or not
@@ -136,8 +136,8 @@ public class RouteController {
         TextButton doneRouting = new TextButton("Route Complete", context.getSkin());
         TextButton cancel = new TextButton("Cancel", context.getSkin());
 
-        doneRouting.setPosition(TaxeGame.WIDTH - SideBarController.CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 10.0f);
-        cancel.setPosition(TaxeGame.WIDTH - 100, TaxeGame.HEIGHT - 33);
+        doneRouting.setPosition(TaxeGame.WIDTH - SideBarController.CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 33.0f);
+        cancel.setPosition(TaxeGame.WIDTH - 10.0f - cancel.getWidth(), TaxeGame.HEIGHT - 33.0f);
 
         //If the cancel button is clicked then the routing is ended but none of the positions are saved as a route in the backend
         cancel.addListener(new ClickListener() {
@@ -262,7 +262,7 @@ public class RouteController {
             if (prevStation!=null) {
                 distance += context.getGameLogic().getMap().getDistance(station,prevStation);
                 DecimalFormat integer = new DecimalFormat("0");
-                context.getSideBarController().displayMessage("Total Distance: " + integer.format(distance) + ". Will take " + integer.format(Math.ceil(distance / train.getSpeed() / 2)) + " turns.", Color.BLACK);
+                context.getSideBarController().displayMessage("Total Distance: " + integer.format(distance) + ". Will take " + integer.format(Math.ceil(distance / train.getSpeed() / 2)) + " turns.");
             }
             prevStation = station;
         }

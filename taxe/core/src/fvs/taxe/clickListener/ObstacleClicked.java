@@ -45,7 +45,7 @@ public class ObstacleClicked extends ClickListener {
         if (!displayingMessage) {
             displayingMessage = true;
             if (Game.getInstance().getState() == GameState.NORMAL) {
-                context.getSideBarController().displayMessage("Place an obstacle on a connection on the map", Color.BLACK);
+                context.getSideBarController().displayMessage("Place an obstacle on a connection on the map");
 
 
             }
