@@ -52,7 +52,7 @@ public class GameScreen extends ScreenAdapter {
         mapTexture = new Texture(Gdx.files.internal("gamemap.png"));
         map = gameLogic.getMap();
 
-        tooltip = new Tooltip(skin);
+        tooltip = new Tooltip(game);
         stage.addActor(tooltip);
 
         //Initialises all of the controllers for the UI
