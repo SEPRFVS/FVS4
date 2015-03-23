@@ -4,8 +4,6 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 
@@ -27,25 +25,14 @@ public class TaxeGame extends Game {
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
 
-        //create font
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("arial.ttf"));
-        FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-
         // font size 50pt
-        parameter.size = 50;
-        font = generator.generateFont(parameter);
+        font = new BitmapFont(Gdx.files.internal("data/play-50.fnt"));
 
         //font size 20pt
-        parameter.size = 20;
-        fontSmall = generator.generateFont(parameter);
+        fontSmall = new BitmapFont(Gdx.files.internal("data/play-20.fnt"));
 
-		//font size 12pt
-		parameter.size = 14;
-		fontTiny = generator.generateFont(parameter);
-
-
-        generator.dispose();
-        // don't forget to dispose to avoid memory leaks!
+		//font size 14pt
+		fontTiny = new BitmapFont(Gdx.files.internal("data/play-14.fnt"));
 
         //Sets the main screen to be the menu
         setScreen(new MainMenuScreen(this));

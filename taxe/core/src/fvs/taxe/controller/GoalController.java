@@ -11,8 +11,6 @@ import gameLogic.listeners.PlayerChangedListener;
 import gameLogic.player.PlayerManager;
 import gameLogic.goal.Goal;
 
-import java.text.DecimalFormat;
-
 public class GoalController {
     //This class is in control of drawing all the goals
     private Context context;
@@ -63,7 +61,7 @@ public class GoalController {
                         goal.baseGoalString() + "\n" + goal.bonusString(), context.getSkin());
                 button.getLabel().setAlignment(Align.left);
                 //The goal buttons are scaled so that they do not overlap nodes on the map, this was found to be necessary after changing the way goals were displayed
-                float scaleFactor = 0.8f;
+                float scaleFactor = 0.77f;
                 button.getLabel().setFontScale(scaleFactor, scaleFactor);
                 button.setWidth(SideBarController.CONTROLS_WIDTH - 20.0f);
                 button.setHeight(scaleFactor * button.getHeight());
