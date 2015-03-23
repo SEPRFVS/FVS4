@@ -1,5 +1,7 @@
 package fvs.taxe.controller;
 
+import java.text.DecimalFormat;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -47,13 +49,12 @@ public class SideBarController {
 
     private void createFlashActor() {
         flashMessage = new Label("", context.getSkin());
-        flashMessage.setPosition(TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 40.0f);
+        flashMessage.setPosition(TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, 74.0f);
         flashMessage.setWidth(CONTROLS_WIDTH - 20.0f);
         flashMessage.setWrap(true);
-        flashMessage.setAlignment(Align.top);
+        flashMessage.setAlignment(Align.bottom);
         context.getStage().addActor(flashMessage);
     }
-
 
     public void displayFlashMessage(String message, Color color) {
         //This method displays a message in the topBar for the default 1.75 seconds
@@ -64,7 +65,6 @@ public class SideBarController {
         //This method also displays a message in the topBar, but for the amount of time specified in the parameters
         flashMessage.setText(message);
         flashMessage.setColor(color);
-        flashMessage.setOriginY(TaxeGame.HEIGHT - 30.0f - flashMessage.getHeight());
         flashMessage.addAction(sequence(delay(time), fadeOut(0.25f)));
     }
 
@@ -94,8 +94,22 @@ public class SideBarController {
 		TaxeGame game = context.getTaxeGame();
     	if (gameLogic.getState() != GameState.ROUTING) {
     		game.batch.begin();
+    		game.fontSmall.setColor(Color.WHITE);
         	//If statement checks whether the turn is above 30, if it is then display 30 anyway
         	game.fontSmall.draw(game.batch, "Turn " + ((gameLogic.getPlayerManager().getTurnNumber() + 1 < gameLogic.TOTAL_TURNS) ? gameLogic.getPlayerManager().getTurnNumber() + 1 : gameLogic.TOTAL_TURNS) + "/" + gameLogic.TOTAL_TURNS, (float) TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 14.0f);
+        	//Give Current Player
+        	game.font.draw(game.batch, "Player " + gameLogic.getPlayerManager().getCurrentPlayer().getPlayerNumber(), TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 40.0f);
+        	//Headings
+        	game.fontSmall.draw(game.batch, "Goals", TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 90.0f);
+        	game.fontSmall.draw(game.batch, "Unplaced Resources", TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 260.0f);
+        	//Draw Scores (Restricted to only 2 players)
+        	//TODO Allow more players
+        	game.fontTiny.draw(game.batch, "Player " + gameLogic.getPlayerManager().getAllPlayers().get(0).getPlayerNumber(), TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, 24.0f);
+        	game.fontTiny.draw(game.batch, "Player " + gameLogic.getPlayerManager().getAllPlayers().get(1).getPlayerNumber(), TaxeGame.WIDTH - (CONTROLS_WIDTH/2) + 10.0f, 24.0f);
+        	DecimalFormat integer = new DecimalFormat("0");
+        	game.font.draw(game.batch, integer.format(gameLogic.getPlayerManager().getAllPlayers().get(0).getScore()), TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, 74.0f);
+        	game.font.draw(game.batch, integer.format(gameLogic.getPlayerManager().getAllPlayers().get(1).getScore()), TaxeGame.WIDTH - (CONTROLS_WIDTH/2) + 10.0f, 74.0f);
+        	
         	game.batch.end();
     	}
     }

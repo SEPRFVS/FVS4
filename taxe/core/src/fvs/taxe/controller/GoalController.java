@@ -31,22 +31,6 @@ public class GoalController {
 				});
     }
 
-    public void drawHeaderText() {
-        //This method draws the header for the goals, this is called at the beginning of every turn
-        TaxeGame game = context.getTaxeGame();
-        float top = (float) TaxeGame.HEIGHT;
-        float x = 10.0f;
-        float y = top - 10.0f;
-        game.batch.begin();
-        game.fontSmall.setColor(Color.BLACK);
-        //Draws the player's name and their score
-        game.fontSmall.draw(game.batch, playerHeader(), x, y);
-        y -= 30;
-        //Draws "Goals:"
-        game.fontSmall.draw(game.batch, "Goals:", x, y);
-        game.batch.end();
-    }
-
     public void setColours(Color[] colours) {
         //This method sets the button colours to be whatever is passed in the parameters
         this.colours = colours;
@@ -64,9 +48,9 @@ public class GoalController {
         Player currentPlayer = pm.getCurrentPlayer();
 
         float top = (float) TaxeGame.HEIGHT;
-        float x = 10.0f;
+        float x = TaxeGame.WIDTH - SideBarController.CONTROLS_WIDTH + 10.0f;
         //This value is set by subtracting the total height of the player header and the goal header, change this if you want to adjust the position of the goals or other elements in the GUI
-        float y = top - 60.0f;
+        float y = top - 110.0f;
 
         int index = 0;
 
@@ -81,7 +65,7 @@ public class GoalController {
                 //The goal buttons are scaled so that they do not overlap nodes on the map, this was found to be necessary after changing the way goals were displayed
                 float scaleFactor = 0.8f;
                 button.getLabel().setFontScale(scaleFactor, scaleFactor);
-                button.setWidth(scaleFactor * button.getWidth());
+                button.setWidth(SideBarController.CONTROLS_WIDTH - 20.0f);
                 button.setHeight(scaleFactor * button.getHeight());
 
                 //Adds the listener to the button so that it will inform the correct parts of the system
@@ -97,15 +81,5 @@ public class GoalController {
             }
         }
         context.getStage().addActor(goalButtons);
-    }
-
-    private String playerHeader() {
-        //This method is used to draw the current player's name and their score
-        //It was necessary to apply a decimal format to the score as it is stored a double which by default is "0.0", however that is not intuitive for scoring as it should only be integer values.
-        DecimalFormat integer = new DecimalFormat("0");
-        return "Player " +
-                context.getGameLogic().getPlayerManager().getCurrentPlayer().getPlayerNumber() +
-                ": " + integer.format(
-                context.getGameLogic().getPlayerManager().getCurrentPlayer().getScore());
     }
 }

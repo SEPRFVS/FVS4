@@ -142,9 +142,6 @@ public class GameScreen extends ScreenAdapter {
         stage.draw();
 
         sideBarController.drawContent();
-
-        resourceController.drawHeaderText();
-        goalController.drawHeaderText();
     }
     
     @Override
