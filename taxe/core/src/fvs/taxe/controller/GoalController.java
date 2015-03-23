@@ -36,7 +36,7 @@ public class GoalController {
         TaxeGame game = context.getTaxeGame();
         float top = (float) TaxeGame.HEIGHT;
         float x = 10.0f;
-        float y = top - 10.0f - TopBarController.CONTROLS_HEIGHT;
+        float y = top - 10.0f;
         game.batch.begin();
         game.fontSmall.setColor(Color.BLACK);
         //Draws the player's name and their score
@@ -66,7 +66,7 @@ public class GoalController {
         float top = (float) TaxeGame.HEIGHT;
         float x = 10.0f;
         //This value is set by subtracting the total height of the player header and the goal header, change this if you want to adjust the position of the goals or other elements in the GUI
-        float y = top - 60.0f - TopBarController.CONTROLS_HEIGHT;
+        float y = top - 60.0f;
 
         int index = 0;
 

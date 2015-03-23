@@ -5,17 +5,19 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+
 import fvs.taxe.TaxeGame;
+import gameLogic.Game;
 import gameLogic.GameState;
 import gameLogic.listeners.GameStateListener;
-
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 public class TopBarController {
     //This class controls what is displayed in the topBar, the primary method of informing the players of events that occur in game
     //It's very possible to move away from a topBar orientated design and more to dialogs as we have done, but we decided not to entirely due to the work required.
-    public final static int CONTROLS_HEIGHT = 40;
+    public final static int CONTROLS_WIDTH = 250;
 
     private Context context;
     private Color controlsColor = Color.LIGHT_GRAY;
@@ -45,7 +47,10 @@ public class TopBarController {
 
     private void createFlashActor() {
         flashMessage = new Label("", context.getSkin());
-        flashMessage.setPosition(400, TaxeGame.HEIGHT - 24);
+        flashMessage.setPosition(TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 40.0f);
+        flashMessage.setWidth(CONTROLS_WIDTH - 20.0f);
+        flashMessage.setWrap(true);
+        flashMessage.setAlignment(Align.top);
         context.getStage().addActor(flashMessage);
     }
 
@@ -59,6 +64,7 @@ public class TopBarController {
         //This method also displays a message in the topBar, but for the amount of time specified in the parameters
         flashMessage.setText(message);
         flashMessage.setColor(color);
+        flashMessage.setOriginY(TaxeGame.HEIGHT - 30.0f - flashMessage.getHeight());
         flashMessage.addAction(sequence(delay(time), fadeOut(0.25f)));
     }
 
@@ -79,10 +85,19 @@ public class TopBarController {
         //This method draws the topBar onto the game screen
         game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         game.shapeRenderer.setColor(controlsColor);
-        game.shapeRenderer.rect(0, TaxeGame.HEIGHT - CONTROLS_HEIGHT, TaxeGame.WIDTH, CONTROLS_HEIGHT);
-        game.shapeRenderer.setColor(Color.BLACK);
-        game.shapeRenderer.rect(0, TaxeGame.HEIGHT - CONTROLS_HEIGHT, TaxeGame.WIDTH, 1);
+        game.shapeRenderer.rect(TaxeGame.WIDTH - CONTROLS_WIDTH, 0, CONTROLS_WIDTH, TaxeGame.HEIGHT);
         game.shapeRenderer.end();
+    }
+    
+    public void drawContent() {
+    	Game gameLogic = context.getGameLogic();
+		TaxeGame game = context.getTaxeGame();
+    	if (gameLogic.getState() != GameState.ROUTING) {
+    		game.batch.begin();
+        	//If statement checks whether the turn is above 30, if it is then display 30 anyway
+        	game.fontSmall.draw(game.batch, "Turn " + ((gameLogic.getPlayerManager().getTurnNumber() + 1 < gameLogic.TOTAL_TURNS) ? gameLogic.getPlayerManager().getTurnNumber() + 1 : gameLogic.TOTAL_TURNS) + "/" + gameLogic.TOTAL_TURNS, (float) TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 14.0f);
+        	game.batch.end();
+    	}
     }
 
     public void addEndTurnButton() {

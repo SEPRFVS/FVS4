@@ -14,7 +14,7 @@ public class TaxeGame extends Game {
 
     // Using native res of the map image we are using at the moment
     //Did not change this to allow resizing as this was deemed to be too much work
-    public static final int WIDTH = 1022, HEIGHT = 678;
+    public static final int WIDTH = 1272, HEIGHT = 678;
 
     public SpriteBatch batch;
     public BitmapFont font;

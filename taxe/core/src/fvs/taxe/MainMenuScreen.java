@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class MainMenuScreen extends ScreenAdapter {
@@ -21,7 +20,6 @@ public class MainMenuScreen extends ScreenAdapter {
     Rectangle exitBounds;
     Vector3 touchPoint;
     Texture mapTexture;
-    Image mapImage;
 
     public MainMenuScreen(TaxeGame game) {
         //This sets all the relevant variables for the menu screen
@@ -37,7 +35,6 @@ public class MainMenuScreen extends ScreenAdapter {
 
         //Loads the gameMap in
         mapTexture = new Texture(Gdx.files.internal("gamemap.png"));
-        mapImage = new Image(mapTexture);
     }
 
     public void update() {
@@ -67,7 +64,7 @@ public class MainMenuScreen extends ScreenAdapter {
         game.batch.begin();
         Color c = game.batch.getColor();
         game.batch.setColor(c.r, c.g, c.b, (float) 0.3);
-        game.batch.draw(mapTexture, 0, 0);
+        game.batch.draw(mapTexture, 0, 0, TaxeGame.WIDTH, TaxeGame.HEIGHT);
         game.batch.setColor(c);
         game.batch.end();
 

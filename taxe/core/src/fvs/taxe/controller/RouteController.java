@@ -136,7 +136,7 @@ public class RouteController {
         TextButton doneRouting = new TextButton("Route Complete", context.getSkin());
         TextButton cancel = new TextButton("Cancel", context.getSkin());
 
-        doneRouting.setPosition(TaxeGame.WIDTH - 250, TaxeGame.HEIGHT - 33);
+        doneRouting.setPosition(TaxeGame.WIDTH - TopBarController.CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 10.0f);
         cancel.setPosition(TaxeGame.WIDTH - 100, TaxeGame.HEIGHT - 33);
 
         //If the cancel button is clicked then the routing is ended but none of the positions are saved as a route in the backend

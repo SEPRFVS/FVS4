@@ -105,7 +105,7 @@ public class GameScreen extends ScreenAdapter {
         game.batch.begin();
 
         //Draws the map background
-        game.batch.draw(mapTexture, 0, 0, TaxeGame.WIDTH, TaxeGame.HEIGHT);
+        game.batch.draw(mapTexture, 0, 0, TaxeGame.WIDTH - TopBarController.CONTROLS_WIDTH, TaxeGame.HEIGHT);
         game.batch.end();
 
         topBarController.drawBackground();
@@ -141,10 +141,7 @@ public class GameScreen extends ScreenAdapter {
 
         stage.draw();
 
-        game.batch.begin();
-        //If statement checks whether the turn is above 30, if it is then display 30 anyway
-        game.fontSmall.draw(game.batch, "Turn " + ((gameLogic.getPlayerManager().getTurnNumber() + 1 < gameLogic.TOTAL_TURNS) ? gameLogic.getPlayerManager().getTurnNumber() + 1 : gameLogic.TOTAL_TURNS) + "/" + gameLogic.TOTAL_TURNS, (float) TaxeGame.WIDTH - 90.0f, 20.0f);
-        game.batch.end();
+        topBarController.drawContent();
 
         resourceController.drawHeaderText();
         goalController.drawHeaderText();
