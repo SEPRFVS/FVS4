@@ -1,7 +1,13 @@
 package fvs.taxe.controller;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
 import fvs.taxe.TaxeGame;
 import fvs.taxe.clickListener.EngineerClicked;
@@ -15,6 +21,7 @@ import gameLogic.resource.*;
 public class ResourceController {
     private Context context;
     private Group resourceButtons = new Group();
+    private TextButtonStyle style = new TextButtonStyle();
 
     public ResourceController(final Context context) {
         this.context = context;
@@ -25,6 +32,13 @@ public class ResourceController {
                 drawPlayerResources(context.getGameLogic().getPlayerManager().getCurrentPlayer());
             }
         });
+        
+        //Build custom styling for buttons
+        style.up = new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal("ui/resourcebuttonup.png"))));
+        style.down = new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal("ui/resourcebuttondown.png"))));
+        style.font = context.getTaxeGame().fontSmall;
+        style.fontColor = Color.BLACK;
+        style.downFontColor = Color.WHITE;
     }
 
     public void drawPlayerResources(Player player) {
@@ -38,7 +52,7 @@ public class ResourceController {
         //Clears the resource buttons so that the other player's resources are not displayed
         resourceButtons.remove();
         resourceButtons.clear();
-
+        
         for (final Resource resource : player.getResources()) {
         	TextButton button = null;
             //This if statement is used to determine what type of resource is being drawn. This is necessary as each resource needs to have a different click listener assigned to its button.
@@ -50,7 +64,7 @@ public class ResourceController {
                 if (train.getPosition() == null) {
                     //Creates a clickListener for the button and adds it to the list of buttons
                     TrainClicked listener = new TrainClicked(context, train);
-                    button = new TextButton(resource.toString(), context.getSkin());
+                    button = new TextButton(resource.toString(), style);
                     button.addListener(listener);
                 }
 
@@ -58,19 +72,19 @@ public class ResourceController {
                 //Creates a clickListener for the button and adds it to the list of buttons
                 Obstacle obstacle = (Obstacle) resource;
                 ObstacleClicked listener = new ObstacleClicked(context, obstacle);
-                button = new TextButton("Obstacle", context.getSkin());
+                button = new TextButton("Obstacle", style);
                 button.addListener(listener);
             } else if (resource instanceof Skip) {
                 //Creates a clickListener for the button and adds it to the list of buttons
                 Skip skip = (Skip) resource;
                 SkipClicked listener = new SkipClicked(context, skip);
-                button = new TextButton("Skip", context.getSkin());
+                button = new TextButton("Skip", style);
                 button.addListener(listener);
             } else if (resource instanceof Engineer) {
                 //Creates a clickListener for the button and adds it to the list of buttons
                 Engineer engineer = (Engineer) resource;
                 EngineerClicked listener = new EngineerClicked(context, engineer);
-                button = new TextButton("Engineer", context.getSkin());
+                button = new TextButton("Engineer", style);
                 button.addListener(listener);
             }
             
