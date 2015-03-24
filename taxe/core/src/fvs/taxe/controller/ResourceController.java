@@ -50,7 +50,7 @@ public class ResourceController {
                 if (train.getPosition() == null) {
                     //Creates a clickListener for the button and adds it to the list of buttons
                     TrainClicked listener = new TrainClicked(context, train);
-                    button = new TextButton(resource.toString(), context.getSideBarController().textButtonStyle);
+                    button = new TextButton(resource.toString(), context.getSkin(), "unplaced-resource");
                     button.addListener(listener);
                 }
 
@@ -58,19 +58,19 @@ public class ResourceController {
                 //Creates a clickListener for the button and adds it to the list of buttons
                 Obstacle obstacle = (Obstacle) resource;
                 ObstacleClicked listener = new ObstacleClicked(context, obstacle);
-                button = new TextButton("Obstacle", context.getSideBarController().textButtonStyle);
+                button = new TextButton("Obstacle", context.getSkin(), "unplaced-resource");
                 button.addListener(listener);
             } else if (resource instanceof Skip) {
                 //Creates a clickListener for the button and adds it to the list of buttons
                 Skip skip = (Skip) resource;
                 SkipClicked listener = new SkipClicked(context, skip);
-                button = new TextButton("Skip", context.getSideBarController().textButtonStyle);
+                button = new TextButton("Skip", context.getSkin(), "unplaced-resource");
                 button.addListener(listener);
             } else if (resource instanceof Engineer) {
                 //Creates a clickListener for the button and adds it to the list of buttons
                 Engineer engineer = (Engineer) resource;
                 EngineerClicked listener = new EngineerClicked(context, engineer);
-                button = new TextButton("Engineer", context.getSideBarController().textButtonStyle);
+                button = new TextButton("Engineer", context.getSkin(), "unplaced-resource");
                 button.addListener(listener);
             }
             

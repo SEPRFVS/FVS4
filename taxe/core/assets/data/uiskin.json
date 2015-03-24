@@ -8,9 +8,9 @@ com.badlogic.gdx.graphics.Color: {
 	black: { a: 1 }
 },
 com.badlogic.gdx.graphics.g2d.BitmapFont: {
-	default-font: { file: play-17.fnt },
-	play-20: { file: play-20.fnt },
 	play-50: { file: play-50.fnt },
+	play-20: { file: play-20.fnt },
+	default-font: { file: play-17.fnt },
 	play-14: { file: play-14.fnt }
 },
 com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
@@ -29,6 +29,13 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 		disabledFontColor: { a: 1, b: 0.8, g: 0.8, r: 0.8 },
 		up: default-round,
 		down: default-round-down
+	},
+	unplaced-resource: {
+		font: default-font,
+		fontColor: { a: 1 },
+		downFontColor: { a: 1, b: 1, g: 1, r: 1 },
+		up: resourcebuttonup,
+		down: resourcebuttondown
 	},
 	toggle: {
 		font: default-font,
@@ -92,6 +99,11 @@ com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	default: {
 		font: default-font,
 		fontColor: { a: 1, b: 1, g: 1, r: 1 }
+	},
+	tooltip: {
+		font: default-font,
+		fontColor: { a: 1, b: 1, g: 1, r: 1 },
+		background: resourcebuttondown
 	},
 	error: {
 		font: default-font,

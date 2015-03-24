@@ -30,7 +30,6 @@ public class SideBarController {
     private Color controlsColor = Color.LIGHT_GRAY;
     private TextButton endTurnButton;
     private Label flashMessage;
-    protected TextButtonStyle textButtonStyle = new TextButtonStyle();
 
     public SideBarController(Context context) {
         this.context = context;
@@ -49,14 +48,6 @@ public class SideBarController {
                 }
             }
         });
-        
-        //Build custom styling for buttons
-        //TODO make it so buttons can be built up to have some padding around them
-        textButtonStyle.up = new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal("ui/resourcebuttonup.png"))));
-        textButtonStyle.down = new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal("ui/resourcebuttondown.png"))));
-        textButtonStyle.font = context.getTaxeGame().fontSmall;
-        textButtonStyle.fontColor = Color.BLACK;
-        textButtonStyle.downFontColor = Color.WHITE;
 
         createFlashActor();
     }
@@ -142,7 +133,7 @@ public class SideBarController {
 
     public void addEndTurnButton() {
         //This method adds an endTurn button to the topBar which allows the user to end their turn
-        endTurnButton = new TextButton("End Turn", textButtonStyle);
+        endTurnButton = new TextButton("End Turn", context.getSkin(), "unplaced-resource");
         endTurnButton.setPosition(TaxeGame.WIDTH - endTurnButton.getWidth() - 10.0f, TaxeGame.HEIGHT - 33.0f);
         endTurnButton.addListener(new ClickListener() {
             @Override
