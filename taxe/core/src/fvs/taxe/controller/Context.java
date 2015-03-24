@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import fvs.taxe.TaxeGame;
 import gameLogic.Game;
+import gameLogic.replay.ReplayManager;
 
 public class Context {
     //Context appears to be a class that allows different aspects of the system access parts that they otherwise logically shouldn't have access to.
@@ -12,6 +13,7 @@ public class Context {
     private Stage stage;
     private Skin skin;
     private Game gameLogic;
+    private ReplayManager replayManager;
     private RouteController routeController;
     private TopBarController topBarController;
 
@@ -55,4 +57,11 @@ public class Context {
         this.topBarController = topBarController;
     }
 
+    public ReplayManager getReplayManager() {
+        return replayManager;
+    }
+
+    public void setReplayManager(ReplayManager replayManager) {
+        this.replayManager = replayManager;
+    }
 }

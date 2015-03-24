@@ -5,6 +5,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -16,6 +17,7 @@ import gameLogic.GameState;
 import gameLogic.listeners.GameStateListener;
 import gameLogic.listeners.TurnListener;
 import gameLogic.map.Map;
+import gameLogic.replay.ReplayManager;
 
 
 public class GameScreen extends ScreenAdapter {
@@ -29,6 +31,7 @@ public class GameScreen extends ScreenAdapter {
     public static final int ANIMATION_TIME = 2;
     private Tooltip tooltip;
     private Context context;
+    private int actorId = 1000;
 
     private StationController stationController;
     private TopBarController topBarController;
@@ -38,7 +41,18 @@ public class GameScreen extends ScreenAdapter {
 
     public GameScreen(TaxeGame game) {
         this.game = game;
-        stage = new Stage(new FitViewport(TaxeGame.WIDTH, TaxeGame.HEIGHT));
+        
+        stage = new Stage(new FitViewport(TaxeGame.WIDTH, TaxeGame.HEIGHT)) {
+            @Override
+            public void addActor(Actor a) {
+                // uniquely name each actor
+                a.setName((String.valueOf(actorId)));
+                actorId++;
+                super.addActor(a);
+            }
+        };
+
+        Gdx.input.setInputProcessor(stage);
 
         //Sets the skin
         skin = new Skin(Gdx.files.internal("data/uiskin.json"));
@@ -46,7 +60,7 @@ public class GameScreen extends ScreenAdapter {
         //Initialises the game
         gameLogic = Game.getInstance();
         context = new Context(stage, skin, game, gameLogic);
-        Gdx.input.setInputProcessor(stage);
+        context.setReplayManager(new ReplayManager());
 
         //Draw background
         mapTexture = new Texture(Gdx.files.internal("gamemap.png"));
