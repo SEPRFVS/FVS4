@@ -133,8 +133,8 @@ public class RouteController {
     }
 
     private void addRoutingButtons() {
-        TextButton doneRouting = new TextButton("Route Complete", context.getSkin());
-        TextButton cancel = new TextButton("Cancel", context.getSkin());
+        TextButton doneRouting = new TextButton("Route Complete", context.getSideBarController().textButtonStyle);
+        TextButton cancel = new TextButton("Cancel", context.getSideBarController().textButtonStyle);
 
         doneRouting.setPosition(TaxeGame.WIDTH - SideBarController.CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 33.0f);
         cancel.setPosition(TaxeGame.WIDTH - 10.0f - cancel.getWidth(), TaxeGame.HEIGHT - 33.0f);

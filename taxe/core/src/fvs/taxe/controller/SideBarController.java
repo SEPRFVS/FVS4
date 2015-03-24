@@ -2,13 +2,18 @@ package fvs.taxe.controller;
 
 import java.text.DecimalFormat;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
 import fvs.taxe.TaxeGame;
 import gameLogic.Game;
@@ -25,6 +30,7 @@ public class SideBarController {
     private Color controlsColor = Color.LIGHT_GRAY;
     private TextButton endTurnButton;
     private Label flashMessage;
+    protected TextButtonStyle textButtonStyle = new TextButtonStyle();
 
     public SideBarController(Context context) {
         this.context = context;
@@ -43,6 +49,14 @@ public class SideBarController {
                 }
             }
         });
+        
+        //Build custom styling for buttons
+        //TODO make it so buttons can be built up to have some padding around them
+        textButtonStyle.up = new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal("ui/resourcebuttonup.png"))));
+        textButtonStyle.down = new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal("ui/resourcebuttondown.png"))));
+        textButtonStyle.font = context.getTaxeGame().fontSmall;
+        textButtonStyle.fontColor = Color.BLACK;
+        textButtonStyle.downFontColor = Color.WHITE;
 
         createFlashActor();
     }
@@ -128,7 +142,7 @@ public class SideBarController {
 
     public void addEndTurnButton() {
         //This method adds an endTurn button to the topBar which allows the user to end their turn
-        endTurnButton = new TextButton("End Turn", context.getSkin());
+        endTurnButton = new TextButton("End Turn", textButtonStyle);
         endTurnButton.setPosition(TaxeGame.WIDTH - endTurnButton.getWidth() - 10.0f, TaxeGame.HEIGHT - 33.0f);
         endTurnButton.addListener(new ClickListener() {
             @Override
