@@ -70,12 +70,13 @@ public class GoalController {
                 HorizontalGroup scores = new HorizontalGroup(); //Prevent multiple columns
                 scores.space(4.0f);
                 scores.bottom();
-                scores.addActor(new Label(goal.getScore() + " points", context.getSkin()));
+                Label baseScore = new Label(goal.getScore() + " points", context.getSkin());
+                scores.addActor(baseScore);
                 scores.addActor(new Label("(+" + goal.getBonus() + " bonus)",context.getSkin(), "bonusgoal"));
                 button.add(scores);
                 button.row();
                 button.add(bonusGoal);
-                button.setHeight(baseGoal.getHeight() + scores.getHeight() + bonusGoal.getHeight() + 2.0f);
+                button.setHeight(baseGoal.getHeight() + baseScore.getHeight() + bonusGoal.getHeight() + 2.0f);
 
                 //Adds the listener to the button so that it will inform the correct parts of the system
                 GoalClickListener listener = new GoalClickListener(context, goal);
