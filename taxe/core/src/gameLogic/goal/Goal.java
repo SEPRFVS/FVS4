@@ -150,7 +150,7 @@ public class Goal {
         if (goingThrough) {
             output = output.concat("Via " + intermediary.getName());
         }
-        output = output.concat(": " + this.bonus + " points");
+        //output = output.concat(": " + this.bonus + " points");
         return output;
     }
 

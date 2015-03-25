@@ -1,14 +1,11 @@
 package fvs.taxe.controller;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.Cell;
+import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 import fvs.taxe.TaxeGame;
 import fvs.taxe.clickListener.GoalClickListener;
@@ -54,7 +51,7 @@ public class GoalController {
         float top = (float) TaxeGame.HEIGHT;
         float x = TaxeGame.WIDTH - SideBarController.CONTROLS_WIDTH + 10.0f;
         //This value is set by subtracting the total height of the player header and the goal header, change this if you want to adjust the position of the goals or other elements in the GUI
-        float y = top - 110.0f;
+        float y = top - 60.0f;
 
         int index = 0;
 
@@ -62,18 +59,23 @@ public class GoalController {
             //Necessary to check whether the goals are complete as completed goals are not removed from the player's list of goals, without this check complete goals would also be displayed.
             if (!goal.getComplete()) {
 
-                y -= 42;
+                y -= 60;
                 
-                Button button = new Button(context.getSkin(), "blue");
+                Button button = new Button(context.getSkin(), "blue"); //Use Button instead of TextButton to get multiple font sizes
                 button.setWidth(SideBarController.CONTROLS_WIDTH - 20.0f);
-                Label baseGoal = new Label(goal.baseGoalString(), context.getSkin(), "basegoal");
-                baseGoal.setWidth(button.getWidth());
+                Label baseGoal = new Label(goal.getOrigin().getName() + " - " + goal.getDestination().getName(), context.getSkin(), "basegoal");
                 Label bonusGoal = new Label(goal.bonusString(), context.getSkin(), "bonusgoal");
-                bonusGoal.setWidth(button.getWidth());
                 button.add(baseGoal);
                 button.row();
+                HorizontalGroup scores = new HorizontalGroup(); //Prevent multiple columns
+                scores.space(4.0f);
+                scores.bottom();
+                scores.addActor(new Label(goal.getScore() + " points", context.getSkin()));
+                scores.addActor(new Label("(+" + goal.getBonus() + " bonus)",context.getSkin(), "bonusgoal"));
+                button.add(scores);
+                button.row();
                 button.add(bonusGoal);
-                button.setHeight(baseGoal.getHeight() + bonusGoal.getHeight() + 2.0f);
+                button.setHeight(baseGoal.getHeight() + scores.getHeight() + bonusGoal.getHeight() + 2.0f);
 
                 //Adds the listener to the button so that it will inform the correct parts of the system
                 GoalClickListener listener = new GoalClickListener(context, goal);

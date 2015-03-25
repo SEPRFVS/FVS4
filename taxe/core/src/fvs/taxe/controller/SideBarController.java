@@ -2,23 +2,19 @@ package fvs.taxe.controller;
 
 import java.text.DecimalFormat;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
 import fvs.taxe.TaxeGame;
 import gameLogic.Game;
 import gameLogic.GameState;
 import gameLogic.listeners.GameStateListener;
+import gameLogic.player.Player;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 public class SideBarController {
@@ -54,7 +50,7 @@ public class SideBarController {
 
     private void createFlashActor() {
         flashMessage = new Label("", context.getSkin());
-        flashMessage.setPosition(TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, 74.0f);
+        flashMessage.setPosition(TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, 69.0f);
         flashMessage.setWidth(CONTROLS_WIDTH - 20.0f);
         flashMessage.setWrap(true);
         flashMessage.setAlignment(Align.bottom);
@@ -115,18 +111,30 @@ public class SideBarController {
     		//If statement checks whether the turn is above 30, if it is then display 30 anyway
     		game.fontSmall.draw(game.batch, "Turn " + ((gameLogic.getPlayerManager().getTurnNumber() + 1 < gameLogic.TOTAL_TURNS) ? gameLogic.getPlayerManager().getTurnNumber() + 1 : gameLogic.TOTAL_TURNS) + "/" + gameLogic.TOTAL_TURNS, (float) TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 14.0f);
     	}
-        //Give Current Player
-        game.font.draw(game.batch, "Player " + gameLogic.getPlayerManager().getCurrentPlayer().getPlayerNumber(), TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 40.0f);
+    	
         //Headings
-        game.fontSmall.draw(game.batch, "Goals", TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 90.0f);
+        game.fontSmall.draw(game.batch, "Goals", TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 40.0f);
         game.fontSmall.draw(game.batch, "Unplaced Resources", TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 260.0f);
-        //Draw Scores (Restricted to only 2 players)
-        //TODO Allow more players
-        game.fontTiny.draw(game.batch, "Player " + gameLogic.getPlayerManager().getAllPlayers().get(0).getPlayerNumber(), TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, 24.0f);
-        game.fontTiny.draw(game.batch, "Player " + gameLogic.getPlayerManager().getAllPlayers().get(1).getPlayerNumber(), TaxeGame.WIDTH - (CONTROLS_WIDTH/2) + 10.0f, 24.0f);
+        
+        //Draw Scores
         DecimalFormat integer = new DecimalFormat("0");
-        game.font.draw(game.batch, integer.format(gameLogic.getPlayerManager().getAllPlayers().get(0).getScore()), TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, 74.0f);
-        game.font.draw(game.batch, integer.format(gameLogic.getPlayerManager().getAllPlayers().get(1).getScore()), TaxeGame.WIDTH - (CONTROLS_WIDTH/2) + 10.0f, 74.0f);
+        for (Player player : gameLogic.getPlayerManager().getAllPlayers()) {
+        	if (player == gameLogic.getPlayerManager().getCurrentPlayer()) {
+        		//Highlight current player
+        		game.fontTiny.setColor(Color.RED);
+        		game.font.setColor(Color.RED);
+        	}
+        	//Set position based on index in array
+        	float position = ((CONTROLS_WIDTH - 20.0f)/gameLogic.getPlayerManager().getAllPlayers().size()) * gameLogic.getPlayerManager().getAllPlayers().indexOf(player);
+        	position += TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f;
+        	game.fontTiny.draw(game.batch, "Player " + player.getPlayerNumber(), position, 24.0f);
+        	game.font.draw(game.batch, integer.format(player.getScore()), position, 64.0f);
+        	if (player == gameLogic.getPlayerManager().getCurrentPlayer()) {
+        		//Reset colours
+        		game.fontTiny.setColor(Color.WHITE);
+        		game.font.setColor(Color.WHITE);
+        	}
+        }
         
         game.batch.end();
     }
