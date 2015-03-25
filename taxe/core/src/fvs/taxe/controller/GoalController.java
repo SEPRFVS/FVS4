@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -78,9 +79,15 @@ public class GoalController {
                 GoalClickListener listener = new GoalClickListener(context, goal);
                 button.setPosition(x, y);
 
+                ButtonStyle style = button.getStyle();
                 if (colours[index++] != null) {
-                    //Sets the colour based on the values in the array. If the train is routing then these colours will match nodes on the map, otherwise they are all grey.
+                    //Sets the colour based on the values in the array. If the train is routing then these colours will match nodes on the map.
+                	style.up = context.getSkin().getDrawable("whitebutton");
+                	button.setStyle(style);
                     button.setColor(colours[index - 1]);
+                } else {
+                	style.up = context.getSkin().getDrawable("lightbluebutton");
+                	button.setStyle(style);
                 }
                 button.addListener(listener);
                 goalButtons.addActor(button);
