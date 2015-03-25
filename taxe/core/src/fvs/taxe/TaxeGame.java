@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 
 public class TaxeGame extends Game {
@@ -15,6 +16,7 @@ public class TaxeGame extends Game {
     public static final int WIDTH = 1272, HEIGHT = 678;
 
     public SpriteBatch batch;
+    public Skin skin;
     public BitmapFont font;
 	public BitmapFont fontSmall;
 	public BitmapFont fontTiny;
@@ -24,15 +26,18 @@ public class TaxeGame extends Game {
     public void create() {
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
+        
+        //Sets the skin
+        skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 
         // font size 50pt
-        font = new BitmapFont(Gdx.files.internal("data/play-50.fnt"));
+        font = skin.getFont("play-50");
 
         //font size 20pt
-        fontSmall = new BitmapFont(Gdx.files.internal("data/play-20.fnt"));
+        fontSmall = skin.getFont("play-20");
 
 		//font size 14pt
-		fontTiny = new BitmapFont(Gdx.files.internal("data/play-14.fnt"));
+		fontTiny = skin.getFont("play-14");
 
         //Sets the main screen to be the menu
         setScreen(new MainMenuScreen(this));

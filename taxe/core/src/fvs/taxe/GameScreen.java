@@ -39,9 +39,9 @@ public class GameScreen extends ScreenAdapter {
     public GameScreen(TaxeGame game) {
         this.game = game;
         stage = new Stage(new FitViewport(TaxeGame.WIDTH, TaxeGame.HEIGHT));
-
-        //Sets the skin
-        skin = new Skin(Gdx.files.internal("data/uiskin.json"));
+        
+        //Set the skin
+        skin = game.skin;
 
         //Initialises the game
         gameLogic = Game.getInstance();
