@@ -1,9 +1,14 @@
 package fvs.taxe.controller;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
+
 import fvs.taxe.TaxeGame;
 import fvs.taxe.clickListener.GoalClickListener;
 import gameLogic.player.Player;
@@ -56,15 +61,18 @@ public class GoalController {
             //Necessary to check whether the goals are complete as completed goals are not removed from the player's list of goals, without this check complete goals would also be displayed.
             if (!goal.getComplete()) {
 
-                y -= 40;
-                TextButton button = new TextButton(
-                        goal.baseGoalString() + "\n" + goal.bonusString(), context.getSkin());
-                button.getLabel().setAlignment(Align.left);
-                //The goal buttons are scaled so that they do not overlap nodes on the map, this was found to be necessary after changing the way goals were displayed
-                float scaleFactor = 0.77f;
-                button.getLabel().setFontScale(scaleFactor, scaleFactor);
+                y -= 42;
+                
+                Button button = new Button(context.getSkin(), "blue");
                 button.setWidth(SideBarController.CONTROLS_WIDTH - 20.0f);
-                button.setHeight(scaleFactor * button.getHeight());
+                Label baseGoal = new Label(goal.baseGoalString(), context.getSkin(), "basegoal");
+                baseGoal.setWidth(button.getWidth());
+                Label bonusGoal = new Label(goal.bonusString(), context.getSkin(), "bonusgoal");
+                bonusGoal.setWidth(button.getWidth());
+                button.add(baseGoal);
+                button.row();
+                button.add(bonusGoal);
+                button.setHeight(baseGoal.getHeight() + bonusGoal.getHeight() + 2.0f);
 
                 //Adds the listener to the button so that it will inform the correct parts of the system
                 GoalClickListener listener = new GoalClickListener(context, goal);

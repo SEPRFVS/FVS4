@@ -4,8 +4,8 @@ com.badlogic.gdx.graphics.Color: {
 	light_grey: { r: 0.8, g: 0.8, b: 0.8, a: 1 },
 	white: { r: 1, g: 1, b: 1, a: 1 },
 	red: { r: 1, a: 1 },
-	grey: { r: 0.7, g: 0.7, b: 0.7, a: 1 },
-	black: { a: 1 }
+	black: { a: 1 },
+	grey: { r: 0.7, g: 0.7, b: 0.7, a: 1 }
 },
 com.badlogic.gdx.graphics.g2d.BitmapFont: {
 	play-50: { file: play-50.fnt },
@@ -62,6 +62,12 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 		fontColor: { a: 1 },
 		up: whitebutton,
 		down: greenbutton
+	},
+	blue: {
+		font: default-font,
+		fontColor: { a: 1, b: 1, g: 1, r: 1 },
+		up: lightbluebutton,
+		down: bluebutton
 	}
 },
 com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
@@ -76,7 +82,8 @@ com.badlogic.gdx.scenes.scene2d.ui.Touchpad$TouchpadStyle: {
 },
 com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
 	default: { up: default-round, down: default-round-down },
-	toggle: { up: default-round, down: default-round-down, checked: default-round-down }
+	toggle: { up: default-round, down: default-round-down, checked: default-round-down },
+	blue: { up: lightbluebutton, down: bluebutton }
 },
 com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
 	default: {
@@ -138,9 +145,17 @@ com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 		fontColor: { a: 1, b: 1, g: 1, r: 1 },
 		background: greysemitrans
 	},
+	basegoal: {
+		font: default-font,
+		fontColor: { a: 1, b: 1, g: 1, r: 1 }
+	},
 	error: {
 		font: default-font,
 		fontColor: { a: 1, r: 1 }
+	},
+	bonusgoal: {
+		font: play-14,
+		fontColor: { a: 1, b: 1, g: 1, r: 1 }
 	},
 	title: {
 		font: default-font,

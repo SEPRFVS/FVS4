@@ -22,14 +22,14 @@ bluewindow
   index: -1
 check-off
   rotate: false
-  xy: 606, 64
+  xy: 623, 64
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 textfield
   rotate: false
-  xy: 606, 64
+  xy: 623, 64
   size: 14, 14
   split: 3, 3, 3, 3
   orig: 14, 14
@@ -37,7 +37,7 @@ textfield
   index: -1
 check-on
   rotate: false
-  xy: 621, 64
+  xy: 638, 64
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -99,7 +99,7 @@ default-rect-down
   index: -1
 default-round
   rotate: false
-  xy: 666, 58
+  xy: 683, 58
   size: 12, 20
   split: 5, 5, 5, 4
   pad: 4, 4, 1, 1
@@ -156,14 +156,14 @@ default-slider
   index: -1
 default-slider-knob
   rotate: false
-  xy: 679, 60
+  xy: 696, 60
   size: 9, 18
   orig: 9, 18
   offset: 0, 0
   index: -1
 default-splitpane
   rotate: false
-  xy: 689, 75
+  xy: 706, 75
   size: 5, 3
   split: 0, 5, 0, 0
   orig: 5, 3
@@ -217,6 +217,14 @@ greysemitrans
   orig: 16, 16
   offset: 0, 0
   index: -1
+lightbluebutton
+  rotate: false
+  xy: 572, 62
+  size: 16, 16
+  split: 3, 4, 3, 4
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
 paint_brush
   rotate: false
   xy: 256, 63
@@ -226,7 +234,7 @@ paint_brush
   index: -1
 redbutton
   rotate: false
-  xy: 572, 62
+  xy: 589, 62
   size: 16, 16
   split: 3, 4, 3, 4
   orig: 16, 16
@@ -249,14 +257,14 @@ selection
   index: -1
 tree-minus
   rotate: false
-  xy: 636, 64
+  xy: 653, 64
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 tree-plus
   rotate: false
-  xy: 651, 64
+  xy: 668, 64
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -270,7 +278,7 @@ white
   index: -1
 whitebutton
   rotate: false
-  xy: 589, 62
+  xy: 606, 62
   size: 16, 16
   split: 3, 4, 3, 4
   orig: 16, 16
