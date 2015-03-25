@@ -6,10 +6,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import gameLogic.Game;
 
-public class DialogTurnSkipped extends Dialog {
+public class DialogTurnSkipped extends UnifiedDialog {
 
     public DialogTurnSkipped(Skin skin) {
-        super("Miss a turn", skin);
+        super("Miss a turn", skin, "redwin");
         //Informs player that they have missed their turn.
         text("Due to circumstances outside our control \n Network Rail would like to apologise for you missing your turn.");
         button("OK", "EXIT");

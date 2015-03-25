@@ -8,11 +8,11 @@ import fvs.taxe.TaxeGame;
 import gameLogic.player.Player;
 import gameLogic.player.PlayerManager;
 
-public class DialogEndGame extends Dialog {
+public class DialogEndGame extends UnifiedDialog {
     private TaxeGame game;
 
     public DialogEndGame(TaxeGame game, PlayerManager pm, Skin skin) {
-        super("GAME OVER", skin);
+        super("GAME OVER", skin, "greenwin");
         this.game = game;
 
         double highScore = 0;

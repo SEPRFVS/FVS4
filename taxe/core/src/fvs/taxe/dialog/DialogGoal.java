@@ -10,12 +10,12 @@ import gameLogic.goal.Goal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DialogGoal extends Dialog {
+public class DialogGoal extends UnifiedDialog {
     private List<ResourceDialogClickListener> clickListeners = new ArrayList<ResourceDialogClickListener>();
 
     public DialogGoal(Goal goal, Skin skin) {
         //Generates a dialog allowing the player to select what they want to do with the goal
-        super(goal.toString(), skin);
+        super(goal.toString(), skin, "bluewin");
 
         text("What do you want to do with this goal?");
 

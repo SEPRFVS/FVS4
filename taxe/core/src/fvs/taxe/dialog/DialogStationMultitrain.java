@@ -9,14 +9,14 @@ import gameLogic.resource.Train;
 
 import java.util.ArrayList;
 
-public class DialogStationMultitrain extends Dialog {
+public class DialogStationMultitrain extends UnifiedDialog {
     //This class is used to create a dialog for when there are multiple trains in one location
     private Context context;
 
     public DialogStationMultitrain(ArrayList<Train> trains, Skin skin, Context context) {
 
         //This constructor is called when there are multiple blocked trains sitting on top of each other
-        super("Select Train", skin);
+        super("Select Train", skin, "bluewin");
         this.context = context;
         text("Choose which train you would like");
 
