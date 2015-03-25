@@ -117,6 +117,9 @@ public class GameScreen extends ScreenAdapter {
             //This colours the start and end nodes of each goal to allow the player to easily see where they need to route
         }
 
+        //Draw station acronyms
+        stationController.displayStationAcronyms();
+        
         //Draw routing
         if (gameLogic.getState() == GameState.ROUTING) {
             routeController.drawRoute(Color.BLACK);
