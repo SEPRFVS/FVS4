@@ -324,11 +324,25 @@ public class StationController {
 			if (trainsAtStation(station) > 0) {
 				//if the number of trains at that station is greater than 0 then it renders the number in the correct place
 				game.fontSmall.draw(game.batch, trainsAtStation(station) + "",
-						(float) station.getLocation().getX() - 6,
-						(float) station.getLocation().getY() + 26);
+						(float) station.getLocation().getX() + 13,
+						(float) station.getLocation().getY() + 8);
 			}
 		}
 
+		game.batch.end();
+	}
+	
+	public void displayStationAcronyms() {
+		TaxeGame game = context.getTaxeGame();
+		game.batch.begin();
+		game.fontTiny.setColor(Color.BLACK);
+		
+		for (Station station : context.getGameLogic().getMap().getStations()) {
+			 if (!(station instanceof CollisionStation)) {
+				game.fontTiny.draw(game.batch, station.getAcronym(), (float) station.getLocation().getX() - 14,
+						(float) station.getLocation().getY() + 24);
+			}	
+		}
 		game.batch.end();
 	}
 
