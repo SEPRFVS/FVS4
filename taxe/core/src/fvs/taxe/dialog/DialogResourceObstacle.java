@@ -10,11 +10,11 @@ import gameLogic.resource.Obstacle;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DialogResourceObstacle extends Dialog {
+public class DialogResourceObstacle extends UnifiedDialog {
     private List<ResourceDialogClickListener> clickListeners = new ArrayList<ResourceDialogClickListener>();
 
     public DialogResourceObstacle(Obstacle obstacle, Skin skin) {
-        super(obstacle.toString(), skin);
+        super(obstacle.toString(), skin, "bluewin");
 
         //Generates all the buttons that allow the user to interact with the dialog
         text("What do you want to do with this obstacle?");

@@ -3,6 +3,7 @@ package fvs.taxe.dialog;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+
 import fvs.taxe.Button;
 import fvs.taxe.clickListener.ResourceDialogClickListener;
 import gameLogic.resource.Engineer;
@@ -10,11 +11,11 @@ import gameLogic.resource.Engineer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DialogResourceEngineer extends Dialog {
+public class DialogResourceEngineer extends UnifiedDialog {
     private List<ResourceDialogClickListener> clickListeners = new ArrayList<ResourceDialogClickListener>();
 
     public DialogResourceEngineer(Engineer engineer, Skin skin) {
-        super(engineer.toString(), skin);
+        super(engineer.toString(), skin, "bluewin");
         //Generates all the buttons that allow the user to interact with the dialog
         text("What do you want to do with this engineer?");
         button("Repair a blocked connection", "PLACE");

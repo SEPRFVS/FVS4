@@ -10,11 +10,11 @@ import fvs.taxe.controller.Context;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DialogResourceSkipped extends Dialog {
+public class DialogResourceSkipped extends UnifiedDialog {
     private List<ResourceDialogClickListener> clickListeners = new ArrayList<ResourceDialogClickListener>();
 
     public DialogResourceSkipped(Context context) {
-        super("Skip", context.getSkin());
+        super("Skip", context.getSkin(), "bluewin");
 
         text("What do you want to do with this resource?");
         //Generates all the buttons required to allow the user to interact with the dialog
