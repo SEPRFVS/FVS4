@@ -37,6 +37,7 @@ import gameLogic.resource.Train;
 
 public class StationController {
 	public final static int CONNECTION_LINE_WIDTH = 5;
+	private final static Boolean showDistances = false;
 
 	private Context context;
 	private Tooltip tooltip;
@@ -293,20 +294,22 @@ public class StationController {
 
 
 		// if the game is in routing mode, then the length of the connection is displayed
-		for (Connection connection : connections) {
-			if (connection.isBlocked()) {
-
-			} else if (Game.getInstance().getState() == GameState.ROUTING) {
-				IPositionable midpoint = connection.getMidpoint();
-				game.batch.begin();
-				game.fontTiny.setColor(Color.BLACK);
-				String text = String.valueOf(Math.round(
-						context.getGameLogic().getMap().getDistance(connection.getStation1(),connection.getStation2())
-				));
-				game.fontTiny.draw(game.batch, text,
-						midpoint.getX() - game.fontTiny.getBounds(text).width / 2f,
-						midpoint.getY() + game.fontTiny.getBounds(text).height / 2f);
-				game.batch.end();
+		if (showDistances){
+			for (Connection connection : connections) {
+				if (connection.isBlocked()) {
+	
+				} else if (Game.getInstance().getState() == GameState.ROUTING) {
+					IPositionable midpoint = connection.getMidpoint();
+					game.batch.begin();
+					game.fontTiny.setColor(Color.BLACK);
+					String text = String.valueOf(Math.round(
+							context.getGameLogic().getMap().getDistance(connection.getStation1(),connection.getStation2())
+					));
+					game.fontTiny.draw(game.batch, text,
+							midpoint.getX() - game.fontTiny.getBounds(text).width / 2f,
+							midpoint.getY() + game.fontTiny.getBounds(text).height / 2f);
+					game.batch.end();
+				}
 			}
 		}
 	}
