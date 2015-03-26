@@ -37,8 +37,17 @@ public class Station {
     }
     
     public String getAcronym(){
-    	//Generates 3 letter acronym based on station name
-    	return (name.charAt(0) + "" + name.charAt(Math.round(name.length()/2)) + "" + name.charAt(name.length()-1)).toUpperCase();
+    	//Special cases
+    	if (name.equals("York")){
+    		return "YRK";
+    	} else if (name.equals("London")){
+    		return "LDN";
+    	} else if (name.equals("Copenhagen")){
+    		return "CPH";
+    	} else {
+    		//First 3 letter acronyms
+    		return (name.substring(0,3)).toUpperCase();
+    	}
     }
 
     public boolean equals(Object o) {
