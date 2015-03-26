@@ -3,6 +3,7 @@ package fvs.taxe.controller;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -24,7 +25,7 @@ import gameLogic.resource.Train;
 
 public class RouteController {
     private Context context;
-    private Group routingButtons = new Group();
+    private List<Actor> routingButtons = new ArrayList<Actor>();
     private List<IPositionable> positions;
     private boolean isRouting = false;
     private Train train;
@@ -165,10 +166,11 @@ public class RouteController {
         });
 
         //Adds the buttons to the screen
-        routingButtons.addActor(doneRouting);
-        routingButtons.addActor(cancel);
+        routingButtons.add(doneRouting);
+        routingButtons.add(cancel);
 
-        context.getStage().addActor(routingButtons);
+        context.getStage().addActor(doneRouting);
+        context.getStage().addActor(cancel);
     }
 
     private void confirmed() {
@@ -181,11 +183,20 @@ public class RouteController {
         TrainMoveController move = new TrainMoveController(context, train);
     }
 
+    private void clearRoutingButtons() {
+        for (Actor actor : routingButtons) {
+            actor.remove();
+        }
+
+        routingButtons.clear();
+    }
+
     private void endRouting() {
         //This routine sets the gamescreen back to how it should be for normal operation
         context.getGameLogic().setState(GameState.NORMAL);
         //All buttons are removed and flags set to the relevant values.
-        routingButtons.remove();
+        clearRoutingButtons();
+
         isRouting = false;
         editingRoute = false;
         distance = 0;
@@ -249,7 +260,7 @@ public class RouteController {
         //This method is used to draw the trains current route so that the user can see where their trains are going
 
 
-        routingButtons.clear();
+        clearRoutingButtons();
 
         train.getRoute();
 
@@ -279,15 +290,14 @@ public class RouteController {
             public void clicked(InputEvent event, float x, float y) {
                 context.getGameLogic().setState(GameState.NORMAL);
                 context.getTopBarController().clearMessage();
-                routingButtons.remove();
+                clearRoutingButtons();
                 distance = 0;
 
             }
         });
 
-        routingButtons.addActor(back);
-
-        context.getStage().addActor(routingButtons);
+        routingButtons.add(back);
+        context.getStage().addActor(back);
     }
 
 }
