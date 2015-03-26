@@ -94,7 +94,6 @@ public class TopBarController {
             public void clicked(InputEvent event, float x, float y) {
                 //This sets the turn to be over in the backend
                 context.getGameLogic().getPlayerManager().turnOver(context);
-                context.getReplayManager().addClick(endTurnButton.getName());
             }
         });
 

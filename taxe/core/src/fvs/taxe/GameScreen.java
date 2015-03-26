@@ -1,6 +1,7 @@
 package fvs.taxe;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -8,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import fvs.taxe.controller.*;
@@ -18,6 +20,9 @@ import gameLogic.listeners.GameStateListener;
 import gameLogic.listeners.TurnListener;
 import gameLogic.map.Map;
 import gameLogic.replay.ReplayManager;
+
+import java.awt.event.InputEvent;
+import java.util.EventListener;
 
 
 public class GameScreen extends ScreenAdapter {
@@ -41,14 +46,33 @@ public class GameScreen extends ScreenAdapter {
 
     public GameScreen(TaxeGame game) {
         this.game = game;
-        
+
+        final ReplayManager rm = new ReplayManager();
+
+        // magic, do not touch
         stage = new Stage(new FitViewport(TaxeGame.WIDTH, TaxeGame.HEIGHT)) {
             @Override
-            public void addActor(Actor a) {
+            public void addActor(final Actor actor) {
+                actor.setName((String.valueOf(actorId)));
+
+                for (final com.badlogic.gdx.scenes.scene2d.EventListener listener : actor.getListeners()) {
+                    if (listener instanceof ClickListener) {
+                        if (!actor.removeListener(listener)) {
+                            System.out.println("OLD LISTENER NOT REMOVED");
+                        }
+                        actor.addListener(new ClickListener() {
+                            @Override
+                            public void clicked(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y) {
+                                rm.addClick(actor.getName());
+                                ((ClickListener) listener).clicked(event, x, y);
+                            }
+                        });
+                    }
+                }
+
                 // uniquely name each actor
-                a.setName((String.valueOf(actorId)));
                 actorId++;
-                super.addActor(a);
+                super.addActor(actor);
             }
         };
 
@@ -60,7 +84,11 @@ public class GameScreen extends ScreenAdapter {
         //Initialises the game
         gameLogic = Game.getInstance();
         context = new Context(stage, skin, game, gameLogic);
-        context.setReplayManager(new ReplayManager());
+
+
+        rm.setStage(stage);
+
+        context.setReplayManager(rm);
 
         //Draw background
         mapTexture = new Texture(Gdx.files.internal("gamemap.png"));
@@ -115,6 +143,10 @@ public class GameScreen extends ScreenAdapter {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
+            context.getReplayManager().playSingle();
+        }
 
         game.batch.begin();
 
