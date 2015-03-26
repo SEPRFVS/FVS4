@@ -133,8 +133,11 @@ public class RouteController {
     }
 
     private void addRoutingButtons() {
-        TextButton doneRouting = new TextButton("Route Complete", context.getSkin(), "unplaced-resource");
-        TextButton cancel = new TextButton("Cancel", context.getSkin(), "unplaced-resource");
+    	//Remove old buttons
+    	routingButtons.clear();
+    	
+        TextButton doneRouting = new TextButton("Route Complete", context.getSkin());
+        TextButton cancel = new TextButton("Cancel", context.getSkin());
 
         doneRouting.setPosition(TaxeGame.WIDTH - SideBarController.CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 33.0f);
         cancel.setPosition(TaxeGame.WIDTH - 10.0f - cancel.getWidth(), TaxeGame.HEIGHT - 33.0f);
@@ -178,7 +181,8 @@ public class RouteController {
         //A move controller is created to allow the train to move along its route.
         //Although move is never used later on in the program, it must be instantiated or else the trains will not move.
         //Hence you should not remove this even though it appears useless, I tried and trains do not move at all.
-        TrainMoveController move = new TrainMoveController(context, train);
+        @SuppressWarnings("unused")
+		TrainMoveController move = new TrainMoveController(context, train);
     }
 
     private void endRouting() {
@@ -247,8 +251,6 @@ public class RouteController {
 
     public void viewRoute(Train train) {
         //This method is used to draw the trains current route so that the user can see where their trains are going
-
-
         routingButtons.clear();
 
         train.getRoute();
@@ -271,9 +273,7 @@ public class RouteController {
 
         //Adds a button to leave the view route screen
         TextButton back = new TextButton("Return", context.getSkin());
-
-        back.setPosition(TaxeGame.WIDTH - 100, TaxeGame.HEIGHT - 33);
-
+        back.setPosition(TaxeGame.WIDTH - back.getWidth() - 10.0f, TaxeGame.HEIGHT - 33.0f);
         back.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -284,9 +284,7 @@ public class RouteController {
 
             }
         });
-
         routingButtons.addActor(back);
-
         context.getStage().addActor(routingButtons);
     }
 

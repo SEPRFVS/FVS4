@@ -1,7 +1,5 @@
 package fvs.taxe.dialog;
 
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import gameLogic.Game;
@@ -11,23 +9,9 @@ public class DialogTurnSkipped extends UnifiedDialog {
     public DialogTurnSkipped(Skin skin) {
         super("Miss a turn", skin, "redwin");
         //Informs player that they have missed their turn.
-        text("Due to circumstances outside our control \n Network Rail would like to apologise for you missing your turn.");
+        text("Your turn has been skipped./nWhat a rotten bit of luck.");
         button("OK", "EXIT");
         align(Align.center);
-    }
-
-    @Override
-    public Dialog show(Stage stage) {
-        //Shows the dialog
-        show(stage, null);
-        setPosition(Math.round((stage.getWidth() - getWidth()) / 2), Math.round((stage.getHeight() - getHeight()) / 2));
-        return this;
-    }
-
-    @Override
-    public void hide() {
-        //Hides the dialog
-        hide(null);
     }
 
     @Override

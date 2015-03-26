@@ -1,7 +1,5 @@
 package fvs.taxe.dialog;
 
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import fvs.taxe.Button;
 import fvs.taxe.clickListener.ResourceDialogClickListener;
@@ -21,21 +19,6 @@ public class DialogGoal extends UnifiedDialog {
 
         button("Drop", "DROP");
         button("Cancel", "CLOSE");
-    }
-
-    @Override
-    public Dialog show(Stage stage) {
-        //Shows the dialog in the centre of the screen
-        show(stage, null);
-        setPosition(Math.round((stage.getWidth() - getWidth()) / 2), Math.round((stage.getHeight() - getHeight()) / 2));
-        return this;
-    }
-
-
-    @Override
-    public void hide() {
-        //Hides the dialog
-        hide(null);
     }
 
     private void clicked(Button button) {

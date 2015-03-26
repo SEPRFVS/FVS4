@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 import fvs.taxe.Button;
@@ -112,7 +111,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                     public void clicked(Station station) {
                         //Checks whether a node is a junction or not. If it is then the train cannot be placed there and the user is informed
                         if (station instanceof CollisionStation) {
-                            context.getSideBarController().displayFlashMessage("Trains cannot be placed at junctions.", Color.RED);
+                            context.getSideBarController().displayFlashMessage("Trains cannot be placed at junctions", Color.RED);
 
                         } else {
                             //This puts the train at the station that the user clicks and adds it to the trains visited history
@@ -231,7 +230,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                                 //Informs the player that their selection is invalid and cancels placement
                                 UnifiedDialog dia = new UnifiedDialog("Invalid Selection", context.getSkin(), "redwin");
                                 dia.text("You have selected two stations which are not connected." +
-                                        "\nPlease use the obstacle again.").align(Align.center);
+                                        "\nPlease use the Obstacle again.").align(Align.center);
                                 dia.button("OK", "OK");
                                 dia.show(context.getStage());
                                 obstacle.setStation1(null);
@@ -325,7 +324,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                                     //If the connection is not blocked then placement is cancelled and the user is informed
                                     UnifiedDialog dia = new UnifiedDialog("Invalid Selection", context.getSkin(), "redwin");
                                     dia.text("You have selected a connection which is not blocked." +
-                                            "\nPlease use the engineer again.").align(Align.center);
+                                            "\nPlease use the Engineer again.").align(Align.center);
                                     dia.button("OK", "OK");
                                     dia.show(context.getStage());
                                     engineer.setStation1(null);
@@ -335,7 +334,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                                 //If the connection does not exist then placement is cancelled and the user is informed of this
                                 UnifiedDialog dia = new UnifiedDialog("Invalid Selection", context.getSkin(), "redwin");
                                 dia.text("You have selected two stations which are not connected." +
-                                        "\nPlease use the engineer again.").align(Align.center);
+                                        "\nPlease use the Engineer again.").align(Align.center);
                                 dia.button("OK", "OK");
                                 dia.show(context.getStage());
                                 engineer.setStation1(null);

@@ -1,7 +1,5 @@
 package fvs.taxe.dialog;
 
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import fvs.taxe.clickListener.TrainClicked;
 import fvs.taxe.controller.Context;
@@ -26,25 +24,11 @@ public class DialogStationMultitrain extends UnifiedDialog {
             if (train.getFinalDestination() != null) {
                 destination = " to " + train.getFinalDestination().getName();
             }
-            button(train.getName() + destination + " (player " + train.getPlayer().getPlayerNumber() + ")", train);
+            button(train.getName() + destination + " (Player " + train.getPlayer().getPlayerNumber() + ")", train);
             getButtonTable().row();
         }
 
         button("Cancel", "CANCEL");
-    }
-
-    @Override
-    public Dialog show(Stage stage) {
-        //Shows the dialog
-        show(stage, null);
-        setPosition(Math.round((stage.getWidth() - getWidth()) / 2), Math.round((stage.getHeight() - getHeight()) / 2));
-        return this;
-    }
-
-    @Override
-    public void hide() {
-        //Hides the dialog
-        hide(null);
     }
 
     @Override

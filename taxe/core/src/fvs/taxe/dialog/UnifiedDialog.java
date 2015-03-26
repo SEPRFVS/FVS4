@@ -1,5 +1,6 @@
 package fvs.taxe.dialog;
 
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -39,5 +40,18 @@ public class UnifiedDialog extends Dialog {
 			return text(text, skin.get(LabelStyle.class));
 		}
 	}
+	
+	@Override
+	public Dialog show(Stage stage) {
+		show(stage, null);
+        setPosition(Math.round((stage.getWidth() - getWidth()) / 2), Math.round((stage.getHeight() - getHeight()) / 2));
+        return this;
+	}
+	
+	@Override
+    public void hide() {
+        //Hides the dialog
+        hide(null);
+    }
 
 }
