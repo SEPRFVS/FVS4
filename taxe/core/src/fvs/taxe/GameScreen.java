@@ -60,6 +60,11 @@ public class GameScreen extends ScreenAdapter {
                         if (!actor.removeListener(listener)) {
                             System.out.println("OLD LISTENER NOT REMOVED");
                         }
+
+                        if (listener.getClass() != ClickListener.class) {
+                            // throw new RuntimeException("Subclass methods will be lost");
+                        }
+
                         actor.addListener(new ClickListener() {
                             @Override
                             public void clicked(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y) {

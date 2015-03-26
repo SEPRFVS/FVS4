@@ -78,7 +78,8 @@ public class TrainClicked extends ClickListener {
                 }else{
                     if (train.isOwnedBy(currentPlayer)) {
                         DialogButtonClicked listener = new DialogButtonClicked(context, currentPlayer, train);
-                        DialogResourceTrain dia = new DialogResourceTrain(train, context.getSkin(), train.getPosition() != null);
+                        DialogResourceTrain dia = new DialogResourceTrain(train, context.getSkin(),
+                                train.getPosition() != null, context.getReplayManager());
                         dia.show(context.getStage());
                         dia.subscribeClick(listener);
                     }
@@ -93,7 +94,8 @@ public class TrainClicked extends ClickListener {
             } else {
                 //If the train is owned by the player and has a final destination then a dialog is displayed allowing the user to interact with the train
                 DialogButtonClicked listener = new DialogButtonClicked(context, currentPlayer, train);
-                DialogResourceTrain dia = new DialogResourceTrain(train, context.getSkin(), train.getPosition() != null);
+                DialogResourceTrain dia = new DialogResourceTrain(train, context.getSkin(), train.getPosition() != null,
+                        context.getReplayManager());
                 dia.show(context.getStage());
                 dia.subscribeClick(listener);
             }

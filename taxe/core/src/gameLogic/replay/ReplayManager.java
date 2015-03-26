@@ -1,5 +1,6 @@
 package gameLogic.replay;
 
+import Util.Tuple;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -12,13 +13,22 @@ public class ReplayManager {
     private int playPosition = 0;
     private boolean playing = false;
     private Stage stage;
-    private List<String> clicks = new ArrayList<String>();
+    private List<Tuple<ReplayType, String>> clicks = new ArrayList<Tuple<ReplayType, String>>();
+
+    private void addClick(ReplayType type, String s) {
+        clicks.add(new Tuple<ReplayType, String>(type, s));
+    }
 
     public void addClick(String actorId) {
         if (playing) return;
 
         System.out.println("Click on "+ actorId +" added");
-        clicks.add(actorId);
+        addClick(ReplayType.ACTOR_CLICK, actorId);
+    }
+
+    public void addDialogClick(String buttonId) {
+        System.out.println("Click on "+ buttonId +" dia button added");
+        addClick(ReplayType.DIALOG_BUTTON_CLICK, buttonId);
     }
 
     public void setStage(Stage stage) {
@@ -34,7 +44,17 @@ public class ReplayManager {
             return;
         }
 
-        clickActorInStage(clicks.get(playPosition));
+        Tuple<ReplayType, String> click = clicks.get(playPosition);
+
+        switch (click.getFirst()) {
+            case ACTOR_CLICK:
+                clickActorInStage(click.getSecond());
+                break;
+            case DIALOG_BUTTON_CLICK:
+                clickDialogButton(click.getSecond());
+                break;
+        }
+
         playPosition++;
         playing = false;
     }
@@ -55,5 +75,11 @@ public class ReplayManager {
 
             return;
         }
+    }
+
+    private void clickDialogButton(String id) {
+        // loop through actors
+        // is dialog
+        // fire result method manually
     }
 }

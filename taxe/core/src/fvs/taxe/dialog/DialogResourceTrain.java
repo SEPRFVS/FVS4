@@ -5,16 +5,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import fvs.taxe.Button;
 import fvs.taxe.clickListener.ResourceDialogClickListener;
+import gameLogic.replay.ReplayManager;
 import gameLogic.resource.Train;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DialogResourceTrain extends Dialog {
+public class DialogResourceTrain extends ReplayDialog {
     private List<ResourceDialogClickListener> clickListeners = new ArrayList<ResourceDialogClickListener>();
 
-    public DialogResourceTrain(Train train, Skin skin, boolean trainPlaced) {
-        super(train.toString(), skin);
+    public DialogResourceTrain(Train train, Skin skin, boolean trainPlaced, ReplayManager replayManager) {
+        super(train.toString(), skin, replayManager);
         text("What do you want to do with this train?");
 
         //Generates the buttons required to allow the user to interact with the dialog
@@ -63,6 +64,8 @@ public class DialogResourceTrain extends Dialog {
 
     @Override
     protected void result(Object obj) {
+        super.result(obj);
+
         if (obj == "CLOSE") {
             this.remove();
         } else if (obj == "DROP") {
