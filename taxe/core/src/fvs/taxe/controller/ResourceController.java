@@ -1,6 +1,7 @@
 package fvs.taxe.controller;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -49,7 +50,10 @@ public class ResourceController {
         y -= 50;
 
         //Clears the resource buttons so that the other player's resources are not displayed
-        resourceButtons.remove();
+        for (Actor actor : resourceButtons.getChildren()) {
+            actor.remove();
+        }
+
         resourceButtons.clear();
 
         for (final Resource resource : player.getResources()) {
@@ -104,8 +108,11 @@ public class ResourceController {
             }
 
         }
+
         //Adds all generated buttons to the stage
-        context.getStage().addActor(resourceButtons);
+        for (Actor actor : resourceButtons.getChildren()) {
+            context.getStage().addActor(actor);
+        }
     }
 
 }
