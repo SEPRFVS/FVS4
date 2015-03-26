@@ -4,8 +4,8 @@ com.badlogic.gdx.graphics.Color: {
 	light_grey: { r: 0.8, g: 0.8, b: 0.8, a: 1 },
 	white: { r: 1, g: 1, b: 1, a: 1 },
 	red: { r: 1, a: 1 },
-	black: { a: 1 },
-	grey: { r: 0.7, g: 0.7, b: 0.7, a: 1 }
+	grey: { r: 0.7, g: 0.7, b: 0.7, a: 1 },
+	black: { a: 1 }
 },
 com.badlogic.gdx.graphics.g2d.BitmapFont: {
 	play-50: { file: play-50.fnt },
@@ -25,10 +25,10 @@ com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle: {
 com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	default: {
 		font: default-font,
-		fontColor: { a: 1, b: 1, g: 1, r: 1 },
-		disabledFontColor: { a: 1, b: 0.8, g: 0.8, r: 0.8 },
-		up: default-round,
-		down: default-round-down
+		fontColor: { a: 1 },
+		disabledFontColor: { a: 1, b: 0.7, g: 0.7, r: 0.7 },
+		up: whitebutton,
+		down: greybutton
 	},
 	bluewin: {
 		font: default-font,
@@ -51,11 +51,11 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	},
 	toggle: {
 		font: default-font,
-		fontColor: { a: 1, b: 1, g: 1, r: 1 },
-		downFontColor: { a: 1, r: 1 },
-		up: default-round,
-		down: default-round-down,
-		checked: default-round-down
+		fontColor: { a: 1 },
+		checkedFontColor: { a: 1, b: 1, g: 1, r: 1 },
+		up: whitebutton,
+		down: greybutton,
+		checked: redbutton
 	},
 	greenwin: {
 		font: default-font,
@@ -71,7 +71,7 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	}
 },
 com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
-	default: { imageUp: paint_brush, up: default-round, down: default-round-down }
+	default: { imageUp: paint_brush, up: whitebutton, down: greybutton }
 },
 com.badlogic.gdx.scenes.scene2d.ui.SplitPane$SplitPaneStyle: {
 	default-vertical: { handle: default-splitpane-vertical },
@@ -81,13 +81,13 @@ com.badlogic.gdx.scenes.scene2d.ui.Touchpad$TouchpadStyle: {
 	default: { background: default-pane, knob: default-round-large }
 },
 com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
-	default: { up: default-round, down: default-round-down },
-	toggle: { up: default-round, down: default-round-down, checked: default-round-down },
+	default: { up: whitebutton, down: greybutton },
+	toggle: { up: whitebutton, down: greybutton, checked: redbutton },
 	blue: { up: lightbluebutton, down: bluebutton }
 },
 com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
 	default: {
-		background: default-window,
+		background: bluewindow,
 		titleFont: default-font,
 		titleFontColor: { a: 1, b: 1, g: 1, r: 1 }
 	},
@@ -97,7 +97,7 @@ com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
 		titleFontColor: { a: 1, b: 1, g: 1, r: 1 }
 	},
 	dialog: {
-		background: default-window,
+		background: bluewindow,
 		titleFont: default-font,
 		titleFontColor: { a: 1, b: 1, g: 1, r: 1 },
 		stageBackground: dialogDim
