@@ -91,7 +91,10 @@ public class ReplayManager {
         for(Actor actor : stage.getActors()) {
             if (actor instanceof ReplayDialog) {
                 System.out.println("found dialog, now clicking..");
-                ((ReplayDialog) actor).result(id);
+
+                ReplayDialog dialog = (ReplayDialog) actor;
+                dialog.result(id);
+                dialog.remove();
             }
         }
     }
