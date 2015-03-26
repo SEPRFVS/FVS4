@@ -14,11 +14,13 @@ import gameLogic.player.Player;
 import gameLogic.listeners.PlayerChangedListener;
 import gameLogic.resource.*;
 
+import java.util.ArrayList;
 import java.util.EventListener;
+import java.util.List;
 
 public class ResourceController {
     private Context context;
-    private Group resourceButtons = new Group();
+    private List<Actor> resourceButtons = new ArrayList<Actor>();
 
     public ResourceController(final Context context) {
         this.context = context;
@@ -50,8 +52,9 @@ public class ResourceController {
         y -= 50;
 
         //Clears the resource buttons so that the other player's resources are not displayed
-        for (Actor actor : resourceButtons.getChildren()) {
+        for (Actor actor : resourceButtons) {
             actor.remove();
+            System.out.println("removing button from stage");
         }
 
         resourceButtons.clear();
@@ -69,7 +72,7 @@ public class ResourceController {
                     TextButton button = new TextButton(resource.toString(), context.getSkin());
                     button.setPosition(x, y);
                     button.addListener(listener);
-                    resourceButtons.addActor(button);
+                    resourceButtons.add(button);
                     y -= 30;
                 }
 
@@ -80,7 +83,7 @@ public class ResourceController {
                 TextButton button = new TextButton("Obstacle", context.getSkin());
                 button.setPosition(x, y);
                 button.addListener(listener);
-                resourceButtons.addActor(button);
+                resourceButtons.add(button);
 
                 y -= 30;
 
@@ -91,7 +94,7 @@ public class ResourceController {
                 TextButton button = new TextButton("Skip", context.getSkin());
                 button.setPosition(x, y);
                 button.addListener(listener);
-                resourceButtons.addActor(button);
+                resourceButtons.add(button);
 
                 y -= 30;
 
@@ -102,7 +105,7 @@ public class ResourceController {
                 TextButton button = new TextButton("Engineer", context.getSkin());
                 button.setPosition(x, y);
                 button.addListener(listener);
-                resourceButtons.addActor(button);
+                resourceButtons.add(button);
 
                 y -= 30;
             }
@@ -110,7 +113,7 @@ public class ResourceController {
         }
 
         //Adds all generated buttons to the stage
-        for (Actor actor : resourceButtons.getChildren()) {
+        for (Actor actor : resourceButtons) {
             context.getStage().addActor(actor);
         }
     }
