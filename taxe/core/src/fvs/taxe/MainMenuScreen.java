@@ -34,7 +34,7 @@ public class MainMenuScreen extends ScreenAdapter {
         touchPoint = new Vector3();
 
         //Loads the gameMap in
-        mapTexture = new Texture(Gdx.files.internal("gamemap.png"));
+        mapTexture = new Texture(Gdx.files.internal("mainmenumap.jpg"));
     }
 
     public void update() {
