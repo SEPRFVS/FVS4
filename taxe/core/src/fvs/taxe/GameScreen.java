@@ -16,6 +16,7 @@ import fvs.taxe.controller.*;
 import fvs.taxe.dialog.DialogEndGame;
 import gameLogic.Game;
 import gameLogic.GameState;
+import gameLogic.RandomSingleton;
 import gameLogic.listeners.GameStateListener;
 import gameLogic.listeners.TurnListener;
 import gameLogic.map.Map;
@@ -26,10 +27,10 @@ import java.util.EventListener;
 
 
 public class GameScreen extends ScreenAdapter {
-    final private TaxeGame game;
+    protected TaxeGame game;
     private Stage stage;
     private Texture mapTexture;
-    private Game gameLogic;
+    protected Game gameLogic;
     private Skin skin;
     private Map map;
     private float timeAnimated = 0;
@@ -44,10 +45,17 @@ public class GameScreen extends ScreenAdapter {
     private GoalController goalController;
     private RouteController routeController;
 
+    public GameScreen() {
+    }
+
     public GameScreen(TaxeGame game) {
         this.game = game;
 
-        final ReplayManager rm = new ReplayManager();
+        init(new ReplayManager());
+    }
+
+    protected void init(final ReplayManager rm) {
+
 
         // magic, do not touch
         stage = new Stage(new FitViewport(TaxeGame.WIDTH, TaxeGame.HEIGHT)) {
@@ -90,10 +98,11 @@ public class GameScreen extends ScreenAdapter {
         //Sets the skin
         skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 
+        setRandomSeed(rm);
+
         //Initialises the game
         gameLogic = Game.getInstance();
         context = new Context(stage, skin, game, gameLogic);
-
 
         rm.setStage(stage);
 
@@ -146,6 +155,12 @@ public class GameScreen extends ScreenAdapter {
         });
     }
 
+    protected void setRandomSeed(ReplayManager rm) {
+        // store the seed in replay manager so same seed can be used in future
+        long seed = System.currentTimeMillis();
+        rm.setSeed(seed);
+        RandomSingleton.setFromSeed(seed);
+    }
 
     // called every frame
     @Override
@@ -155,6 +170,11 @@ public class GameScreen extends ScreenAdapter {
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
             context.getReplayManager().playSingle();
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            gameLogic.dispose();
+            game.setScreen(new ReplayScreen(game, context.getReplayManager()));
         }
 
         game.batch.begin();

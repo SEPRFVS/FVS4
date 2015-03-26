@@ -54,7 +54,6 @@ public class ResourceController {
         //Clears the resource buttons so that the other player's resources are not displayed
         for (Actor actor : resourceButtons) {
             actor.remove();
-            System.out.println("removing button from stage");
         }
 
         resourceButtons.clear();

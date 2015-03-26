@@ -13,8 +13,17 @@ import java.util.List;
 public class ReplayManager {
     private int playPosition = 0;
     private boolean playing = false;
+    private long seed;
     private Stage stage;
     private List<Tuple<ReplayType, String>> clicks = new ArrayList<Tuple<ReplayType, String>>();
+
+    public void setSeed(long seed) {
+        this.seed = seed;
+    }
+
+    public long getSeed() {
+        return seed;
+    }
 
     private void addClick(ReplayType type, String s) {
         clicks.add(new Tuple<ReplayType, String>(type, s));
