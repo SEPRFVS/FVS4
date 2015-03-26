@@ -38,13 +38,7 @@ public class Station {
     
     public String getAcronym(){
     	//Generates 3 letter acronym based on station name
-    	String acronym;
-    	if (name.length() % 2 == 0){
-    		acronym = name.charAt(0) + "" + name.charAt(name.length()/2) + "" + name.charAt(name.length()-1);
-    	} else {
-    		acronym = name.charAt(0) + "" + name.charAt(Math.round(name.length()/2)) + "" + name.charAt(name.length()-1);
-    	}
-    	return acronym.toUpperCase();
+    	return (name.charAt(0) + "" + name.charAt(Math.round(name.length()/2)) + "" + name.charAt(name.length()-1)).toUpperCase();
     }
 
     public boolean equals(Object o) {
