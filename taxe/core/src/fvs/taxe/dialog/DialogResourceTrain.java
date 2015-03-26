@@ -63,7 +63,7 @@ public class DialogResourceTrain extends ReplayDialog {
     }
 
     @Override
-    protected void result(Object obj) {
+    public void result(Object obj) {
         super.result(obj);
 
         if (obj == "CLOSE") {

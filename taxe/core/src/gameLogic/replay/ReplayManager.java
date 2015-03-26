@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import fvs.taxe.dialog.ReplayDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,8 +79,11 @@ public class ReplayManager {
     }
 
     private void clickDialogButton(String id) {
-        // loop through actors
-        // is dialog
-        // fire result method manually
+        for(Actor actor : stage.getActors()) {
+            if (actor instanceof ReplayDialog) {
+                System.out.println("found dialog, now clicking..");
+                ((ReplayDialog) actor).result(id);
+            }
+        }
     }
 }

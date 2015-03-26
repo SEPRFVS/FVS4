@@ -13,8 +13,11 @@ public class ReplayDialog extends Dialog {
         this.replayManager = replayManager;
     }
 
+    // this method is called when the user clicks a button on a dialog, obj is used to differentiate which
+    // button was clicked. when replaying the game, we need this method to be public, as we're calling this method
+    // from outside this class and subclasses
     @Override
-    protected void result(Object o) {
+    public void result(Object o) {
         replayManager.addDialogClick(o.toString());
     }
 }
