@@ -67,6 +67,10 @@ public class GameScreen extends ScreenAdapter {
                                 ((ClickListener) listener).clicked(event, x, y);
                             }
                         });
+
+                        // only override a single click listener, we don't want to be storing each click twice
+                        // on actors with multiple listeners
+                        break;
                     }
                 }
 
