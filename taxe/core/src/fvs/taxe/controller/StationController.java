@@ -141,8 +141,8 @@ public class StationController {
 			@Override
 			public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
 				//Shows tooltip indicating the station's name
-				tooltip.setPosition(collisionStationActor.getX() + 10,
-						collisionStationActor.getY() + 10);
+				tooltip.setPosition(collisionStationActor.getX() + 15,
+						collisionStationActor.getY() + 15);
 				tooltip.show("Junction");
 			}
 
@@ -276,8 +276,7 @@ public class StationController {
 		// draw an icon on connections that are blocked, showing how many turns remain until they
 		// become unblocked
 		// if the game is in routing mode, then all connections that aren't blocked have a
-		// translucent black circle drawn on their midpoint, to increase visibility of the white
-		// text that will be drawn on top showing the length of the connection
+		// translucent black circle drawn on their midpoint
 		for (Connection connection : connections) {
 			IPositionable midpoint = connection.getMidpoint();
 			if (connection.isBlocked()) {

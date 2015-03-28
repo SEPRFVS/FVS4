@@ -2,6 +2,7 @@ package fvs.taxe;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -15,6 +16,7 @@ import gameLogic.Game;
 import gameLogic.GameState;
 import gameLogic.listeners.GameStateListener;
 import gameLogic.listeners.TurnListener;
+import gameLogic.map.Connection;
 import gameLogic.map.Map;
 
 
@@ -29,6 +31,7 @@ public class GameScreen extends ScreenAdapter {
     public static final int ANIMATION_TIME = 2;
     private Tooltip tooltip;
     private Context context;
+    private Sound backgroundMusic; 
 
     private StationController stationController;
     private SideBarController sideBarController;
@@ -92,6 +95,18 @@ public class GameScreen extends ScreenAdapter {
                     goalController.setColours(new Color[3]);
                 }
             }
+        });
+        
+        //Add a listener to determine if a connection has become blocked this turn and play sounds
+        gameLogic.getPlayerManager().subscribeTurnChanged(new TurnListener() {
+        	@Override
+        	public void changed(){
+        		for (Connection connection : gameLogic.getMap().getConnections()) {
+        			if(connection.isBlocked() && connection.getTurnsBlocked() == 5) {
+        				Gdx.audio.newSound(Gdx.files.internal("sound/obstacle.mp3")).play();
+        			}
+        		}
+        	}
         });
     }
 
@@ -162,12 +177,18 @@ public class GameScreen extends ScreenAdapter {
         sideBarController.addEndTurnButton();
         goalController.showCurrentPlayerGoals();
         resourceController.drawPlayerResources(gameLogic.getPlayerManager().getCurrentPlayer());
+        
+        //Load background music
+        backgroundMusic = Gdx.audio.newSound(Gdx.files.internal("sound/noise.mp3"));
+        backgroundMusic.loop(0.2f);
     }
 
 
     @Override
     public void dispose() {
         mapTexture.dispose();
+        backgroundMusic.stop();
+        backgroundMusic.dispose();
         stage.dispose();
     }
 

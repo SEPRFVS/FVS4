@@ -217,6 +217,8 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
 
                                 //If the connections exists then the connection is blocked for 5 turns
                                 obstacle.use(context.getGameLogic().getMap().getConnection(obstacle.getStation1(), obstacle.getStation2()));
+                                //Play blocked sound
+                                Gdx.audio.newSound(Gdx.files.internal("sound/obstacle.mp3")).play();
                                 //The obstacle is removed from the player's inventory as it has been used
                                 currentPlayer.removeResource(obstacle);
 
@@ -319,6 +321,9 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                                 if (context.getGameLogic().getMap().getConnection(engineer.getStation1(), engineer.getStation2()).isBlocked()) {
                                     //If the connection is blocked then it removes the blockage
                                     engineer.use(context.getGameLogic().getMap().getConnection(engineer.getStation1(), engineer.getStation2()));
+                                    //Play fixed sound
+                                    Gdx.audio.newSound(Gdx.files.internal("sound/engineer.mp3")).play();
+                                    //Remove resource from player
                                     currentPlayer.removeResource(engineer);
                                 } else {
                                     //If the connection is not blocked then placement is cancelled and the user is informed

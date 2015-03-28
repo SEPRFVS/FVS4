@@ -2,6 +2,7 @@ package fvs.taxe;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -20,6 +21,7 @@ public class MainMenuScreen extends ScreenAdapter {
     Rectangle exitBounds;
     Vector3 touchPoint;
     Texture mapTexture;
+    Sound backgroundMusic;
 
     public MainMenuScreen(TaxeGame game) {
         //This sets all the relevant variables for the menu screen
@@ -35,6 +37,10 @@ public class MainMenuScreen extends ScreenAdapter {
 
         //Loads the gameMap in
         mapTexture = new Texture(Gdx.files.internal("mainmenumap.jpg"));
+        
+        //Load background music
+        backgroundMusic = Gdx.audio.newSound(Gdx.files.internal("sound/noise.mp3"));
+        backgroundMusic.loop(0.2f);
     }
 
     public void update() {
@@ -43,6 +49,8 @@ public class MainMenuScreen extends ScreenAdapter {
             camera.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
             if (playBounds.contains(touchPoint.x, touchPoint.y)) {
                 game.setScreen(new GameScreen(game));
+                backgroundMusic.stop();
+                backgroundMusic.dispose();
                 return;
             }
             if (exitBounds.contains(touchPoint.x, touchPoint.y)) {
