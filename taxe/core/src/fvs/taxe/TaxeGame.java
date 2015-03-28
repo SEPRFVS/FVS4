@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
+import fvs.taxe.controller.SoundController;
+
 
 public class TaxeGame extends Game {
 
@@ -21,6 +23,7 @@ public class TaxeGame extends Game {
 	public BitmapFont fontSmall;
 	public BitmapFont fontTiny;
     public ShapeRenderer shapeRenderer;
+    public SoundController soundController;
 
     @Override
     public void create() {
@@ -32,12 +35,13 @@ public class TaxeGame extends Game {
 
         // font size 50pt
         font = skin.getFont("play-50");
-
         //font size 20pt
         fontSmall = skin.getFont("play-20");
-
 		//font size 14pt
 		fontTiny = skin.getFont("play-14");
+		
+		//Set game sounds
+		soundController = new SoundController();
 
         //Sets the main screen to be the menu
         setScreen(new MainMenuScreen(this));

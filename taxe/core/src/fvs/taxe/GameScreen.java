@@ -31,7 +31,6 @@ public class GameScreen extends ScreenAdapter {
     public static final int ANIMATION_TIME = 2;
     private Tooltip tooltip;
     private Context context;
-    private Sound backgroundMusic; 
 
     private StationController stationController;
     private SideBarController sideBarController;
@@ -103,7 +102,7 @@ public class GameScreen extends ScreenAdapter {
         	public void changed(){
         		for (Connection connection : gameLogic.getMap().getConnections()) {
         			if(connection.isBlocked() && connection.getTurnsBlocked() == 5) {
-        				Gdx.audio.newSound(Gdx.files.internal("sound/obstacle.mp3")).play();
+        				context.getSoundController().playSound("obstacle");
         			}
         		}
         	}
@@ -179,16 +178,14 @@ public class GameScreen extends ScreenAdapter {
         resourceController.drawPlayerResources(gameLogic.getPlayerManager().getCurrentPlayer());
         
         //Load background music
-        backgroundMusic = Gdx.audio.newSound(Gdx.files.internal("sound/noise.mp3"));
-        backgroundMusic.loop(0.2f);
+        game.soundController.playBackgroundMusic();
     }
 
 
     @Override
     public void dispose() {
         mapTexture.dispose();
-        backgroundMusic.stop();
-        backgroundMusic.dispose();
+        game.soundController.stopBackgroundMusic();
         stage.dispose();
     }
 

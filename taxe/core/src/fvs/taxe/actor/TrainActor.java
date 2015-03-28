@@ -61,7 +61,7 @@ public class TrainActor extends Image {
             if (collision != null) {
                 //If there is a collision then the user is informed, the two trains destroyed and the connection that they collided on is blocked for 5 turns.
                 context.getSideBarController().displayFlashMessage("Two trains collided.  They were both destroyed.", Color.RED, 2);
-                Gdx.audio.newSound(Gdx.files.internal("sound/crash.mp3")).play();
+                context.getSoundController().playSound("crash");
                 Game.getInstance().getMap().blockConnection(train.getLastStation(), train.getNextStation(), 5);
                 collision.getActor().remove();
                 collision.getPlayer().removeResource(collision);

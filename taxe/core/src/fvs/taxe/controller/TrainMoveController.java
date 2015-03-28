@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.ContentModelContainer;
 
 import fvs.taxe.actor.TrainActor;
 import gameLogic.Game;
@@ -95,7 +96,7 @@ public class TrainMoveController {
                 ArrayList<String> completedGoals = context.getGameLogic().getGoalManager().trainArrived(train, train.getPlayer());
                 for (String message : completedGoals) {
                     context.getSideBarController().displayFlashMessage(message, Color.WHITE, 2);
-                    Gdx.audio.newSound(Gdx.files.internal("sound/open.mp3")).play();
+                    context.getSoundController().playSound("open");
                 }
 
                 //Sets the train's position to be equal to its final destination's position so that it is appropriately hidden and linked to the station

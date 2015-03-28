@@ -14,12 +14,14 @@ public class Context {
     private Game gameLogic;
     private RouteController routeController;
     private SideBarController sideBarController;
+    private SoundController soundController;
 
     public Context(Stage stage, Skin skin, TaxeGame taxeGame, Game gameLogic) {
         this.stage = stage;
         this.skin = skin;
         this.taxeGame = taxeGame;
         this.gameLogic = gameLogic;
+        this.soundController = taxeGame.soundController;
     }
 
     //Getters and setters: pretty self-explanatory
@@ -54,5 +56,13 @@ public class Context {
     public void setSideBarController(SideBarController sideBarController) {
         this.sideBarController = sideBarController;
     }
+
+	public SoundController getSoundController() {
+		return soundController;
+	}
+
+	public void setSoundController(SoundController soundController) {
+		this.soundController = soundController;
+	}
 
 }
