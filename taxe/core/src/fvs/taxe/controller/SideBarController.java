@@ -114,7 +114,7 @@ public class SideBarController {
     	
         //Headings
         game.fontSmall.draw(game.batch, "Goals", TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 40.0f);
-        game.fontSmall.draw(game.batch, "Unplaced Resources", TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 260.0f);
+        game.fontSmall.draw(game.batch, "Available Resources", TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 260.0f);
         
         //Draw Scores
         DecimalFormat integer = new DecimalFormat("0");
