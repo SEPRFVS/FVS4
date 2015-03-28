@@ -16,6 +16,8 @@ public class Player {
     private double score;
     //This indicates whether the player is skipping their turn.
     private boolean skip;
+    //Stores the player name
+    private String name = "";
 
     public Player(PlayerManager pm, int playerNumber) {
         goals = new ArrayList<Goal>();
@@ -132,4 +134,12 @@ public class Player {
         }
         return false;
     }
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }

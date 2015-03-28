@@ -24,6 +24,8 @@ public class TaxeGame extends Game {
 	public BitmapFont fontTiny;
     public ShapeRenderer shapeRenderer;
     public SoundController soundController;
+    
+    public GameScreen gamescreen;
 
     @Override
     public void create() {
