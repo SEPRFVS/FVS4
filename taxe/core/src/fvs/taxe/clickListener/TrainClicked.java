@@ -18,12 +18,15 @@ import gameLogic.resource.Train;
 import java.util.ArrayList;
 
 //Responsible for checking whether the train is clicked.
-public class TrainClicked extends ClickListener {
+public class TrainClicked extends ReplayClickListener {
     private Context context;
     private Train train;
     private boolean displayingMessage;
 
-    public TrainClicked(Context context, Train train) {
+    // actor passed in is the actor clicked, for this case it could be either a button or a train image
+    public TrainClicked(Context context, Train train, Actor actor) {
+        super(context.getReplayManager(), actor);
+
         this.train = train;
         this.context = context;
         displayingMessage = false;
@@ -31,6 +34,8 @@ public class TrainClicked extends ClickListener {
 
     @Override
     public void clicked(InputEvent event, float x, float y) {
+        super.clicked(event, x, y);
+
         if (Game.getInstance().getState() == GameState.NORMAL) {
 
             // current player can't be passed in as it changes so find out current player at this instant

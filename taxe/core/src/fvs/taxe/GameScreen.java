@@ -71,36 +71,40 @@ public class GameScreen extends ScreenAdapter {
                     b.setSize(b.getWidth() + 50, b.getHeight());
                 }
 
-                for (final com.badlogic.gdx.scenes.scene2d.EventListener listener : actor.getListeners()) {
-                    if (listener instanceof ReplayClickListener) {
-                        // don't edit listeners which are of this type (they already record click events)
-                        continue;
-                    }
-
-                    if (listener instanceof ClickListener) {
-                        if (!actor.removeListener(listener)) {
-                            System.out.println("OLD LISTENER NOT REMOVED");
-                        }
-
-                        if (listener.getClass() != ClickListener.class) {
-                            // throw new RuntimeException("Subclass methods will be lost");
-                        }
-
-                        boolean added = actor.addListener(new ClickListener() {
-                            @Override
-                            public void clicked(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y) {
-                                rm.addClick(actor.getName());
-                                ((ClickListener) listener).clicked(event, x, y);
-                            }
-                        });
-
-                        // only override a single click listener, we don't want to be storing each click twice
-                        // on actors with multiple listeners
-                        if (added) {
-                            break;
-                        }
-                    }
-                }
+//                for (final com.badlogic.gdx.scenes.scene2d.EventListener listener : actor.getListeners()) {
+//                    if (listener instanceof ReplayClickListener) {
+//                        // don't edit listeners which are of this type (they already record click events)
+//                        continue;
+//                    }
+//
+//                    if (!(listener instanceof ClickListener)) {
+//                        continue;
+//                    }
+//
+//                    System.out.println("Listener that isn't Replay click, hmmm");
+//
+//                    if (!actor.removeListener(listener)) {
+//                        System.out.println("OLD LISTENER NOT REMOVED");
+//                    }
+//
+//                    if (listener.getClass() != ClickListener.class) {
+//                        // throw new RuntimeException("Subclass methods will be lost");
+//                    }
+//
+//                    boolean added = actor.addListener(new ClickListener() {
+//                        @Override
+//                        public void clicked(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y) {
+//                            rm.addClick(actor.getName());
+//                            ((ClickListener) listener).clicked(event, x, y);
+//                        }
+//                    });
+//
+//                    // only override a single click listener, we don't want to be storing each click twice
+//                    // on actors with multiple listeners
+//                    if (added) {
+//                        break;
+//                    }
+//                }
 
                 // uniquely name each actor
                 actorId++;

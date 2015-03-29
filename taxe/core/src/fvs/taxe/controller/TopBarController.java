@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import fvs.taxe.TaxeGame;
+import fvs.taxe.clickListener.ReplayClickListener;
 import gameLogic.GameState;
 import gameLogic.listeners.GameStateListener;
 
@@ -89,9 +90,11 @@ public class TopBarController {
         //This method adds an endTurn button to the topBar which allows the user to end their turn
         endTurnButton = new TextButton("End Turn", context.getSkin());
         endTurnButton.setPosition(TaxeGame.WIDTH - 100.0f, TaxeGame.HEIGHT - 33.0f);
-        endTurnButton.addListener(new ClickListener() {
+        endTurnButton.addListener(new ReplayClickListener(context.getReplayManager(), endTurnButton) {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+
                 //This sets the turn to be over in the backend
                 context.getGameLogic().getPlayerManager().turnOver(context);
             }

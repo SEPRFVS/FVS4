@@ -289,9 +289,10 @@ public class RouteController {
 
         back.setPosition(TaxeGame.WIDTH - 100, TaxeGame.HEIGHT - 33);
 
-        back.addListener(new ClickListener() {
+        back.addListener(new ReplayClickListener(context.getReplayManager(), back) {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
                 context.getGameLogic().setState(GameState.NORMAL);
                 context.getTopBarController().clearMessage();
                 clearRoutingButtons();

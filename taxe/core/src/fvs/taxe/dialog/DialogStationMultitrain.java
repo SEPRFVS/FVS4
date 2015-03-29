@@ -56,7 +56,7 @@ public class DialogStationMultitrain extends ReplayDialog {
             this.remove();
         } else {
             //Simulate click on the train
-            TrainClicked clicker = new TrainClicked(context, (Train) obj);
+            TrainClicked clicker = new TrainClicked(context, (Train) obj, null);
             //This is a small hack, by setting the value of the simulated x value to -1, we can use this to check whether or not
             //This dialog has been opened before. If this was not here then this dialog and trainClicked would get stuck in an endless loop!
             clicker.clicked(null, -1, 0);

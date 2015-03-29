@@ -67,8 +67,8 @@ public class ResourceController {
                 //If a train is not placed then its position is null so this is used to check
                 if (train.getPosition() == null) {
                     //Creates a clickListener for the button and adds it to the list of buttons
-                    TrainClicked listener = new TrainClicked(context, train);
                     TextButton button = new TextButton(resource.toString(), context.getSkin());
+                    TrainClicked listener = new TrainClicked(context, train, button);
                     button.setPosition(x, y);
                     button.addListener(listener);
                     resourceButtons.add(button);

@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import fvs.taxe.clickListener.ReplayClickListener;
 import fvs.taxe.clickListener.StationClickListener;
 import fvs.taxe.TaxeGame;
 import fvs.taxe.Tooltip;
@@ -77,9 +78,11 @@ public class StationController {
 		final StationActor stationActor = new StationActor(station.getLocation(), station);
 
 		//Creates new click listener for that station
-		stationActor.addListener(new ClickListener() {
+		stationActor.addListener(new ReplayClickListener(context.getReplayManager(), stationActor) {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
+				super.clicked(event, x, y);
+
 				//This routine finds all trains located at this station by iterating through every one and checking if the location equals the station location
 				if (Game.getInstance().getState() == GameState.NORMAL) {
 					ArrayList<Train> trains = new ArrayList<Train>();
@@ -95,7 +98,8 @@ public class StationController {
 					}
 					if (trains.size() == 1) {
 						//If there is only one train here it immediately simulates the train click
-						TrainClicked clicker = new TrainClicked(context, trains.get(0));
+						//actor=null because in this instance no actor has been clicked
+						TrainClicked clicker = new TrainClicked(context, trains.get(0), null);
 						clicker.clicked(null, -1, 0);
 					} else if (trains.size() > 1) {
 						//If there is more than one of a particular train then the multitrain dialog is called using the list of trains
@@ -132,9 +136,11 @@ public class StationController {
 				collisionStation.getLocation());
 
 		//No need for a thorough clicked routine in the collision station unlike the standard station as trains cannot be located on a collision station
-		collisionStationActor.addListener(new ClickListener() {
+		collisionStationActor.addListener(new ReplayClickListener(context.getReplayManager(), collisionStationActor) {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
+				super.clicked(event, x, y);
+
 				stationClicked(collisionStation);
 			}
 

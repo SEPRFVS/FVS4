@@ -9,6 +9,9 @@ public class ReplayClickListener extends ClickListener {
     private ReplayManager replayManager;
     private Actor actor;
 
+    protected ReplayClickListener() {
+    }
+
     public ReplayClickListener(ReplayManager replayManager, Actor actor) {
         this.replayManager = replayManager;
         this.actor = actor;
@@ -16,6 +19,11 @@ public class ReplayClickListener extends ClickListener {
 
     @Override
     public void clicked(InputEvent event, float x, float y) {
+        if (actor == null) {
+            System.out.println("Click not logged as click event was first by code not user event");
+            return;
+        }
+
         replayManager.addClick(actor.getName());
     }
 }
