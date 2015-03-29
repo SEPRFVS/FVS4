@@ -95,7 +95,7 @@ public class TrainMoveController {
                 //This informs the user that their train has completed a goal, if it has
                 ArrayList<String> completedGoals = context.getGameLogic().getGoalManager().trainArrived(train, train.getPlayer());
                 for (String message : completedGoals) {
-                    context.getSideBarController().displayFlashMessage(message, Color.WHITE, 2);
+                    context.getNotificationController().showNotification(message, 2);
                     context.getSoundController().playSound("open");
                 }
 

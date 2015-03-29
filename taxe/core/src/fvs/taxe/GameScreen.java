@@ -92,6 +92,7 @@ public class GameScreen extends ScreenAdapter {
         routeController = new RouteController(context);
         context.setRouteController(routeController);
         context.setSideBarController(sideBarController);
+        context.setNotificationController(new NotificationController(context));
 
         //Adds a listener that displays a flash message whenever the turn ends
         gameLogic.getPlayerManager().subscribeTurnChanged(new TurnListener() {
