@@ -3,16 +3,17 @@ package fvs.taxe.dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import fvs.taxe.Button;
 import fvs.taxe.clickListener.ResourceDialogClickListener;
+import gameLogic.replay.ReplayManager;
 import gameLogic.resource.Obstacle;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DialogResourceObstacle extends UnifiedDialog {
+public class DialogResourceObstacle extends ReplayDialog {
     private List<ResourceDialogClickListener> clickListeners = new ArrayList<ResourceDialogClickListener>();
 
-    public DialogResourceObstacle(Obstacle obstacle, Skin skin) {
-        super(obstacle.toString(), skin, "bluewin");
+    public DialogResourceObstacle(Obstacle obstacle, Skin skin, ReplayManager replayManager) {
+        super(obstacle.toString(), skin, "bluewin", replayManager);
 
         //Generates all the buttons that allow the user to interact with the dialog
         text("What do you want to do with this obstacle?");
@@ -34,7 +35,9 @@ public class DialogResourceObstacle extends UnifiedDialog {
     }
 
     @Override
-    protected void result(Object obj) {
+    public void result(Object obj) {
+        super.result(obj);
+
         //Tells the clicked routine which button has been pressed
         if (obj == "CLOSE") {
             this.remove();

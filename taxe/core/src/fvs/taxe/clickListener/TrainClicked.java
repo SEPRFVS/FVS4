@@ -18,12 +18,15 @@ import gameLogic.resource.Train;
 import java.util.ArrayList;
 
 //Responsible for checking whether the train is clicked.
-public class TrainClicked extends ClickListener {
+public class TrainClicked extends ReplayClickListener {
     private Context context;
     private Train train;
     private boolean displayingMessage;
 
-    public TrainClicked(Context context, Train train) {
+    // actor passed in is the actor clicked, for this case it could be either a button or a train image
+    public TrainClicked(Context context, Train train, Actor actor) {
+        super(context.getReplayManager(), actor);
+
         this.train = train;
         this.context = context;
         displayingMessage = false;
@@ -31,6 +34,7 @@ public class TrainClicked extends ClickListener {
 
     @Override
     public void clicked(InputEvent event, float x, float y) {
+        super.clicked(event, x, y);
 
         if (Game.getInstance().getState() == GameState.NORMAL) {
 
@@ -79,7 +83,8 @@ public class TrainClicked extends ClickListener {
                 }else{
                     if (train.isOwnedBy(currentPlayer)) {
                         DialogButtonClicked listener = new DialogButtonClicked(context, currentPlayer, train);
-                        DialogResourceTrain dia = new DialogResourceTrain(train, context.getSkin(), train.getPosition() != null);
+                        DialogResourceTrain dia = new DialogResourceTrain(train, context.getSkin(),
+                                train.getPosition() != null, context.getReplayManager());
                         dia.show(context.getStage());
                         dia.subscribeClick(listener);
                     }
@@ -94,7 +99,8 @@ public class TrainClicked extends ClickListener {
             } else {
                 //If the train is owned by the player and has a final destination then a dialog is displayed allowing the user to interact with the train
                 DialogButtonClicked listener = new DialogButtonClicked(context, currentPlayer, train);
-                DialogResourceTrain dia = new DialogResourceTrain(train, context.getSkin(), train.getPosition() != null);
+                DialogResourceTrain dia = new DialogResourceTrain(train, context.getSkin(), train.getPosition() != null,
+                        context.getReplayManager());
                 dia.show(context.getStage());
                 dia.subscribeClick(listener);
             }

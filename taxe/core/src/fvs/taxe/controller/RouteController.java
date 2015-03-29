@@ -3,6 +3,7 @@ package fvs.taxe.controller;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Util.Tuple;
+import fvs.taxe.clickListener.ReplayClickListener;
 import fvs.taxe.clickListener.StationClickListener;
 import fvs.taxe.TaxeGame;
 import gameLogic.GameState;
@@ -24,7 +26,7 @@ import gameLogic.resource.Train;
 
 public class RouteController {
     private Context context;
-    private Group routingButtons = new Group();
+    private List<Actor> routingButtons = new ArrayList<Actor>();
     private List<IPositionable> positions;
     private boolean isRouting = false;
     private Train train;
@@ -143,17 +145,20 @@ public class RouteController {
         cancel.setPosition(TaxeGame.WIDTH - 10.0f - cancel.getWidth(), TaxeGame.HEIGHT - 33.0f);
 
         //If the cancel button is clicked then the routing is ended but none of the positions are saved as a route in the backend
-        cancel.addListener(new ClickListener() {
+        cancel.addListener(new ReplayClickListener(context.getReplayManager(), cancel) {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
                 endRouting();
             }
         });
 
         //If the finished button is pressed then the routing is ended and the route is saved in the backend
-        doneRouting.addListener(new ClickListener() {
+        doneRouting.addListener(new ReplayClickListener(context.getReplayManager(), doneRouting) {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+
                 //Checks whether or not the route is legal and can end
                 if (!canEndRouting) {
                     //If not, informs the user of what they must do to make the route legal
@@ -168,10 +173,11 @@ public class RouteController {
         });
 
         //Adds the buttons to the screen
-        routingButtons.addActor(doneRouting);
-        routingButtons.addActor(cancel);
+        routingButtons.add(doneRouting);
+        routingButtons.add(cancel);
 
-        context.getStage().addActor(routingButtons);
+        context.getStage().addNamedActor(doneRouting);
+        context.getStage().addNamedActor(cancel);
     }
 
     private void confirmed() {
@@ -185,11 +191,20 @@ public class RouteController {
 		TrainMoveController move = new TrainMoveController(context, train);
     }
 
+    private void clearRoutingButtons() {
+        for (Actor actor : routingButtons) {
+            actor.remove();
+        }
+
+        routingButtons.clear();
+    }
+
     private void endRouting() {
         //This routine sets the gamescreen back to how it should be for normal operation
         context.getGameLogic().setState(GameState.NORMAL);
         //All buttons are removed and flags set to the relevant values.
-        routingButtons.remove();
+        clearRoutingButtons();
+
         isRouting = false;
         editingRoute = false;
         distance = 0;
@@ -251,7 +266,7 @@ public class RouteController {
 
     public void viewRoute(Train train) {
         //This method is used to draw the trains current route so that the user can see where their trains are going
-        routingButtons.clear();
+        clearRoutingButtons();
 
         train.getRoute();
 
@@ -274,18 +289,20 @@ public class RouteController {
         //Adds a button to leave the view route screen
         TextButton back = new TextButton("Return", context.getSkin());
         back.setPosition(TaxeGame.WIDTH - back.getWidth() - 10.0f, TaxeGame.HEIGHT - 33.0f);
-        back.addListener(new ClickListener() {
+        back.addListener(new ReplayClickListener(context.getReplayManager(), back) {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
                 context.getGameLogic().setState(GameState.NORMAL);
                 context.getSideBarController().clearMessage();
-                routingButtons.remove();
+                clearRoutingButtons();
                 distance = 0;
 
             }
         });
-        routingButtons.addActor(back);
-        context.getStage().addActor(routingButtons);
+
+        routingButtons.add(back);
+        context.getStage().addNamedActor(back);
     }
 
 }
