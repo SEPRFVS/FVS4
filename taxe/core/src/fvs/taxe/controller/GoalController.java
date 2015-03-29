@@ -1,6 +1,7 @@
 package fvs.taxe.controller;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
@@ -12,11 +13,13 @@ import gameLogic.player.PlayerManager;
 import gameLogic.goal.Goal;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GoalController {
     //This class is in control of drawing all the goals
     private Context context;
-    private Group goalButtons = new Group();
+    private List<Actor> goalButtons = new ArrayList<Actor>();
     private Color[] colours = new Color[3];
 
     public GoalController(Context context) {
@@ -57,7 +60,10 @@ public class GoalController {
     public void showCurrentPlayerGoals() {
         //This method displays the player's current goals
         //First the current goals are cleared so that the other player's goals are not displayed too.
-        goalButtons.remove();
+        for (Actor goalButton : goalButtons) {
+            goalButton.remove();
+        }
+
         goalButtons.clear();
 
         PlayerManager pm = context.getGameLogic().getPlayerManager();
@@ -93,10 +99,10 @@ public class GoalController {
                     button.setColor(colours[index - 1]);
                 }
                 button.addListener(listener);
-                goalButtons.addActor(button);
+                goalButtons.add(button);
+                context.getStage().addActor(button);
             }
         }
-        context.getStage().addActor(goalButtons);
     }
 
     private String playerHeader() {
