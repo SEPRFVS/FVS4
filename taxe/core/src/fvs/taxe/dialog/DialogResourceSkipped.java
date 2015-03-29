@@ -10,11 +10,11 @@ import fvs.taxe.controller.Context;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DialogResourceSkipped extends Dialog {
+public class DialogResourceSkipped extends ReplayDialog {
     private List<ResourceDialogClickListener> clickListeners = new ArrayList<ResourceDialogClickListener>();
 
     public DialogResourceSkipped(Context context) {
-        super("Skip", context.getSkin());
+        super("Skip", context.getSkin(), context.getReplayManager());
 
         text("What do you want to do with this resource?");
         //Generates all the buttons required to allow the user to interact with the dialog
@@ -51,7 +51,9 @@ public class DialogResourceSkipped extends Dialog {
 
 
     @Override
-    protected void result(Object obj) {
+    public void result(Object obj) {
+        super.result(obj);
+
         //Calls the clicked routine and passes it the button that the user clicked
         if (obj == "EXIT") {
             Gdx.app.exit();

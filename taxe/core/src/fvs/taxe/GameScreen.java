@@ -64,6 +64,13 @@ public class GameScreen extends ScreenAdapter {
             public void addActor(final Actor actor) {
                 actor.setName((String.valueOf(actorId)));
 
+                // for debugging only, useful to see the unique name of buttons in their text
+                if (actor instanceof TextButton) {
+                    TextButton b = (TextButton)actor;
+                    b.setText(b.getName() + ":" + b.getText());
+                    b.setSize(b.getWidth() + 50, b.getHeight());
+                }
+
                 for (final com.badlogic.gdx.scenes.scene2d.EventListener listener : actor.getListeners()) {
                     if (listener instanceof ReplayClickListener) {
                         // don't edit listeners which are of this type (they already record click events)

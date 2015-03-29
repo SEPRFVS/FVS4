@@ -32,7 +32,7 @@ public class ObstacleClicked extends ClickListener {
 
             //Creates a dialog and a listener for the result of it
             DialogButtonClicked listener = new DialogButtonClicked(context, currentPlayer, obstacle);
-            DialogResourceObstacle dia = new DialogResourceObstacle(obstacle, context.getSkin());
+            DialogResourceObstacle dia = new DialogResourceObstacle(obstacle, context.getSkin(), context.getReplayManager());
             dia.show(context.getStage());
             dia.subscribeClick(listener);
         }

@@ -59,7 +59,7 @@ public class GoalClickListener extends ClickListener {
             Player currentPlayer = Game.getInstance().getPlayerManager().getCurrentPlayer();
             DialogGoalButtonClicked listener = new DialogGoalButtonClicked(currentPlayer,
                     goal);
-            DialogGoal dia = new DialogGoal(goal, context.getSkin());
+            DialogGoal dia = new DialogGoal(goal, context.getSkin(), context.getReplayManager());
             dia.show(context.getStage());
             dia.subscribeClick(listener);
         }

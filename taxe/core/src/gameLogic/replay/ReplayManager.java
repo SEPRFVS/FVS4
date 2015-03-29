@@ -26,6 +26,8 @@ public class ReplayManager {
     }
 
     private void addClick(ReplayType type, String s) {
+        if (playing) return;
+
         clicks.add(new Tuple<ReplayType, String>(type, s));
     }
 
@@ -47,7 +49,6 @@ public class ReplayManager {
 
     public void playSingle() {
         playing = true;
-        System.out.println("playing single..." + String.valueOf(playPosition));
 
         if (playPosition > clicks.size()) {
             System.out.println("Played all clicks");
@@ -55,6 +56,9 @@ public class ReplayManager {
         }
 
         Tuple<ReplayType, String> click = clicks.get(playPosition);
+
+        System.out.println("playing single..." + String.valueOf(playPosition) + ", actor: " + click.getSecond());
+
 
         switch (click.getFirst()) {
             case ACTOR_CLICK:

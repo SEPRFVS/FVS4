@@ -5,16 +5,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import fvs.taxe.Button;
 import fvs.taxe.clickListener.ResourceDialogClickListener;
+import gameLogic.replay.ReplayManager;
 import gameLogic.resource.Engineer;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DialogResourceEngineer extends Dialog {
+public class DialogResourceEngineer extends ReplayDialog {
     private List<ResourceDialogClickListener> clickListeners = new ArrayList<ResourceDialogClickListener>();
 
-    public DialogResourceEngineer(Engineer engineer, Skin skin) {
-        super(engineer.toString(), skin);
+    public DialogResourceEngineer(Engineer engineer, Skin skin, ReplayManager replayManager) {
+        super(engineer.toString(), skin, replayManager);
         //Generates all the buttons that allow the user to interact with the dialog
         text("What do you want to do with this engineer?");
         button("Repair a blocked connection", "PLACE");
@@ -49,7 +50,9 @@ public class DialogResourceEngineer extends Dialog {
     }
 
     @Override
-    protected void result(Object obj) {
+    public void result(Object obj) {
+        super.result(obj);
+
         //Does things based on which button the user presses
         if (obj == "CLOSE") {
             this.remove();

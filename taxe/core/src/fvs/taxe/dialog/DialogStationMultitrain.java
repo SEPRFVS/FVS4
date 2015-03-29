@@ -9,14 +9,14 @@ import gameLogic.resource.Train;
 
 import java.util.ArrayList;
 
-public class DialogStationMultitrain extends Dialog {
+public class DialogStationMultitrain extends ReplayDialog {
     //This class is used to create a dialog for when there are multiple trains in one location
     private Context context;
 
     public DialogStationMultitrain(ArrayList<Train> trains, Skin skin, Context context) {
 
         //This constructor is called when there are multiple blocked trains sitting on top of each other
-        super("Select Train", skin);
+        super("Select Train", skin, context.getReplayManager());
         this.context = context;
         text("Choose which train you would like");
 
@@ -48,7 +48,9 @@ public class DialogStationMultitrain extends Dialog {
     }
 
     @Override
-    protected void result(Object obj) {
+    public void result(Object obj) {
+        super.result(obj);
+
         if (obj == "CANCEL") {
             //If the user clicks cancel then it deletes the dialog
             this.remove();
