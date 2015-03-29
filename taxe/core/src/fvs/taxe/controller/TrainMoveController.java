@@ -1,5 +1,7 @@
 package fvs.taxe.controller;
 
+import Util.Tuple;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
@@ -10,9 +12,11 @@ import com.sun.xml.internal.bind.v2.schemagen.xmlschema.ContentModelContainer;
 
 import fvs.taxe.actor.TrainActor;
 import gameLogic.Game;
+import gameLogic.goal.Goal;
 import gameLogic.map.IPositionable;
 import gameLogic.map.Position;
 import gameLogic.map.Station;
+import gameLogic.player.Player;
 import gameLogic.resource.Train;
 
 import java.util.ArrayList;
@@ -93,9 +97,9 @@ public class TrainMoveController {
         return new RunnableAction() {
             public void run() {
                 //This informs the user that their train has completed a goal, if it has
-                ArrayList<String> completedGoals = context.getGameLogic().getGoalManager().trainArrived(train, train.getPlayer());
-                for (String message : completedGoals) {
-                    context.getNotificationController().showNotification(message, 2);
+                ArrayList<Tuple<Player, Goal>> completedGoals = context.getGameLogic().getGoalManager().trainArrived(train, train.getPlayer());
+                for (Tuple<Player, Goal> message : completedGoals) {
+                    context.getNotificationController().showGoalComplete(message.getFirst(), message.getSecond());
                     context.getSoundController().playSound("open");
                 }
 

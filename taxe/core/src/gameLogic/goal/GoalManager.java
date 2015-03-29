@@ -12,6 +12,8 @@ import gameLogic.resource.Train;
 import java.util.ArrayList;
 import java.util.Random;
 
+import Util.Tuple;
+
 public class GoalManager {
     public final static int CONFIG_MAX_PLAYER_GOALS = 3;
     private ResourceManager resourceManager;
@@ -104,9 +106,9 @@ public class GoalManager {
 		}*/
     }
 
-    public ArrayList<String> trainArrived(Train train, Player player) {
+    public ArrayList<Tuple<Player, Goal>> trainArrived(Train train, Player player) {
         //This updates the score when a train arrives at a station by checking if the goals are complete
-        ArrayList<String> completedString = new ArrayList<String>();
+        ArrayList<Tuple<Player, Goal>> completedString = new ArrayList<Tuple<Player, Goal>>();
         for (Goal goal : player.getGoals()) {
             if (goal.isComplete(train)) {
                 if (goal.isBonusCompleted(train)) {
@@ -116,7 +118,7 @@ public class GoalManager {
                 }
                 player.completeGoal(goal);
                 player.removeResource(train);
-                completedString.add(player.getName() + " completed a goal to " + goal.toString() + "!");
+                completedString.add(new Tuple<Player, Goal>(player, goal));
             }
         }
         System.out.println("Train arrived at final destination: " + train.getFinalDestination().getName());
