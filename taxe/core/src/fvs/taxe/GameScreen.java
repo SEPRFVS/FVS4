@@ -9,9 +9,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import fvs.taxe.clickListener.ReplayClickListener;
 import fvs.taxe.controller.*;
 import fvs.taxe.dialog.DialogEndGame;
 import gameLogic.Game;
@@ -55,15 +57,19 @@ public class GameScreen extends ScreenAdapter {
     }
 
     protected void init(final ReplayManager rm) {
-
-
-        // magic, do not touch
+        // magic, do not touch, every time an actor is added to the stage, modify its click listener
+        // to one that records its click events
         stage = new Stage(new FitViewport(TaxeGame.WIDTH, TaxeGame.HEIGHT)) {
             @Override
             public void addActor(final Actor actor) {
                 actor.setName((String.valueOf(actorId)));
 
                 for (final com.badlogic.gdx.scenes.scene2d.EventListener listener : actor.getListeners()) {
+                    if (listener instanceof ReplayClickListener) {
+                        // don't edit listeners which are of this type (they already record click events)
+                        continue;
+                    }
+
                     if (listener instanceof ClickListener) {
                         if (!actor.removeListener(listener)) {
                             System.out.println("OLD LISTENER NOT REMOVED");
@@ -73,7 +79,7 @@ public class GameScreen extends ScreenAdapter {
                             // throw new RuntimeException("Subclass methods will be lost");
                         }
 
-                        actor.addListener(new ClickListener() {
+                        boolean added = actor.addListener(new ClickListener() {
                             @Override
                             public void clicked(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y) {
                                 rm.addClick(actor.getName());
@@ -83,7 +89,9 @@ public class GameScreen extends ScreenAdapter {
 
                         // only override a single click listener, we don't want to be storing each click twice
                         // on actors with multiple listeners
-                        break;
+                        if (added) {
+                            break;
+                        }
                     }
                 }
 

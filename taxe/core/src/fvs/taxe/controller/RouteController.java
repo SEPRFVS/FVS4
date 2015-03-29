@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Util.Tuple;
+import fvs.taxe.clickListener.ReplayClickListener;
 import fvs.taxe.clickListener.StationClickListener;
 import fvs.taxe.TaxeGame;
 import gameLogic.GameState;
@@ -141,17 +142,20 @@ public class RouteController {
         cancel.setPosition(TaxeGame.WIDTH - 100, TaxeGame.HEIGHT - 33);
 
         //If the cancel button is clicked then the routing is ended but none of the positions are saved as a route in the backend
-        cancel.addListener(new ClickListener() {
+        cancel.addListener(new ReplayClickListener(context.getReplayManager(), cancel) {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
                 endRouting();
             }
         });
 
         //If the finished button is pressed then the routing is ended and the route is saved in the backend
-        doneRouting.addListener(new ClickListener() {
+        doneRouting.addListener(new ReplayClickListener(context.getReplayManager(), doneRouting) {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+
                 //Checks whether or not the route is legal and can end
                 if (!canEndRouting) {
                     //If not, informs the user of what they must do to make the route legal

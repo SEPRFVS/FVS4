@@ -85,6 +85,8 @@ public class ReplayManager {
 
             return;
         }
+
+        throw new RuntimeException("Actor " + name + " not found");
     }
 
     private void clickDialogButton(String id) {
