@@ -27,11 +27,11 @@ public class GoalController {
         //Makes the system redraw the currentGoals whenever the player changes.
         context.getGameLogic().getPlayerManager()
                 .subscribePlayerChanged(new PlayerChangedListener() {
-					@Override
-					public void changed() {
-						showCurrentPlayerGoals();
-					}
-				});
+                    @Override
+                    public void changed() {
+                        showCurrentPlayerGoals();
+                    }
+                });
     }
 
     public void drawHeaderText() {
@@ -89,16 +89,15 @@ public class GoalController {
                 button.getLabel().setFontScale(scaleFactor, scaleFactor);
                 button.setWidth(scaleFactor * button.getWidth());
                 button.setHeight(scaleFactor * button.getHeight());
-
-                //Adds the listener to the button so that it will inform the correct parts of the system
-                GoalClickListener listener = new GoalClickListener(context, goal);
                 button.setPosition(x, y);
 
                 if (colours[index++] != null) {
                     //Sets the colour based on the values in the array. If the train is routing then these colours will match nodes on the map, otherwise they are all grey.
                     button.setColor(colours[index - 1]);
                 }
-                button.addListener(listener);
+
+                //Adds the listener to the button so that it will inform the correct parts of the system
+                button.addListener(new GoalClickListener(context, goal, button));
                 goalButtons.add(button);
                 context.getStage().addNamedActor(button);
             }

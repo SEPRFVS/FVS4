@@ -12,12 +12,14 @@ import gameLogic.player.Player;
 import gameLogic.resource.Engineer;
 
 //Responsible for checking whether then engineer has been clicked
-public class EngineerClicked extends ClickListener {
+public class EngineerClicked extends ReplayClickListener {
     private Engineer engineer;
     private Context context;
     private boolean displayingMessage;
 
-    public EngineerClicked(Context context, Engineer engineer) {
+    public EngineerClicked(Context context, Engineer engineer, Actor actor) {
+        super(context.getReplayManager(), actor);
+
         this.engineer = engineer;
         this.context = context;
         displayingMessage = false;
@@ -25,8 +27,9 @@ public class EngineerClicked extends ClickListener {
 
     @Override
     public void clicked(InputEvent event, float x, float y) {
-        if (Game.getInstance().getState() == GameState.NORMAL) {
+        super.clicked(event, x, y);
 
+        if (Game.getInstance().getState() == GameState.NORMAL) {
             // current player can't be passed in as it changes so find out current player at this instant
             Player currentPlayer = Game.getInstance().getPlayerManager().getCurrentPlayer();
 
