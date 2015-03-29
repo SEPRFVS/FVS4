@@ -57,7 +57,7 @@ public class SetupScreen extends ScreenAdapter {
 	     
 	     game.batch.begin();
 	     game.font.setColor(Color.BLACK);
-	     game.font.draw(game.batch, "Team Names", TaxeGame.WIDTH/2 - 125.0f, TaxeGame.HEIGHT - 10.0f);
+	     game.font.draw(game.batch, "Enter Team Names", TaxeGame.WIDTH/2 - 200.0f, TaxeGame.HEIGHT - 10.0f);
 	     game.batch.end();
 	     
 	     stage.draw();
@@ -67,7 +67,7 @@ public class SetupScreen extends ScreenAdapter {
 	 public void show() {
 		 float row = 0.0f;
 		 for(Player player : context.getGameLogic().getPlayerManager().getAllPlayers()) {
-			 TextField text = new TextField("Player " + player.getPlayerNumber(), skin);
+			 TextField text = new TextField("Player " + player.getPlayerNumber(), skin, "names");
 			 text.setName("name" + player.getPlayerNumber());
 			 text.setPosition((TaxeGame.WIDTH/2) - (text.getWidth()/2), TaxeGame.HEIGHT - 100.0f - row);
 			 row += text.getHeight() + 10.0f;
