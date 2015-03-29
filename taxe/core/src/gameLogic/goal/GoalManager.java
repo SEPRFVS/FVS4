@@ -116,7 +116,7 @@ public class GoalManager {
                 }
                 player.completeGoal(goal);
                 player.removeResource(train);
-                completedString.add("player " + player.getPlayerNumber() + " completed a goal to " + goal.toString() + "!");
+                completedString.add(player.getName() + " completed a goal to " + goal.toString() + "!");
             }
         }
         System.out.println("Train arrived at final destination: " + train.getFinalDestination().getName());
