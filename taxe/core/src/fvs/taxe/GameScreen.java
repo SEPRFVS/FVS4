@@ -24,9 +24,11 @@ import gameLogic.listeners.GameStateListener;
 import gameLogic.listeners.TurnListener;
 import gameLogic.map.Connection;
 import gameLogic.map.Map;
+import gameLogic.player.Player;
 import gameLogic.replay.ReplayManager;
 
 import java.awt.event.InputEvent;
+import java.util.ArrayList;
 import java.util.EventListener;
 
 
@@ -152,8 +154,12 @@ public class GameScreen extends ScreenAdapter {
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            ArrayList<String> playerNames = new ArrayList<String>();
+            for(Player player : gameLogic.getPlayerManager().getAllPlayers()) {
+            	playerNames.add(player.getName());
+            }
             gameLogic.dispose();
-            game.setScreen(new ReplayScreen(game, context.getReplayManager()));
+            game.setScreen(new ReplayScreen(game, context.getReplayManager(), playerNames));
         }
 
         game.batch.begin();
@@ -210,8 +216,14 @@ public class GameScreen extends ScreenAdapter {
     // Called when GameScreen becomes current screen of the game
     public void show() {
     	if(gameLogic.getPlayerManager().getCurrentPlayer().getName().equals("")) {
-    		game.setScreen(new SetupScreen(game, context));
-    		return;
+    		if(this instanceof ReplayScreen) {
+    			for (int i = 0; i < gameLogic.getPlayerManager().getAllPlayers().size(); i++) {
+    				gameLogic.getPlayerManager().getAllPlayers().get(i).setName(((ReplayScreen) this).playerNames.get(i));
+    			}
+    		} else {
+    			game.setScreen(new SetupScreen(game, context));
+    			return;
+    		}
     	}
     	
     	Gdx.input.setInputProcessor(stage);
