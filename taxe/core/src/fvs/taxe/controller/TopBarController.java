@@ -113,6 +113,6 @@ public class TopBarController {
             }
         });
 
-        context.getStage().addActor(endTurnButton);
+        context.getStage().addNamedActor(endTurnButton);
     }
 }

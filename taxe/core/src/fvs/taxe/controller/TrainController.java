@@ -23,7 +23,7 @@ public class TrainController {
         TrainActor trainActor = new TrainActor(train, context);
         trainActor.addListener(new TrainClicked(context, train, trainActor));
         trainActor.setVisible(false);
-        context.getStage().addActor(trainActor);
+        context.getStage().addNamedActor(trainActor);
 
         return trainActor;
     }

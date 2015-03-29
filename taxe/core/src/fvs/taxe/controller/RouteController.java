@@ -173,8 +173,8 @@ public class RouteController {
         routingButtons.add(doneRouting);
         routingButtons.add(cancel);
 
-        context.getStage().addActor(doneRouting);
-        context.getStage().addActor(cancel);
+        context.getStage().addNamedActor(doneRouting);
+        context.getStage().addNamedActor(cancel);
     }
 
     private void confirmed() {
@@ -302,7 +302,7 @@ public class RouteController {
         });
 
         routingButtons.add(back);
-        context.getStage().addActor(back);
+        context.getStage().addNamedActor(back);
     }
 
 }

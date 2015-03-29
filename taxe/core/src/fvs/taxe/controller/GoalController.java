@@ -100,7 +100,7 @@ public class GoalController {
                 }
                 button.addListener(listener);
                 goalButtons.add(button);
-                context.getStage().addActor(button);
+                context.getStage().addNamedActor(button);
             }
         }
     }

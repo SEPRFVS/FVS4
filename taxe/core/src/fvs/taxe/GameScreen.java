@@ -30,7 +30,7 @@ import java.util.EventListener;
 
 public class GameScreen extends ScreenAdapter {
     protected TaxeGame game;
-    private Stage stage;
+    private StageNamedActor stage;
     private Texture mapTexture;
     protected Game gameLogic;
     private Skin skin;
@@ -39,7 +39,6 @@ public class GameScreen extends ScreenAdapter {
     public static final int ANIMATION_TIME = 2;
     private Tooltip tooltip;
     private Context context;
-    private int actorId = 1000;
 
     private StationController stationController;
     private TopBarController topBarController;
@@ -57,60 +56,7 @@ public class GameScreen extends ScreenAdapter {
     }
 
     protected void init(final ReplayManager rm) {
-        // magic, do not touch, every time an actor is added to the stage, modify its click listener
-        // to one that records its click events
-        stage = new Stage(new FitViewport(TaxeGame.WIDTH, TaxeGame.HEIGHT)) {
-            @Override
-            public void addActor(final Actor actor) {
-                actor.setName((String.valueOf(actorId)));
-
-                // for debugging only, useful to see the unique name of buttons in their text
-                if (actor instanceof TextButton) {
-                    TextButton b = (TextButton)actor;
-                    b.setText(b.getName() + ":" + b.getText());
-                    b.setSize(b.getWidth() + 50, b.getHeight());
-                }
-
-//                for (final com.badlogic.gdx.scenes.scene2d.EventListener listener : actor.getListeners()) {
-//                    if (listener instanceof ReplayClickListener) {
-//                        // don't edit listeners which are of this type (they already record click events)
-//                        continue;
-//                    }
-//
-//                    if (!(listener instanceof ClickListener)) {
-//                        continue;
-//                    }
-//
-//                    System.out.println("Listener that isn't Replay click, hmmm");
-//
-//                    if (!actor.removeListener(listener)) {
-//                        System.out.println("OLD LISTENER NOT REMOVED");
-//                    }
-//
-//                    if (listener.getClass() != ClickListener.class) {
-//                        // throw new RuntimeException("Subclass methods will be lost");
-//                    }
-//
-//                    boolean added = actor.addListener(new ClickListener() {
-//                        @Override
-//                        public void clicked(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y) {
-//                            rm.addClick(actor.getName());
-//                            ((ClickListener) listener).clicked(event, x, y);
-//                        }
-//                    });
-//
-//                    // only override a single click listener, we don't want to be storing each click twice
-//                    // on actors with multiple listeners
-//                    if (added) {
-//                        break;
-//                    }
-//                }
-
-                // uniquely name each actor
-                actorId++;
-                super.addActor(actor);
-            }
-        };
+        stage = new StageNamedActor(new FitViewport(TaxeGame.WIDTH, TaxeGame.HEIGHT));
 
         Gdx.input.setInputProcessor(stage);
 

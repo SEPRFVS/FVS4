@@ -113,7 +113,7 @@ public class ResourceController {
 
         //Adds all generated buttons to the stage
         for (Actor actor : resourceButtons) {
-            context.getStage().addActor(actor);
+            context.getStage().addNamedActor(actor);
         }
     }
 

@@ -127,7 +127,7 @@ public class StationController {
 
 		station.setActor(stationActor);
 
-		context.getStage().addActor(stationActor);
+		context.getStage().addNamedActor(stationActor);
 	}
 
 	private void renderCollisionStation(final Station collisionStation) {
@@ -159,7 +159,7 @@ public class StationController {
 			}
 		});
 
-		context.getStage().addActor(collisionStationActor);
+		context.getStage().addNamedActor(collisionStationActor);
 	}
 
 	public static Color[] colours = {Color.ORANGE, Color.GREEN, Color.PURPLE};

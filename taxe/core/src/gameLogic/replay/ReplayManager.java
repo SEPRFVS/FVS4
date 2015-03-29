@@ -75,6 +75,9 @@ public class ReplayManager {
 
     private void clickActorInStage(String name) {
         for(Actor actor : stage.getActors()) {
+            // if an actor has no name, then it isn't one that we are interested in replaying it's clicked event
+            // e.g. tooltip
+            if (actor.getName() == null) continue;
             if (!actor.getName().equals(name)) continue;
 
             System.out.println("Actor found in stage");
