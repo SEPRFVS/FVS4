@@ -2,21 +2,24 @@ package fvs.taxe.controller;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import fvs.taxe.StageNamedActor;
 import fvs.taxe.TaxeGame;
 import gameLogic.Game;
+import gameLogic.replay.ReplayManager;
 
 public class Context {
     //Context appears to be a class that allows different aspects of the system access parts that they otherwise logically shouldn't have access to.
     //While this is a bit of a workaround to make implementation easier, it does weaken encapsulation somewhat, however a full system overhaul would be unfeasible to remedy this.
     private TaxeGame taxeGame;
-    private Stage stage;
+    private StageNamedActor stage;
     private Skin skin;
     private Game gameLogic;
+    private ReplayManager replayManager;
     private RouteController routeController;
     private SideBarController sideBarController;
     private SoundController soundController;
 
-    public Context(Stage stage, Skin skin, TaxeGame taxeGame, Game gameLogic) {
+    public Context(StageNamedActor stage, Skin skin, TaxeGame taxeGame, Game gameLogic) {
         this.stage = stage;
         this.skin = skin;
         this.taxeGame = taxeGame;
@@ -25,7 +28,7 @@ public class Context {
     }
 
     //Getters and setters: pretty self-explanatory
-    public Stage getStage() {
+    public StageNamedActor getStage() {
         return stage;
     }
 
@@ -65,4 +68,11 @@ public class Context {
 		this.soundController = soundController;
 	}
 
+    public ReplayManager getReplayManager() {
+        return replayManager;
+    }
+
+    public void setReplayManager(ReplayManager replayManager) {
+        this.replayManager = replayManager;
+    }
 }

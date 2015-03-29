@@ -21,10 +21,9 @@ public class TrainController {
         //This renders the actor of the train which is passed to it
 
         TrainActor trainActor = new TrainActor(train, context);
-        trainActor.addListener(new TrainClicked(context, train));
-
+        trainActor.addListener(new TrainClicked(context, train, trainActor));
         trainActor.setVisible(false);
-        context.getStage().addActor(trainActor);
+        context.getStage().addNamedActor(trainActor);
 
         return trainActor;
     }

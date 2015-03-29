@@ -11,13 +11,15 @@ import gameLogic.player.Player;
 import gameLogic.resource.Skip;
 
 //Responsible for checking whether the Skip is clicked.
-public class SkipClicked extends ClickListener {
+public class SkipClicked extends ReplayClickListener {
 
     Context context;
     Skip skip;
     private boolean displayingMessage;
 
-    public SkipClicked(Context context, Skip skip) {
+    public SkipClicked(Context context, Skip skip, Actor actor) {
+        super(context.getReplayManager(), actor);
+
         this.context = context;
         this.skip = skip;
         displayingMessage = false;
@@ -25,6 +27,8 @@ public class SkipClicked extends ClickListener {
 
 
     public void clicked(InputEvent event, float x, float y) {
+        super.clicked(event, x, y);
+
         //When skip is clicked it checks whether the game is in the normal state
         if (Game.getInstance().getState() == GameState.NORMAL) {
 

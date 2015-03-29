@@ -1,30 +1,40 @@
 package fvs.taxe;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import fvs.taxe.clickListener.ReplayClickListener;
 import fvs.taxe.controller.*;
 import fvs.taxe.dialog.DialogEndGame;
 import gameLogic.Game;
 import gameLogic.GameState;
+import gameLogic.RandomSingleton;
 import gameLogic.listeners.GameStateListener;
 import gameLogic.listeners.TurnListener;
 import gameLogic.map.Connection;
 import gameLogic.map.Map;
+import gameLogic.replay.ReplayManager;
+
+import java.awt.event.InputEvent;
+import java.util.EventListener;
 
 
 public class GameScreen extends ScreenAdapter {
-    final private TaxeGame game;
-    private Stage stage;
+    protected TaxeGame game;
+    private StageNamedActor stage;
     private Texture mapTexture;
-    private Game gameLogic;
+    protected Game gameLogic;
     private Skin skin;
     private Map map;
     private float timeAnimated = 0;
@@ -38,17 +48,32 @@ public class GameScreen extends ScreenAdapter {
     private GoalController goalController;
     private RouteController routeController;
 
+    public GameScreen() {
+    }
+
     public GameScreen(TaxeGame game) {
         this.game = game;
-        stage = new Stage(new FitViewport(TaxeGame.WIDTH, TaxeGame.HEIGHT));
-        
-        //Set the skin
+
+        init(new ReplayManager());
+    }
+
+    protected void init(final ReplayManager rm) {
+        stage = new StageNamedActor(new FitViewport(TaxeGame.WIDTH, TaxeGame.HEIGHT));
+
+        Gdx.input.setInputProcessor(stage);
+
+        //Sets the skin
         skin = game.skin;
+
+        setRandomSeed(rm);
 
         //Initialises the game
         gameLogic = Game.getInstance();
         context = new Context(stage, skin, game, gameLogic);
-        Gdx.input.setInputProcessor(stage);
+
+        rm.setStage(stage);
+
+        context.setReplayManager(rm);
 
         //Draw background
         mapTexture = new Texture(Gdx.files.internal("gamemap.jpg"));
@@ -109,12 +134,27 @@ public class GameScreen extends ScreenAdapter {
         });
     }
 
+    protected void setRandomSeed(ReplayManager rm) {
+        // store the seed in replay manager so same seed can be used in future
+        long seed = System.currentTimeMillis();
+        rm.setSeed(seed);
+        RandomSingleton.setFromSeed(seed);
+    }
 
     // called every frame
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
+            context.getReplayManager().playSingle();
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            gameLogic.dispose();
+            game.setScreen(new ReplayScreen(game, context.getReplayManager()));
+        }
 
         game.batch.begin();
 

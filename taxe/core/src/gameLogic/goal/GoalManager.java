@@ -1,6 +1,7 @@
 package gameLogic.goal;
 
 import gameLogic.Game;
+import gameLogic.RandomSingleton;
 import gameLogic.player.Player;
 import gameLogic.map.CollisionStation;
 import gameLogic.map.Map;
@@ -44,7 +45,7 @@ public class GoalManager {
         int score = (int) (shortestDist * (Math.pow(1.0001, shortestDist))); //Score by default = shortestDist*1.0001^shortestDist.
         // This rewards players for completing longer goals, but not too much. If the scaling value was too large then it would be unfair to players that only receive shorter goals.
 
-        Random random = new Random();
+        Random random = RandomSingleton.getRandom();
         int rand = random.nextInt(3);
         if (rand == 0) {
             //decide if goal has intermediary station; if not, initiate  the intermediary station as origin

@@ -2,6 +2,7 @@ package gameLogic.map;
 
 import com.badlogic.gdx.math.Vector2;
 import gameLogic.Game;
+import gameLogic.RandomSingleton;
 import gameLogic.player.Player;
 import gameLogic.dijkstra.Dijkstra;
 import gameLogic.resource.Train;
@@ -13,13 +14,14 @@ import java.util.Random;
 public class Map {
     private List<Station> stations;
     private List<Connection> connections;
-    private Random random = new Random();
+    private Random random;
     private Dijkstra dijkstra;
     private JSONImporter jsonImporter;
 
     public Map() {
         stations = new ArrayList<Station>();
         connections = new ArrayList<Connection>();
+        random = RandomSingleton.getRandom();
 
         //Imports all values from the JSON file using the JSONImporter
         jsonImporter = new JSONImporter(this);

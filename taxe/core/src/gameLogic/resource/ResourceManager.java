@@ -1,6 +1,8 @@
 package gameLogic.resource;
 
 import Util.Tuple;
+import gameLogic.Game;
+import gameLogic.RandomSingleton;
 import gameLogic.player.Player;
 import gameLogic.map.JSONImporter;
 
@@ -9,7 +11,7 @@ import java.util.Random;
 
 public class ResourceManager {
     public final int CONFIG_MAX_RESOURCES = 7;
-    private Random random = new Random();
+    private Random random = RandomSingleton.getRandom();
     private ArrayList<Tuple<String, Integer>> trains;
 
     public ResourceManager() {

@@ -1,6 +1,9 @@
 package fvs.taxe.controller;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 import fvs.taxe.TaxeGame;
@@ -12,9 +15,13 @@ import gameLogic.player.Player;
 import gameLogic.listeners.PlayerChangedListener;
 import gameLogic.resource.*;
 
+import java.util.ArrayList;
+import java.util.EventListener;
+import java.util.List;
+
 public class ResourceController {
     private Context context;
-    private Group resourceButtons = new Group();
+    private List<Actor> resourceButtons = new ArrayList<Actor>();
 
     public ResourceController(final Context context) {
         this.context = context;
@@ -36,7 +43,10 @@ public class ResourceController {
         y -= 50;
 
         //Clears the resource buttons so that the other player's resources are not displayed
-        resourceButtons.remove();
+        for (Actor actor : resourceButtons) {
+            actor.remove();
+        }
+
         resourceButtons.clear();
         
         for (final Resource resource : player.getResources()) {
@@ -49,41 +59,40 @@ public class ResourceController {
                 //If a train is not placed then its position is null so this is used to check
                 if (train.getPosition() == null) {
                     //Creates a clickListener for the button and adds it to the list of buttons
-                    TrainClicked listener = new TrainClicked(context, train);
                     button = new TextButton(resource.toString(), context.getSkin(), "unplaced-resource");
+                    TrainClicked listener = new TrainClicked(context, train, button);
                     button.addListener(listener);
                 }
-
             } else if (resource instanceof Obstacle) {
                 //Creates a clickListener for the button and adds it to the list of buttons
                 Obstacle obstacle = (Obstacle) resource;
-                ObstacleClicked listener = new ObstacleClicked(context, obstacle);
                 button = new TextButton("Obstacle", context.getSkin(), "unplaced-resource");
-                button.addListener(listener);
+                button.addListener(new ObstacleClicked(context, obstacle, button));
             } else if (resource instanceof Skip) {
                 //Creates a clickListener for the button and adds it to the list of buttons
                 Skip skip = (Skip) resource;
-                SkipClicked listener = new SkipClicked(context, skip);
                 button = new TextButton("Skip", context.getSkin(), "unplaced-resource");
-                button.addListener(listener);
+                button.addListener(new SkipClicked(context, skip, button));
             } else if (resource instanceof Engineer) {
                 //Creates a clickListener for the button and adds it to the list of buttons
                 Engineer engineer = (Engineer) resource;
-                EngineerClicked listener = new EngineerClicked(context, engineer);
                 button = new TextButton("Engineer", context.getSkin(), "unplaced-resource");
-                button.addListener(listener);
+                button.addListener(new EngineerClicked(context, engineer, button));
             }
             
             if (button != null) {
             	button.setPosition(x, y);
             	button.setWidth(SideBarController.CONTROLS_WIDTH - 20.0f);
-            	resourceButtons.addActor(button);
+            	resourceButtons.add(button);
             	y -= 30;
             }
 
         }
+
         //Adds all generated buttons to the stage
-        context.getStage().addActor(resourceButtons);
+        for (Actor actor : resourceButtons) {
+            context.getStage().addNamedActor(actor);
+        }
     }
 
 }

@@ -1,6 +1,7 @@
 package fvs.taxe.controller;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
@@ -14,10 +15,14 @@ import gameLogic.listeners.PlayerChangedListener;
 import gameLogic.player.PlayerManager;
 import gameLogic.goal.Goal;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 public class GoalController {
     //This class is in control of drawing all the goals
     private Context context;
-    private Group goalButtons = new Group();
+    private List<Actor> goalButtons = new ArrayList<Actor>();
     private Color[] colours = new Color[3];
 
     public GoalController(Context context) {
@@ -25,11 +30,11 @@ public class GoalController {
         //Makes the system redraw the currentGoals whenever the player changes.
         context.getGameLogic().getPlayerManager()
                 .subscribePlayerChanged(new PlayerChangedListener() {
-					@Override
-					public void changed() {
-						showCurrentPlayerGoals();
-					}
-				});
+                    @Override
+                    public void changed() {
+                        showCurrentPlayerGoals();
+                    }
+                });
     }
 
     public void setColours(Color[] colours) {
@@ -42,7 +47,10 @@ public class GoalController {
     public void showCurrentPlayerGoals() {
         //This method displays the player's current goals
         //First the current goals are cleared so that the other player's goals are not displayed too.
-        goalButtons.remove();
+        for (Actor goalButton : goalButtons) {
+            goalButton.remove();
+        }
+
         goalButtons.clear();
 
         PlayerManager pm = context.getGameLogic().getPlayerManager();
@@ -79,7 +87,6 @@ public class GoalController {
                 button.setHeight(baseGoal.getHeight() + baseScore.getHeight() + bonusGoal.getHeight() + 2.0f);
 
                 //Adds the listener to the button so that it will inform the correct parts of the system
-                GoalClickListener listener = new GoalClickListener(context, goal);
                 button.setPosition(x, y);
 
                 ButtonStyle style = button.getStyle();
@@ -92,10 +99,12 @@ public class GoalController {
                 	style.up = context.getSkin().getDrawable("lightbluebutton");
                 	button.setStyle(style);
                 }
-                button.addListener(listener);
-                goalButtons.addActor(button);
+
+                //Adds the listener to the button so that it will inform the correct parts of the system
+                button.addListener(new GoalClickListener(context, goal, button));
+                goalButtons.add(button);
+                context.getStage().addNamedActor(button);
             }
         }
-        context.getStage().addActor(goalButtons);
     }
 }
