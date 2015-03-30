@@ -1,11 +1,9 @@
 package fvs.taxe.controller;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
@@ -16,14 +14,24 @@ import gameLogic.resource.Train;
 
 public class NotificationController {
 	private Context context;
+	private ScrollPane scrollPane;
 	private Table notification;
+	
+	public static final float PANE_WIDTH = 300.0f;
+	public static final float PANE_HEIGHT = 160.0f; 
 	
 	public NotificationController(Context context) {
 		this.context = context;
 		notification = new Table();
-		notification.setWidth(300.0f);
-		notification.setPosition(10.0f, TaxeGame.HEIGHT - 10.0f - notification.getHeight()); //Set initial position
-		context.getStage().addActor(notification);
+		notification.setWidth(PANE_WIDTH);
+		notification.left().top();
+		scrollPane = new ScrollPane(notification, context.getSkin());
+		scrollPane.setWidth(PANE_WIDTH);
+		scrollPane.setHeight(PANE_HEIGHT);
+		scrollPane.setScrollingDisabled(true, false);
+		scrollPane.setSmoothScrolling(true);
+		scrollPane.setPosition(10.0f, TaxeGame.HEIGHT - 10.0f - scrollPane.getHeight()); //Set initial position
+		context.getStage().addActor(scrollPane);
 	}
 	
 	public void showGoalComplete(Player player, Goal goal) {
@@ -56,23 +64,10 @@ public class NotificationController {
 		//Create label for notification
 		Label label = new Label(message, context.getSkin(), "notification");
 		label.setWrap(true);
-		label.setWidth(notification.getWidth());
-		label.setHeight(label.getStyle().font.getWrappedBounds(message, label.getWidth()).height + 10.0f);
 		//Add label to table
+		notification.add(label).pad(5.0f).width(PANE_WIDTH - 12.0f);
 		notification.row();
-		notification.addActor(label);
-		notification.setHeight(label.getHeight() + notification.getHeight());
-		notification.setPosition(10.0f, TaxeGame.HEIGHT - 10.0f - notification.getHeight());
-		label.addAction(sequence(fadeIn(0.25f), delay(displaytime), fadeOut(0.25f), removeUsedLabel(label)));
-	}
-	
-	private RunnableAction removeUsedLabel(final Label label) {
-		return new RunnableAction() {
-			public void run() {
-				//Remove label so that previous labels move up
-				notification.setHeight(notification.getHeight() - label.getHeight());
-				notification.removeActor(label);
-			}
-		};
+		//Animate
+		label.addAction(sequence(alpha(0), delay(0.1f), new RunnableAction(){public void run(){scrollPane.setScrollPercentY(100);}}, fadeIn(0.25f)));
 	}
 }
