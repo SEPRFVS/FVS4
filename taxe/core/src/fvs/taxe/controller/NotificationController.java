@@ -11,6 +11,8 @@ import fvs.taxe.TaxeGame;
 import fvs.taxe.clickListener.NotificationButtonClickListener;
 import fvs.taxe.clickListener.NotificationScrollPaneClickListener;
 import gameLogic.goal.Goal;
+import gameLogic.map.Connection;
+import gameLogic.map.Station;
 import gameLogic.player.Player;
 import gameLogic.resource.Train;
 
@@ -72,6 +74,21 @@ public class NotificationController {
 		//Show message from rail controllers
 		String message2 = "@RailControl: Line closed from #" + train1.getLastStation().getName() + " - #" + train1.getNextStation().getName() + " following a crash. #delays";
 		showNotification(message2);
+	}
+	
+	public void showObstacleMessage(Connection connection) {
+		String message = "@RailControl: #delays between #" + connection.getStation1().getName() + " and #" + connection.getStation2().getName() + "";
+		showNotification(message);
+	}
+	
+	public void showObstacleCause(Station station, Player player) {
+		String message = "@RailControl: Issues near #" + station.getName() + " caused by a track failiure.  @" + player.getName().replace(" ", "") + " may know more";
+		showNotification(message);
+	}
+	
+	public void showEngineerMessage(Connection connection, Player player) {
+		String message = "@" + player.getName().replace(" ", "") + ": Keeping @RailControl happy by fixing track problems between #" + connection.getStation1().getName() + " & #" + connection.getStation2().getName();
+		showNotification(message);
 	}
 	
 	public void showNotification(String message) {

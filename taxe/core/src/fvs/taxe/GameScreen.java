@@ -131,6 +131,7 @@ public class GameScreen extends ScreenAdapter {
         		for (Connection connection : gameLogic.getMap().getConnections()) {
         			if(connection.isBlocked() && connection.getTurnsBlocked() == 5) {
         				context.getSoundController().playSound("obstacle");
+        				context.getNotificationController().showObstacleMessage(connection);
         			}
         		}
         	}

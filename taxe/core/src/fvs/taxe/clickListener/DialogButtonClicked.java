@@ -219,6 +219,8 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                                 obstacle.use(context.getGameLogic().getMap().getConnection(obstacle.getStation1(), obstacle.getStation2()));
                                 //Play blocked sound
                                 context.getSoundController().playSound("obstacle");
+                                context.getNotificationController().showObstacleMessage(context.getGameLogic().getMap().getConnection(obstacle.getStation1(), obstacle.getStation2()));
+                                context.getNotificationController().showObstacleCause(obstacle.getStation1(), context.getGameLogic().getPlayerManager().getCurrentPlayer());
                                 //The obstacle is removed from the player's inventory as it has been used
                                 currentPlayer.removeResource(obstacle);
 
@@ -323,6 +325,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                                     engineer.use(context.getGameLogic().getMap().getConnection(engineer.getStation1(), engineer.getStation2()));
                                     //Play fixed sound
                                     context.getSoundController().playSound("engineer");
+                                    context.getNotificationController().showEngineerMessage(context.getGameLogic().getMap().getConnection(engineer.getStation1(), engineer.getStation2()), context.getGameLogic().getPlayerManager().getCurrentPlayer());
                                     //Remove resource from player
                                     currentPlayer.removeResource(engineer);
                                 } else {
