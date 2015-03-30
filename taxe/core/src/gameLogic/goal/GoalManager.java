@@ -108,7 +108,7 @@ public class GoalManager {
 
     public ArrayList<Tuple<Player, Goal>> trainArrived(Train train, Player player) {
         //This updates the score when a train arrives at a station by checking if the goals are complete
-        ArrayList<Tuple<Player, Goal>> completedString = new ArrayList<Tuple<Player, Goal>>();
+        ArrayList<Tuple<Player, Goal>> completedGoals = new ArrayList<Tuple<Player, Goal>>();
         for (Goal goal : player.getGoals()) {
             if (goal.isComplete(train)) {
                 if (goal.isBonusCompleted(train)) {
@@ -118,10 +118,10 @@ public class GoalManager {
                 }
                 player.completeGoal(goal);
                 player.removeResource(train);
-                completedString.add(new Tuple<Player, Goal>(player, goal));
+                completedGoals.add(new Tuple<Player, Goal>(player, goal));
             }
         }
         System.out.println("Train arrived at final destination: " + train.getFinalDestination().getName());
-        return completedString;
+        return completedGoals;
     }
 }

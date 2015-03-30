@@ -71,7 +71,8 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	}
 },
 com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
-	default: { imageUp: paint_brush, up: whitebutton, down: greybutton }
+	default: { imageUp: paint_brush, up: whitebutton, down: greybutton },
+	notification: { imageUp: speech }
 },
 com.badlogic.gdx.scenes.scene2d.ui.SplitPane$SplitPaneStyle: {
 	default-vertical: { handle: default-splitpane-vertical },
@@ -136,7 +137,8 @@ com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
 		hScrollKnob: default-round-large,
 		vScroll: default-scroll,
 		vScrollKnob: default-round-large
-	}
+	},
+	notification: { background: speechpanel, hScrollKnob: greytransscrollknob, vScrollKnob: greytransscrollknob }
 },
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	optional: {
