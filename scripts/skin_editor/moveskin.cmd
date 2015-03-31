@@ -7,4 +7,4 @@ del %uipath% /q
 
 REM Copy new files across
 mkdir %uipath%
-robocopy projects/FVS4 %uipath% uiskin.png uiskin.json uiskin.atlas default.png *.fnt
+robocopy projects/FVS4 %uipath% uiskin.json uiskin.atlas *.png *.fnt

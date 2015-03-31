@@ -108,6 +108,10 @@ public class Game {
     public void subscribeStateChanged(GameStateListener listener) {
         gameStateListeners.add(listener);
     }
+    
+    public void unsubscribeStateChanged(GameStateListener listener) {
+    	gameStateListeners.remove(listener);
+    }
 
     private void stateChanged() {
         for (GameStateListener listener : gameStateListeners) {

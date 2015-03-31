@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import fvs.taxe.clickListener.ReplayClickListener;
 import fvs.taxe.controller.*;
 import fvs.taxe.dialog.DialogEndGame;
+import fvs.taxe.dialog.DialogNews;
 import gameLogic.Game;
 import gameLogic.GameState;
 import gameLogic.RandomSingleton;
@@ -127,12 +128,29 @@ public class GameScreen extends ScreenAdapter {
         //Add a listener to determine if a connection has become blocked this turn and play sounds
         gameLogic.getPlayerManager().subscribeTurnChanged(new TurnListener() {
         	@Override
-        	public void changed(){
+        	public void changed() {
         		for (Connection connection : gameLogic.getMap().getConnections()) {
         			if(connection.isBlocked() && connection.getTurnsBlocked() == 5) {
         				context.getSoundController().playSound("obstacle");
         				context.getNotificationController().showObstacleMessage(connection);
         			}
+        		}
+        	}
+        });
+        
+        //Add a listener to determine if the news should be shown after routing for that turn
+        gameLogic.getPlayerManager().subscribeTurnChanged(new TurnListener() {
+        	@Override
+        	public void changed() {
+        		if(gameLogic.getPlayerManager().getTurnNumber() % DialogNews.SHOW_EVERY == 0 || gameLogic.getPlayerManager().getTurnNumber() == context.getGameLogic().TOTAL_TURNS) {
+        			gameLogic.subscribeStateChanged(new GameStateListener() {
+        				@Override
+        				public void changed(GameState state) {
+        					if(state == GameState.NORMAL){
+        						new DialogNews(context, context.getReplayManager()).removeListenerOnExit(this, context).show(stage);
+        					}
+        				}
+        			});
         		}
         	}
         });
@@ -239,6 +257,11 @@ public class GameScreen extends ScreenAdapter {
         
         //Load background music
         game.soundController.playBackgroundMusic();
+        
+        if(gameLogic.getPlayerManager().getTurnNumber() == 0) {
+            //Show news at start of game only
+            new DialogNews(context, context.getReplayManager()).show(stage);
+        }
     }
 
 
