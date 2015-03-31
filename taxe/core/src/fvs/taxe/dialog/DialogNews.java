@@ -25,7 +25,7 @@ public class DialogNews extends ReplayDialog {
 
 	public DialogNews(Context context, ReplayManager replayManager) {
 		//Generates a dialog giving news based on scores and events in the past turns
-	    super("THE DAILY CHUFF", context.getSkin(), "news", replayManager);
+	    super("THE DAILY SIGNAL", context.getSkin(), "news", replayManager);
 	    
 	    Table content = getContentTable();
 	    if(context.getGameLogic().getPlayerManager().getTurnNumber() == context.getGameLogic().TOTAL_TURNS) {
@@ -49,7 +49,7 @@ public class DialogNews extends ReplayDialog {
 	        			goalsComplete++;
 	        		}
 	        	}
-	        	String col1 = "Since starting operation " + winner.getName() + " have become a force to be reckoned with, delivering " + goalsComplete + " to their destination.";
+	        	String col1 = "Since starting operation " + winner.getName() + " have become a force to be reckoned with, delivering " + goalsComplete + " trains to their destination.";
 	        	ArrayList<String> names = new ArrayList<String>();
 		    	for(Player player : context.getGameLogic().getPlayerManager().getAllPlayers()) {
 		    		if(player != winner) {
@@ -62,8 +62,8 @@ public class DialogNews extends ReplayDialog {
 		    	} else {
 		    		col2 += names.get(0);
 		    	}
-		    	col2 += " to go bust as their market dominance increases.  Illegedly, they have profits in excess of £" + winner.getScore() + ".";
-		    	String col3 = "Notorious social media commentator, @DwileFlonking, was happy at the news saying \"#HappyDays for @" + winner.getName().replace(" ", "") + " with their gloal domination\".";
+		    	col2 += " to go bust as their market dominance increases.  Allegedly, they have profits in excess of $" + winner.getScore() + ".";
+		    	String col3 = "Notorious social media commentator, @DwileFlonking, was happy at the news saying \"#HappyDays for @" + winner.getName().replace(" ", "") + " with their global domination\".";
 	        	setStory(context.getSkin(), winner.getName() + " emerges victorious", "Other companies left for dead by their success", col1, col2, col3);
 	        } else {
 	        	ArrayList<String> names = new ArrayList<String>();
@@ -133,7 +133,7 @@ public class DialogNews extends ReplayDialog {
 	    		}
 	    		col2 += "\"";
 	    		String col3 = "There have been accusations from an industry insider that train companies have been deliberatly damaging tracks used by their competitors.";
-	    		setStory(context.getSkin(), "Poor Maintainance record shows", "European Rail Control slammed by passengers", col1, col2, col3);
+	    		setStory(context.getSkin(), "Poor Maintainance Record Shows", "European Rail Control slammed by passengers", col1, col2, col3);
 	    	} else {
 	    		Player aheadPlayer = null;
 	    		for (Player player:  context.getGameLogic().getPlayerManager().getAllPlayers()) {
@@ -150,8 +150,8 @@ public class DialogNews extends ReplayDialog {
 	    				completedGoals++;
 	    			}
 	    		}
-	    		String col2 = completedGoals + " trains have arrived at their destination over the past few days.  We don't yet know about other operators yet but it's a good start.";
-	    		String col3 = "Can they contain their momentum though?  Their chairman certainly thinks so, \"We always strive to be the best and won't stop until we are.\"";
+	    		String col2 = completedGoals + " trains have arrived at their destination over the past few days.  We don't yet know about other operators performance but it's a good start.";
+	    		String col3 = "Can they maintain their momentum though?  Their chairman certainly thinks so, \"We always strive to be the best and won't stop until we are.\"";
 	    		setStory(context.getSkin(), aheadPlayer.getName() + " deliver results", "Company posts it's best results to date", col1, col2, col3);
 	    	}
 	    }
