@@ -7,10 +7,18 @@ import Util.Tuple;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.JsonWriter.OutputType;
+
+import fvs.taxe.TaxeGame;
+import fvs.taxe.dialog.DialogSettings;
 
 public class SoundController {
 	private ArrayList<Tuple<String, Sound>> sounds = new ArrayList<Tuple<String, Sound>>();
@@ -106,5 +114,20 @@ public class SoundController {
 			json.setOutputType(OutputType.json);
 			Gdx.files.local("taxesettings.json").writeString(json.toJson(jsonOutput), false);
 		}
+	}
+	
+	public void addSettingsButton(final Stage stage, final Skin skin) {
+		ImageButton button = new ImageButton(skin, "settings");
+		button.setWidth(34.0f);
+		button.setHeight(34.0f);
+		button.setPosition(TaxeGame.WIDTH - 10.0f - button.getWidth(), 10.0f);
+		final SoundController self = this;
+		button.addListener(new ClickListener(){
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				new DialogSettings(self, skin).show(stage);
+			}
+		});
+		stage.addActor(button);
 	}
 }

@@ -182,10 +182,6 @@ public class GameScreen extends ScreenAdapter {
             gameLogic.dispose();
             game.setScreen(new ReplayScreen(game, context.getReplayManager(), playerNames));
         }
-        
-        if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-        	new DialogSettings(context.getSoundController(), context.getSkin()).show(context.getStage());
-        }
 
         game.batch.begin();
 
@@ -261,6 +257,7 @@ public class GameScreen extends ScreenAdapter {
         resourceController.drawPlayerResources(gameLogic.getPlayerManager().getCurrentPlayer());
         
         //Load background music
+        game.soundController.addSettingsButton(stage, skin);
         game.soundController.playBackgroundMusic();
         
         if(gameLogic.getPlayerManager().getTurnNumber() == 0) {

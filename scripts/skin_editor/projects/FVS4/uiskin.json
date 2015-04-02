@@ -76,6 +76,7 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 },
 com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 	default: { imageUp: paint_brush, up: whitebutton, down: greybutton },
+	settings: { imageUp: settings, up: whitebutton, down: greybutton },
 	notification: { imageUp: speech }
 },
 com.badlogic.gdx.scenes.scene2d.ui.SplitPane$SplitPaneStyle: {
@@ -119,6 +120,11 @@ com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
 	},
 	greenwin: {
 		background: greenwindow,
+		titleFont: default-font,
+		titleFontColor: { a: 1, b: 1, g: 1, r: 1 }
+	},
+	greywin: {
+		background: greywindow,
 		titleFont: default-font,
 		titleFontColor: { a: 1, b: 1, g: 1, r: 1 }
 	}
@@ -225,6 +231,7 @@ com.badlogic.gdx.scenes.scene2d.ui.Tree$TreeStyle: {
 },
 com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle: {
 	default-vertical: { background: default-slider, knob: default-slider-knob },
+	settings: { background: greyslider, knob: whitesliderknob },
 	default-horizontal: { background: default-slider, knob: default-slider-knob }
 },
 com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle: {

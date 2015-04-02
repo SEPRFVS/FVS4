@@ -14,13 +14,13 @@ public class DialogSettings extends UnifiedDialog {
 	private float origSound;
 
 	public DialogSettings(final SoundController soundController, Skin skin) {
-		super("Settings", skin, "bluewin");
+		super("Settings", skin, "greywin");
 		this.soundController = soundController;
 		
 		//Create Labels, Sliders and handlers (and store original values to allow restoration)
 		origMusic = soundController.getMusicVolume();
 		text("Music Volume");
-		Slider music = new Slider(0.0f, 1.0f, 0.01f, false, skin);
+		Slider music = new Slider(0.0f, 1.0f, 0.01f, false, skin, "settings");
 		music.setValue(origMusic);
 		music.addListener(new ChangeListener(){
 			@Override
@@ -34,7 +34,7 @@ public class DialogSettings extends UnifiedDialog {
 		
 		origSound = soundController.getSoundVolume();
 		text("Sound Volume");
-		Slider sound = new Slider(0.0f, 1.0f, 0.01f, false, skin);
+		Slider sound = new Slider(0.0f, 1.0f, 0.01f, false, skin, "settings");
 		sound.setValue(origSound);
 		sound.addListener(new ChangeListener(){
 			@Override
