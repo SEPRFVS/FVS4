@@ -25,7 +25,7 @@ public class DialogNews extends ReplayDialog {
 
 	public DialogNews(Context context, ReplayManager replayManager) {
 		//Generates a dialog giving news based on scores and events in the past turns
-	    super("THE DAILY SIGNAL", context.getSkin(), "news", replayManager);
+	    super("THE DAILY RAIL", context.getSkin(), "news", replayManager);
 	    
 	    Table content = getContentTable();
 	    if(context.getGameLogic().getPlayerManager().getTurnNumber() == context.getGameLogic().TOTAL_TURNS) {
@@ -109,7 +109,7 @@ public class DialogNews extends ReplayDialog {
 	    			connectionsBlocked++;
 	    		}
 	    	}
-	    	if(connectionsBlocked > 5) {
+	    	if(connectionsBlocked > 4) {
 	    		String col1 = "Today, " + connectionsBlocked + " pieces of track were completely closed to trains as maintainance has fallen behind.";
 	    		String col2 = "In response to accusations, Rail Control said \"";
 	    		Player mostEngineers = null;
