@@ -1,13 +1,16 @@
 package fvs.taxe.controller;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import Util.Tuple;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonReader;
+import com.badlogic.gdx.utils.JsonValue;
+import com.badlogic.gdx.utils.JsonWriter.OutputType;
 
 public class SoundController {
 	private ArrayList<Tuple<String, Sound>> sounds = new ArrayList<Tuple<String, Sound>>();
@@ -16,6 +19,8 @@ public class SoundController {
 	private float musicVolume = 0.2f;
 	
 	public SoundController() {
+		loadSettings();
+		
 		backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("sound/noise.mp3"));
 		sounds.add(new Tuple<String, Sound>("crash", Gdx.audio.newSound(Gdx.files.internal("sound/crash.mp3"))));
 		sounds.add(new Tuple<String, Sound>("engineer", Gdx.audio.newSound(Gdx.files.internal("sound/engineer.mp3"))));
@@ -67,6 +72,39 @@ public class SoundController {
 	public void setMusicVolume(float musicVolume) {
 		if(musicVolume >= 0.0f && musicVolume <= 1.0f) {
 			this.musicVolume = musicVolume;
+		}
+		if(backgroundMusic != null) {
+			backgroundMusic.setVolume(musicVolume);
+		}
+	}
+	
+	public void loadSettings() {
+		if(Gdx.files.isLocalStorageAvailable()) {
+			if(Gdx.files.local("taxesettings.json").exists()) {
+				JsonReader jsonReader = new JsonReader();
+				JsonValue jsonVal = jsonReader.parse(Gdx.files.local("taxesettings.json"));
+				
+				if(jsonVal.has("music")) {
+					setMusicVolume(jsonVal.get("music").asFloat());
+				}
+				if(jsonVal.has("sound")) {
+					setSoundVolume(jsonVal.get("sound").asFloat());
+				}
+			}
+		}
+	}
+	
+	public void saveSettings() {
+		if(Gdx.files.isLocalStorageAvailable()) {
+			Object jsonOutput = new Object(){
+				@SuppressWarnings("unused")
+				private float music = getMusicVolume();
+				@SuppressWarnings("unused")
+				private float sound = getSoundVolume();
+			};
+			Json json = new Json();
+			json.setOutputType(OutputType.json);
+			Gdx.files.local("taxesettings.json").writeString(json.toJson(jsonOutput), false);
 		}
 	}
 }

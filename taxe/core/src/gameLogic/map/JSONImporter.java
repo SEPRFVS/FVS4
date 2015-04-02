@@ -15,7 +15,7 @@ public class JSONImporter {
 		JsonReader jsonReader = new JsonReader();
 
 		//Defines the file to parse
-		JsonValue jsonVal = jsonReader.parse(Gdx.files.local("stations.json"));
+		JsonValue jsonVal = jsonReader.parse(Gdx.files.internal("stations.json"));
 
 		//Parses the stations and adds them to the map
 		parseStations(jsonVal, map);
@@ -28,7 +28,7 @@ public class JSONImporter {
 		JsonReader jsonReader = new JsonReader();
 
 		//Defines the file to parse
-		JsonValue jsonVal = jsonReader.parse(Gdx.files.local("trains.json"));
+		JsonValue jsonVal = jsonReader.parse(Gdx.files.internal("trains.json"));
 
 		ArrayList<Tuple<String, Integer>> trains = new ArrayList<Tuple<String, Integer>>();
 

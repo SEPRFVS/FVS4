@@ -18,6 +18,7 @@ import fvs.taxe.clickListener.ReplayClickListener;
 import fvs.taxe.controller.*;
 import fvs.taxe.dialog.DialogEndGame;
 import fvs.taxe.dialog.DialogNews;
+import fvs.taxe.dialog.DialogSettings;
 import gameLogic.Game;
 import gameLogic.GameState;
 import gameLogic.RandomSingleton;
@@ -180,6 +181,10 @@ public class GameScreen extends ScreenAdapter {
             }
             gameLogic.dispose();
             game.setScreen(new ReplayScreen(game, context.getReplayManager(), playerNames));
+        }
+        
+        if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+        	new DialogSettings(context.getSoundController(), context.getSkin()).show(context.getStage());
         }
 
         game.batch.begin();
