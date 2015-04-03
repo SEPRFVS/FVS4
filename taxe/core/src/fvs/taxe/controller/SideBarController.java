@@ -110,7 +110,7 @@ public class SideBarController {
     	game.fontTiny.setColor(Color.WHITE);
     	if (gameLogic.getState() != GameState.ROUTING) {
     		//If statement checks whether the turn is above 30, if it is then display 30 anyway
-    		game.fontSmall.draw(game.batch, "Turn " + ((gameLogic.getPlayerManager().getTurnNumber() + 1 < gameLogic.TOTAL_TURNS) ? gameLogic.getPlayerManager().getTurnNumber() + 1 : gameLogic.TOTAL_TURNS) + "/" + gameLogic.TOTAL_TURNS, (float) TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 14.0f);
+    		game.fontSmall.draw(game.batch, "Turn " + ((gameLogic.getPlayerManager().getTurnNumber() + 1 < gameLogic.getTotalTurns()) ? gameLogic.getPlayerManager().getTurnNumber() + 1 : gameLogic.getTotalTurns()) + "/" + gameLogic.getTotalTurns(), (float) TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, TaxeGame.HEIGHT - 14.0f);
     	}
     	
         //Headings

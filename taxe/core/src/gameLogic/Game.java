@@ -26,8 +26,10 @@ public class Game {
     //Number of players, not sure how much impact this has on the game at the moment but if you wanted to add more players you would use this attributes
     private final int CONFIG_PLAYERS = 2;
 
-    //This
-    public final int TOTAL_TURNS = 30;
+    //Number of turns in the game
+    private int totalTurns = 30;
+    
+    //Maximum points for each turn
     public final int MAX_POINTS = 10000;
 
     private Game() {
@@ -117,5 +119,15 @@ public class Game {
         for (GameStateListener listener : gameStateListeners) {
             listener.changed(state);
         }
+    }
+    
+    public void setTotalTurns(int totalTurns) {
+    	if(totalTurns > 0 && totalTurns % 2 == 0) {
+    		this.totalTurns = totalTurns;
+    	}
+    }
+    
+    public int getTotalTurns() {
+    	return totalTurns;
     }
 }
