@@ -4,8 +4,8 @@ com.badlogic.gdx.graphics.Color: {
 	light_grey: { r: 0.8, g: 0.8, b: 0.8, a: 1 },
 	white: { r: 1, g: 1, b: 1, a: 1 },
 	red: { r: 1, a: 1 },
-	black: { a: 1 },
-	grey: { r: 0.7, g: 0.7, b: 0.7, a: 1 }
+	grey: { r: 0.7, g: 0.7, b: 0.7, a: 1 },
+	black: { a: 1 }
 },
 com.badlogic.gdx.graphics.g2d.BitmapFont: {
 	merriweather-50: { file: Merriweather-Black-50.fnt },
@@ -27,6 +27,12 @@ com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle: {
 	default: { background: default-scroll, knobBefore: default-round-large }
 },
 com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
+	bigblue: {
+		font: play-50,
+		fontColor: { a: 1, b: 1, g: 1, r: 1 },
+		up: lightbluebutton,
+		down: bluebutton
+	},
 	default: {
 		font: default-font,
 		fontColor: { a: 1 },
@@ -40,6 +46,12 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 		up: whitebutton,
 		down: bluebutton
 	},
+	biggreen: {
+		font: play-50,
+		fontColor: { a: 1, b: 1, g: 1, r: 1 },
+		up: lightgreenbutton,
+		down: greenbutton
+	},
 	unplaced-resource: {
 		font: default-font,
 		fontColor: { a: 1 },
@@ -51,6 +63,12 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 		font: default-font,
 		fontColor: { a: 1 },
 		up: whitebutton,
+		down: redbutton
+	},
+	bigred: {
+		font: play-50,
+		fontColor: { a: 1, b: 1, g: 1, r: 1 },
+		up: lightredbutton,
 		down: redbutton
 	},
 	toggle: {

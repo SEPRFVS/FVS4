@@ -92,6 +92,8 @@ public class SetupScreen extends ScreenAdapter {
 		 button.setWidth(60.0f);
 		 button.setPosition((TaxeGame.WIDTH/2) - (button.getWidth()/2), TaxeGame.HEIGHT - 100.0f - row);
 		 stage.addActor(button);
+		 
+		 context.getSoundController().addSettingsButton(stage, skin);
 	 }
 	 
 	 @Override
