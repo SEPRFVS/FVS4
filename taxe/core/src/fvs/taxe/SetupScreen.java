@@ -31,6 +31,7 @@ public class SetupScreen extends ScreenAdapter {
 	private Skin skin;
 	private ArrayList<TextField> inputs = new ArrayList<TextField>();
 	private TextField numTurns;
+	private TextButton endless;
 	
 	public SetupScreen(TaxeGame game, Context context) {
 		this.game = game;
@@ -84,7 +85,6 @@ public class SetupScreen extends ScreenAdapter {
 		//Set number of turns
 		Table turnTable = new Table();
 		numTurns = new TextField("30", skin, "names");
-		numTurns.setName("turns");
 		numTurns.setTextFieldListener(new TextFieldListener(){
 			@Override
 			public void keyTyped(TextField textField, char c) {
@@ -99,7 +99,9 @@ public class SetupScreen extends ScreenAdapter {
 			}
 		});
 		turnTable.add(numTurns).width(30.0f);
-		turnTable.add(new Label("turns", skin, "defaultblack"));
+		turnTable.add(new Label("turns or", skin, "defaultblack"));
+		endless = new TextButton("Endless Mode", skin, "onoff");
+		turnTable.add(endless);
 		
 		turnTable.setPosition((TaxeGame.WIDTH/2) - (turnTable.getWidth()/2), TaxeGame.HEIGHT - 100.0f - row);
 		row += turnTable.getHeight() + 10.0f;
@@ -118,25 +120,28 @@ public class SetupScreen extends ScreenAdapter {
 					}
 				}
 				//Test number of turns input
-				if(numTurns.getText().equals("")) {
-					UnifiedDialog dialog = new UnifiedDialog("Check Number of Turns", skin, "redwin");
-					dialog.text("Please make sure the number of turns is a positive, even number");
-					dialog.button("OK");
-					dialog.show(stage);
-					return;
+				if(endless.isChecked()) {
+					context.getGameLogic().setTotalTurns(0);
 				} else {
-					if(Integer.parseInt(numTurns.getText()) == 0 || Integer.parseInt(numTurns.getText()) % 2 != 0) {
-						//Prevent running further
+					if(numTurns.getText().equals("")) {
 						UnifiedDialog dialog = new UnifiedDialog("Check Number of Turns", skin, "redwin");
 						dialog.text("Please make sure the number of turns is a positive, even number");
 						dialog.button("OK");
 						dialog.show(stage);
-					 	return;
-				 	} else {
-					 	context.getGameLogic().setTotalTurns(Integer.parseInt(numTurns.getText()));
-				 	}
+						return;
+					} else {
+						if(Integer.parseInt(numTurns.getText()) == 0 || Integer.parseInt(numTurns.getText()) % 2 != 0) {
+							//Prevent running further
+							UnifiedDialog dialog = new UnifiedDialog("Check Number of Turns", skin, "redwin");
+							dialog.text("Please make sure the number of turns is a positive, even number");
+							dialog.button("OK");
+							dialog.show(stage);
+						 	return;
+					 	} else {
+						 	context.getGameLogic().setTotalTurns(Integer.parseInt(numTurns.getText()));
+					 	}
+					}
 				}
-				 
 				game.setScreen(game.gamescreen);
 				return;
 			}

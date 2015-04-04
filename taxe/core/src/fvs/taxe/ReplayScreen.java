@@ -8,11 +8,13 @@ import gameLogic.replay.ReplayManager;
 public class ReplayScreen extends GameScreen {
     private ReplayManager replayManager;
     protected ArrayList<String> playerNames;
+    protected int totalTurns;
 
-    public ReplayScreen(TaxeGame game, ReplayManager replayManager, ArrayList<String> playerNames) {
+    public ReplayScreen(TaxeGame game, ReplayManager replayManager, ArrayList<String> playerNames, int totalTurns) {
         this.replayManager = replayManager;
         this.game = game;
         this.playerNames = playerNames;
+        this.totalTurns = totalTurns;
 
         init(replayManager);
     }

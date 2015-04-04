@@ -122,7 +122,8 @@ public class Game {
     }
     
     public void setTotalTurns(int totalTurns) {
-    	if(totalTurns > 0 && totalTurns % 2 == 0) {
+    	//Allows positive even numbers only, and 0 to indicate endless mode
+    	if(totalTurns >= 0 && totalTurns % 2 == 0) {
     		this.totalTurns = totalTurns;
     	}
     }

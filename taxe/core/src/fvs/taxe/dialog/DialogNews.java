@@ -28,7 +28,7 @@ public class DialogNews extends ReplayDialog {
 	    super("THE DAILY RAIL", context.getSkin(), "news", replayManager);
 	    
 	    Table content = getContentTable();
-	    if(context.getGameLogic().getPlayerManager().getTurnNumber() == context.getGameLogic().getTotalTurns()) {
+	    if(context.getGameLogic().getPlayerManager().getTurnNumber() == context.getGameLogic().getTotalTurns() && context.getGameLogic().getTotalTurns() > 0) {
 	    	//Show end game news
 	    	double highScore = 0;
 	        Player winner = null;
