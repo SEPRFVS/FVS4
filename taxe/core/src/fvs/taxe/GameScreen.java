@@ -237,17 +237,8 @@ public class GameScreen extends ScreenAdapter {
     // Called when GameScreen becomes current screen of the game
     public void show() {
     	if(gameLogic.getPlayerManager().getCurrentPlayer().getName().equals("")) {
-    		if(this instanceof ReplayScreen) {
-    			for (int i = 0; i < gameLogic.getPlayerManager().getAllPlayers().size(); i++) {
-    				gameLogic.getPlayerManager().getAllPlayers().get(i).setName(((ReplayScreen) this).playerNames.get(i));
-    			}
-    		} else {
-    			game.setScreen(new SetupScreen(game, context));
-    			return;
-    		}
-    	}
-    	if(this instanceof ReplayScreen) {
-    		gameLogic.setTotalTurns(((ReplayScreen) this).totalTurns);
+    		game.setScreen(new SetupScreen(game, context));
+    		return;
     	}
     	
     	Gdx.input.setInputProcessor(stage);
