@@ -2,8 +2,8 @@ package gameLogic.map;
 
 import com.badlogic.gdx.math.Vector2;
 import gameLogic.Game;
-import gameLogic.player.Player;
 import gameLogic.dijkstra.Dijkstra;
+import gameLogic.player.Player;
 import gameLogic.resource.Train;
 
 import java.util.ArrayList;
@@ -25,6 +25,9 @@ public class Map {
         jsonImporter = new JSONImporter(this);
 
         //Analyses the graph using Dijkstra's algorithm
+        dijkstra = new Dijkstra(this);
+    }
+    public void updateDijkstra() {
         dijkstra = new Dijkstra(this);
     }
 
@@ -98,6 +101,11 @@ public class Map {
         Connection newConnection = new Connection(station1, station2);
         connections.add(newConnection);
         return newConnection;
+    }
+
+    public void removeConnection(Station station1, Station station2) {
+        Connection conn = getConnection(station1, station2);
+        connections.remove(conn);
     }
 
     //Add Connection by Names

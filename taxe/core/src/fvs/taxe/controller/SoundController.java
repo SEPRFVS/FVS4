@@ -1,13 +1,11 @@
 package fvs.taxe.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import Util.Tuple;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+
+import java.util.ArrayList;
 
 public class SoundController {
 	private ArrayList<Tuple<String, Sound>> sounds = new ArrayList<Tuple<String, Sound>>();
@@ -30,7 +28,7 @@ public class SoundController {
 	}
 	
 	public void playBackgroundMusic() {
-		playBackgroundMusic(musicVolume);
+		//playBackgroundMusic(musicVolume);
 	}
 	
 	public void stopBackgroundMusic() {

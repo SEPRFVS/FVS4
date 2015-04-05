@@ -2,14 +2,10 @@ package fvs.taxe.controller;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-
 import fvs.taxe.TaxeGame;
-import fvs.taxe.clickListener.EngineerClicked;
-import fvs.taxe.clickListener.ObstacleClicked;
-import fvs.taxe.clickListener.SkipClicked;
-import fvs.taxe.clickListener.TrainClicked;
-import gameLogic.player.Player;
+import fvs.taxe.clickListener.*;
 import gameLogic.listeners.PlayerChangedListener;
+import gameLogic.player.Player;
 import gameLogic.resource.*;
 
 public class ResourceController {
@@ -71,6 +67,18 @@ public class ResourceController {
                 Engineer engineer = (Engineer) resource;
                 EngineerClicked listener = new EngineerClicked(context, engineer);
                 button = new TextButton("Engineer", context.getSkin(), "unplaced-resource");
+                button.addListener(listener);
+            } else if (resource instanceof ConnectionModifier) {
+                //Creates a clickListener for the button and adds it to the list of buttons
+                ConnectionModifier connectionModifier = (ConnectionModifier) resource;
+                ConnectionClicked listener = new ConnectionClicked(context, connectionModifier);
+                button = new TextButton("Connection modifier", context.getSkin(), "unplaced-resource");
+                button.addListener(listener);
+            } else if (resource instanceof JunctionModifier) {
+                //Creates a clickListener for the button and adds it to the list of buttons
+                JunctionModifier junctionModifier  = (JunctionModifier) resource;
+                JunctionModifierClicked listener = new JunctionModifierClicked(context, junctionModifier);
+                button = new TextButton("Junction modifier", context.getSkin(), "unplaced-resource");
                 button.addListener(listener);
             }
             

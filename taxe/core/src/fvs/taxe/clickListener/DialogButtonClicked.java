@@ -7,24 +7,18 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
-
 import fvs.taxe.Button;
-import fvs.taxe.clickListener.StationClickListener;
 import fvs.taxe.actor.TrainActor;
-import fvs.taxe.clickListener.ResourceDialogClickListener;
 import fvs.taxe.controller.Context;
 import fvs.taxe.controller.StationController;
 import fvs.taxe.controller.TrainController;
 import fvs.taxe.dialog.UnifiedDialog;
 import gameLogic.Game;
 import gameLogic.GameState;
-import gameLogic.player.Player;
 import gameLogic.map.CollisionStation;
 import gameLogic.map.Station;
-import gameLogic.resource.Engineer;
-import gameLogic.resource.Obstacle;
-import gameLogic.resource.Skip;
-import gameLogic.resource.Train;
+import gameLogic.player.Player;
+import gameLogic.resource.*;
 
 public class DialogButtonClicked implements ResourceDialogClickListener {
     //This class is huge and seemingly complicated because it handles the events based off of any button being clicked
@@ -34,6 +28,8 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
     private Obstacle obstacle;
     private Skip skip;
     private Engineer engineer;
+    private ConnectionModifier connectionModifier;
+    private JunctionModifier junctionModifier;
 
     public DialogButtonClicked(Context context, Player player, Train train) {
         //This constructor is used when a train dialog button is clicked.
@@ -44,6 +40,8 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
         this.obstacle = null;
         this.skip = null;
         this.engineer = null;
+        this.connectionModifier = null;
+        this.junctionModifier = null;
     }
 
     public DialogButtonClicked(Context context, Player player, Obstacle obstacle) {
@@ -55,6 +53,8 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
         this.context = context;
         this.obstacle = obstacle;
         this.engineer = null;
+        this.connectionModifier = null;
+        this.junctionModifier = null;
     }
 
     public DialogButtonClicked(Context context, Player player, Skip skip) {
@@ -66,6 +66,8 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
         this.context = context;
         this.obstacle = null;
         this.engineer = null;
+        this.connectionModifier = null;
+        this.junctionModifier = null;
     }
 
     public DialogButtonClicked(Context context, Player player, Engineer engineer) {
@@ -77,6 +79,30 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
         this.context = context;
         this.obstacle = null;
         this.skip = null;
+        this.connectionModifier = null;
+        this.junctionModifier = null;
+    }
+
+    public DialogButtonClicked(Context context, Player player, ConnectionModifier connectionModifier) {
+        this.currentPlayer = player;
+        this.train = null;
+        this.engineer = null;
+        this.context = context;
+        this.obstacle = null;
+        this.skip = null;
+        this.connectionModifier = connectionModifier;
+        this.junctionModifier = null;
+    }
+
+    public DialogButtonClicked(Context context, Player player, JunctionModifier junctionModifier) {
+        this.currentPlayer = player;
+        this.train = null;
+        this.engineer = null;
+        this.context = context;
+        this.obstacle = null;
+        this.skip = null;
+        this.connectionModifier = null;
+        this.junctionModifier = junctionModifier;
     }
 
     @Override
@@ -414,6 +440,172 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
             case TRAIN_CHANGE_ROUTE:
                 //Begins the change route feature when TRAIN_CHANGE_ROUTE is pressed by the player
                 context.getRouteController().begin(train);
+                break;
+
+            case CONNECTION_PLACE: {
+                Game.getInstance().setState(GameState.PLACING_RESOURCE);
+
+//                //Sets the cursor to be the one used for placement of engineers
+//                Pixmap pixmap = new Pixmap(Gdx.files.internal("connection.png"));
+//                Gdx.input.setCursorImage(pixmap, 0, 0); // these numbers will need tweaking
+//                pixmap.dispose();
+
+                //Hides all trains
+                final TrainController trainController = new TrainController(context);
+                trainController.setTrainsVisible(null, false);
+                context.getSideBarController().displayMessage("Placing new connection");
+
+                //Adds a station click listener that handles all the logic
+                final StationClickListener stationListener = new StationClickListener() {
+                    @Override
+                    public void clicked(Station station) {
+                        if (connectionModifier.getStation1() == null) {
+                            //If the station is the first one clicked then it sets it to be station1
+                            connectionModifier.setStation1(station);
+                        } else {
+                            //If the station is the second one clicked then it sets it to station2
+                            connectionModifier.setStation2(station);
+
+                            //Checks whether a connection exists between the two selected stations
+                            if (!context.getGameLogic().getMap().doesConnectionExist(connectionModifier.getStation1().getName(), connectionModifier.getStation2().getName())) {
+                                // add connection
+                                Game.getInstance().getMap().addConnection(connectionModifier.getStation1().getName(), connectionModifier.getStation2().getName());
+                                Game.getInstance().getMap().updateDijkstra();
+                                currentPlayer.removeResource(connectionModifier);
+
+                            } else {
+                                //If the connection does not exist then placement is cancelled and the user is informed of this
+                                UnifiedDialog dia = new UnifiedDialog("Invalid Selection", context.getSkin(), "redwin");
+                                dia.text("You have selected two stations which are already connected." +
+                                        "\nPlease use the Connection modifier again.").align(Align.center);
+                                dia.button("OK", "OK");
+                                dia.show(context.getStage());
+                                connectionModifier.setStation1(null);
+                                connectionModifier.setStation2(null);
+                            }
+                            //This resets all relevant values and unsubscribes from the listeners created for placing engineers
+                            context.getSideBarController().clearMessage();
+                            StationController.unsubscribeStationClick(this);
+                            Gdx.input.setCursorImage(null, 0, 0);
+                            context.getGameLogic().setState(GameState.NORMAL);
+                            trainController.setTrainsVisible(null, true);
+                        }
+                    }
+                };
+                StationController.subscribeStationClick(stationListener);
+
+                //Adds a keyListener that triggers when the
+                final InputListener keyListener = new InputListener() {
+                    @Override
+                    public boolean keyDown(InputEvent event, int keycode) {
+                        if (keycode == Input.Keys.ESCAPE) {
+                            //Makes all trains visible
+                            TrainController trainController = new TrainController(context);
+                            trainController.setTrainsVisible(null, true);
+
+                            //Resets cursor
+                            Gdx.input.setCursorImage(null, 0, 0);
+
+                            //Unsubscribes from the StationClickListener as this would cause a lot of errors and unexpected behaviour is not called from the correct context
+                            StationController.unsubscribeStationClick(stationListener);
+                            Game.getInstance().setState(GameState.NORMAL);
+
+                            //Resets the topBar
+                            context.getSideBarController().clearMessage();
+
+                            //Removes itself from the keylisteners of the game as otherwise there would be a lot of null pointer exceptions and unintended behaviour
+                            context.getStage().removeListener(this);
+                        }
+                        return true;
+                    }
+                };
+                this.context.getStage().addListener(keyListener);
+                break;
+            }
+
+            case CONNECTION_REMOVE: {
+                Game.getInstance().setState(GameState.PLACING_RESOURCE);
+
+//                //Sets the cursor to be the one used for placement of engineers
+//                Pixmap pixmap = new Pixmap(Gdx.files.internal("connection.png"));
+//                Gdx.input.setCursorImage(pixmap, 0, 0); // these numbers will need tweaking
+//                pixmap.dispose();
+
+                //Hides all trains
+                final TrainController trainController = new TrainController(context);
+                trainController.setTrainsVisible(null, false);
+                context.getSideBarController().displayMessage("Removing an old connection");
+
+                //Adds a station click listener that handles all the logic
+                final StationClickListener stationListener = new StationClickListener() {
+                    @Override
+                    public void clicked(Station station) {
+                        if (connectionModifier.getStation1() == null) {
+                            //If the station is the first one clicked then it sets it to be station1
+                            connectionModifier.setStation1(station);
+                        } else {
+                            //If the station is the second one clicked then it sets it to station2
+                            connectionModifier.setStation2(station);
+
+                            //Checks whether a connection exists between the two selected stations
+                            if (context.getGameLogic().getMap().doesConnectionExist(connectionModifier.getStation1().getName(), connectionModifier.getStation2().getName())) {
+                                // add connection
+                                Game.getInstance().getMap().removeConnection(connectionModifier.getStation1(), connectionModifier.getStation2());
+                                Game.getInstance().getMap().updateDijkstra();
+                                currentPlayer.removeResource(connectionModifier);
+
+                            } else {
+                                //If the connection does not exist then placement is cancelled and the user is informed of this
+                                UnifiedDialog dia = new UnifiedDialog("Invalid Selection", context.getSkin(), "redwin");
+                                dia.text("You have selected two stations which are not connected." +
+                                        "\nPlease use the Connection modifier again.").align(Align.center);
+                                dia.button("OK", "OK");
+                                dia.show(context.getStage());
+                                connectionModifier.setStation1(null);
+                                connectionModifier.setStation2(null);
+                            }
+                            //This resets all relevant values and unsubscribes from the listeners created for placing engineers
+                            context.getSideBarController().clearMessage();
+                            StationController.unsubscribeStationClick(this);
+                            Gdx.input.setCursorImage(null, 0, 0);
+                            context.getGameLogic().setState(GameState.NORMAL);
+                            trainController.setTrainsVisible(null, true);
+                        }
+                    }
+                };
+                StationController.subscribeStationClick(stationListener);
+
+                //Adds a keyListener that triggers when the
+                final InputListener keyListener = new InputListener() {
+                    @Override
+                    public boolean keyDown(InputEvent event, int keycode) {
+                        if (keycode == Input.Keys.ESCAPE) {
+                            //Makes all trains visible
+                            TrainController trainController = new TrainController(context);
+                            trainController.setTrainsVisible(null, true);
+
+                            //Resets cursor
+                            Gdx.input.setCursorImage(null, 0, 0);
+
+                            //Unsubscribes from the StationClickListener as this would cause a lot of errors and unexpected behaviour is not called from the correct context
+                            StationController.unsubscribeStationClick(stationListener);
+                            Game.getInstance().setState(GameState.NORMAL);
+
+                            //Resets the topBar
+                            context.getSideBarController().clearMessage();
+
+                            //Removes itself from the keylisteners of the game as otherwise there would be a lot of null pointer exceptions and unintended behaviour
+                            context.getStage().removeListener(this);
+                        }
+                        return true;
+                    }
+                };
+                this.context.getStage().addListener(keyListener);
+                break;
+            }
+
+            case CONNECTION_DROP:
+                currentPlayer.removeResource(connectionModifier);
                 break;
         }
     }

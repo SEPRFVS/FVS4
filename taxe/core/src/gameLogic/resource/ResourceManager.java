@@ -1,8 +1,8 @@
 package gameLogic.resource;
 
 import Util.Tuple;
-import gameLogic.player.Player;
 import gameLogic.map.JSONImporter;
+import gameLogic.player.Player;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -30,7 +30,7 @@ public class ResourceManager {
         //Returns a random resource
 
 
-        int idx = random.nextInt(11);
+        int idx = random.nextInt(12);
         if (idx == 1) {
             //1 in 10 chance to return an obstacle
             return new Obstacle();
@@ -42,6 +42,14 @@ public class ResourceManager {
         }
 
         if (idx == 3) {
+            return new ConnectionModifier();
+        }
+
+        if (idx == 4) {
+            return new JunctionModifier();
+        }
+
+        if (idx == 5) {
             //1 in 10 chance to return an engineer
             return new Engineer();
         } else {
