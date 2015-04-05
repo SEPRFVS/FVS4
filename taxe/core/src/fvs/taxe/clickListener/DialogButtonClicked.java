@@ -212,7 +212,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                 final StationClickListener stationListener = new StationClickListener() {
                     @Override
                     public void clicked(Station station) {
-
+                        station.getActor().setSelected(true);
                         //If the station clicked is the first one to be chosen by the user
                         if (obstacle.getStation1() == null) {
 
@@ -246,8 +246,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                                         "\nPlease use the Obstacle again.").align(Align.center);
                                 dia.button("OK", "OK");
                                 dia.show(context.getStage());
-                                obstacle.setStation1(null);
-                                obstacle.setStation2(null);
+
                             }
                             //This code runs regardless of whether the placement was successful, this returns the game to its normal state
 
@@ -263,6 +262,11 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
 
                             //Sets all moving trains to be visible
                             trainController.setTrainsVisible(null, true);
+
+                            obstacle.getStation1().getActor().setSelected(false);
+                            obstacle.getStation2().getActor().setSelected(false);
+                            obstacle.setStation1(null);
+                            obstacle.setStation2(null);
                         }
                     }
                 };
@@ -319,6 +323,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                 final StationClickListener stationListener = new StationClickListener() {
                     @Override
                     public void clicked(Station station) {
+                        station.getActor().setSelected(true);
                         if (engineer.getStation1() == null) {
                             //If the station is the first one clicked then it sets it to be station1
                             engineer.setStation1(station);
@@ -343,8 +348,6 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                                             "\nPlease use the Engineer again.").align(Align.center);
                                     dia.button("OK", "OK");
                                     dia.show(context.getStage());
-                                    engineer.setStation1(null);
-                                    engineer.setStation2(null);
                                 }
                             } else {
                                 //If the connection does not exist then placement is cancelled and the user is informed of this
@@ -353,8 +356,6 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                                         "\nPlease use the Engineer again.").align(Align.center);
                                 dia.button("OK", "OK");
                                 dia.show(context.getStage());
-                                engineer.setStation1(null);
-                                engineer.setStation2(null);
                             }
                             //This resets all relevant values and unsubscribes from the listeners created for placing engineers
                             context.getSideBarController().clearMessage();
@@ -362,6 +363,10 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                             Gdx.input.setCursorImage(null, 0, 0);
                             context.getGameLogic().setState(GameState.NORMAL);
                             trainController.setTrainsVisible(null, true);
+                            engineer.getStation1().getActor().setSelected(false);
+                            engineer.getStation2().getActor().setSelected(false);
+                            engineer.setStation1(null);
+                            engineer.setStation2(null);
                         }
                     }
                 };
@@ -444,6 +449,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                 final StationClickListener stationListener = new StationClickListener() {
                     @Override
                     public void clicked(Station station) {
+                        station.getActor().setSelected(true);
                         if (connectionModifier.getStation1() == null) {
                             //If the station is the first one clicked then it sets it to be station1
                             connectionModifier.setStation1(station);
@@ -468,8 +474,6 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                                             "\nPlease use the Connection modifier again.").align(Align.center);
                                     dia.button("OK", "OK");
                                     dia.show(context.getStage());
-                                    connectionModifier.setStation1(null);
-                                    connectionModifier.setStation2(null);
                                 }
                             } else {
                                 //If the connection does not exist then placement is cancelled and the user is informed of this
@@ -478,8 +482,6 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                                         "\nPlease use the Connection modifier again.").align(Align.center);
                                 dia.button("OK", "OK");
                                 dia.show(context.getStage());
-                                connectionModifier.setStation1(null);
-                                connectionModifier.setStation2(null);
                             }
                             //This resets all relevant values and unsubscribes from the listeners created for placing engineers
                             context.getSideBarController().clearMessage();
@@ -487,6 +489,10 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                             Gdx.input.setCursorImage(null, 0, 0);
                             context.getGameLogic().setState(GameState.NORMAL);
                             trainController.setTrainsVisible(null, true);
+                            connectionModifier.getStation1().getActor().setSelected(false);
+                            connectionModifier.getStation2().getActor().setSelected(false);
+                            connectionModifier.setStation1(null);
+                            connectionModifier.setStation2(null);
                         }
                     }
                 };
@@ -538,6 +544,8 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                 final StationClickListener stationListener = new StationClickListener() {
                     @Override
                     public void clicked(Station station) {
+                        // highlight the selected station
+                        station.getActor().setSelected(true);
                         if (connectionModifier.getStation1() == null) {
                             //If the station is the first one clicked then it sets it to be station1
                             connectionModifier.setStation1(station);
@@ -570,8 +578,6 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                                             "\nPlease use the Connection modifier again.").align(Align.center);
                                     dia.button("OK", "OK");
                                     dia.show(context.getStage());
-                                    connectionModifier.setStation1(null);
-                                    connectionModifier.setStation2(null);
                                 }
 
                             } else {
@@ -581,8 +587,6 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                                         "\nPlease use the Connection modifier again.").align(Align.center);
                                 dia.button("OK", "OK");
                                 dia.show(context.getStage());
-                                connectionModifier.setStation1(null);
-                                connectionModifier.setStation2(null);
                             }
                             //This resets all relevant values and unsubscribes from the listeners created for placing engineers
                             context.getSideBarController().clearMessage();
@@ -590,7 +594,12 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                             Gdx.input.setCursorImage(null, 0, 0);
                             context.getGameLogic().setState(GameState.NORMAL);
                             trainController.setTrainsVisible(null, true);
+                            connectionModifier.getStation1().getActor().setSelected(false);
+                            connectionModifier.getStation2().getActor().setSelected(false);
+                            connectionModifier.setStation1(null);
+                            connectionModifier.setStation2(null);
                         }
+
                     }
                 };
                 StationController.subscribeStationClick(stationListener);

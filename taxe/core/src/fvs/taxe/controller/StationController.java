@@ -9,30 +9,29 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import fvs.taxe.TaxeGame;
+import fvs.taxe.Tooltip;
+import fvs.taxe.actor.CollisionStationActor;
+import fvs.taxe.actor.StationActor;
+import fvs.taxe.clickListener.StationClickListener;
+import fvs.taxe.clickListener.TrainClicked;
+import fvs.taxe.dialog.DialogStationMultitrain;
+import gameLogic.Game;
+import gameLogic.GameState;
+import gameLogic.goal.Goal;
+import gameLogic.map.CollisionStation;
+import gameLogic.map.Connection;
+import gameLogic.map.IPositionable;
+import gameLogic.map.Station;
+import gameLogic.player.Player;
+import gameLogic.resource.Resource;
+import gameLogic.resource.Train;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-
-import fvs.taxe.clickListener.StationClickListener;
-import fvs.taxe.TaxeGame;
-import fvs.taxe.Tooltip;
-import fvs.taxe.actor.CollisionStationActor;
-import fvs.taxe.actor.StationActor;
-import fvs.taxe.dialog.DialogStationMultitrain;
-import fvs.taxe.clickListener.TrainClicked;
-import gameLogic.Game;
-import gameLogic.GameState;
-import gameLogic.player.Player;
-import gameLogic.goal.Goal;
-import gameLogic.map.CollisionStation;
-import gameLogic.map.Connection;
-import gameLogic.map.IPositionable;
-import gameLogic.map.Station;
-import gameLogic.resource.Resource;
-import gameLogic.resource.Train;
 
 public class StationController {
 	public final static int CONNECTION_LINE_WIDTH = 5;
@@ -152,6 +151,7 @@ public class StationController {
 				tooltip.hide();
 			}
 		});
+		collisionStation.setActor(collisionStationActor);
 
 		context.getStage().addActor(collisionStationActor);
 	}

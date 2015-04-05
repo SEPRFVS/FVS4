@@ -2,14 +2,13 @@ package gameLogic.resource;
 
 import Util.Tuple;
 import fvs.taxe.actor.TrainActor;
-import gameLogic.Game;
 import gameLogic.map.IPositionable;
 import gameLogic.map.Station;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Train extends Resource {
+public class  Train extends Resource {
     private String leftImage;
     private String rightImage;
     private IPositionable position;
