@@ -1,9 +1,7 @@
 package fvs.taxe.controller;
 
 import java.util.ArrayList;
-
 import Util.Tuple;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;

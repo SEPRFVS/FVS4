@@ -2,16 +2,16 @@ package fvs.taxe.clickListener;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import fvs.taxe.Tooltip;
-import fvs.taxe.actor.StationActor;
 import fvs.taxe.controller.Context;
 import fvs.taxe.dialog.DialogGoal;
 import gameLogic.Game;
 import gameLogic.GameState;
-import gameLogic.player.Player;
 import gameLogic.goal.Goal;
 import gameLogic.map.Station;
+import gameLogic.player.Player;
 
 //Responsible for checking whether the goal is clicked
 public class GoalClickListener extends ReplayClickListener {
@@ -75,7 +75,7 @@ public class GoalClickListener extends ReplayClickListener {
             //Need to check whether tooltips are currently being shown as otherwise it redraws them instantly after the clicked routine has ended
             tooltip1 = new Tooltip(context);
             Station origin = goal.getOrigin();
-            StationActor originActor = origin.getActor();
+            Image originActor = (Image) origin.getActor();
 
             //Sets the tooltip to have the origin's name and to be shown to the top right of the station
             tooltip1.setPosition(originActor.getX() + 20, originActor.getY() + 20);
@@ -85,7 +85,7 @@ public class GoalClickListener extends ReplayClickListener {
             //Sets the tooltip to have the destination's name and to be shown to the top right of the station
             tooltip2 = new Tooltip(context);
             Station destination = goal.getDestination();
-            StationActor destinationActor = destination.getActor();
+            Image destinationActor = (Image) destination.getActor();
             context.getStage().addActor(tooltip2);
             tooltip2.setPosition(destinationActor.getX() + 20, destinationActor.getY() + 20);
             tooltip2.show(destination.getName());
@@ -94,7 +94,7 @@ public class GoalClickListener extends ReplayClickListener {
             Station intermediary = goal.getIntermediary();
             if (!intermediary.getName().equals(origin.getName())) {
                 tooltip3 = new Tooltip(context);
-                StationActor intermediaryActor = intermediary.getActor();
+                Image intermediaryActor = (Image) intermediary.getActor();
                 context.getStage().addActor(tooltip3);
                 tooltip3.setPosition(intermediaryActor.getX() + 20, intermediaryActor.getY() + 20);
                 tooltip3.show(intermediary.getName());

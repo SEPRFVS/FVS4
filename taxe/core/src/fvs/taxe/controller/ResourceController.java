@@ -5,14 +5,10 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-
 import fvs.taxe.TaxeGame;
-import fvs.taxe.clickListener.EngineerClicked;
-import fvs.taxe.clickListener.ObstacleClicked;
-import fvs.taxe.clickListener.SkipClicked;
-import fvs.taxe.clickListener.TrainClicked;
-import gameLogic.player.Player;
+import fvs.taxe.clickListener.*;
 import gameLogic.listeners.PlayerChangedListener;
+import gameLogic.player.Player;
 import gameLogic.resource.*;
 
 import java.util.ArrayList;
@@ -78,6 +74,11 @@ public class ResourceController {
                 Engineer engineer = (Engineer) resource;
                 button = new TextButton("Engineer", context.getSkin(), "unplaced-resource");
                 button.addListener(new EngineerClicked(context, engineer, button));
+            } else if (resource instanceof ConnectionModifier) {
+                //Creates a clickListener for the button and adds it to the list of buttons
+                ConnectionModifier connectionModifier = (ConnectionModifier) resource;
+                button = new TextButton("Connection modifier", context.getSkin(), "unplaced-resource");
+                button.addListener(new ConnectionClicked(context, connectionModifier, button));
             }
             
             if (button != null) {

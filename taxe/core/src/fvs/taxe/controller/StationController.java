@@ -22,16 +22,16 @@ import fvs.taxe.TaxeGame;
 import fvs.taxe.Tooltip;
 import fvs.taxe.actor.CollisionStationActor;
 import fvs.taxe.actor.StationActor;
-import fvs.taxe.dialog.DialogStationMultitrain;
 import fvs.taxe.clickListener.TrainClicked;
+import fvs.taxe.dialog.DialogStationMultitrain;
 import gameLogic.Game;
 import gameLogic.GameState;
-import gameLogic.player.Player;
 import gameLogic.goal.Goal;
 import gameLogic.map.CollisionStation;
 import gameLogic.map.Connection;
 import gameLogic.map.IPositionable;
 import gameLogic.map.Station;
+import gameLogic.player.Player;
 import gameLogic.resource.Resource;
 import gameLogic.resource.Train;
 
@@ -158,6 +158,7 @@ public class StationController {
 				tooltip.hide();
 			}
 		});
+		collisionStation.setActor(collisionStationActor);
 
 		context.getStage().addNamedActor(collisionStationActor);
 	}
