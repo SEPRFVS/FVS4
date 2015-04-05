@@ -46,10 +46,6 @@ public class ResourceManager {
         }
 
         if (idx == 4) {
-            return new JunctionModifier();
-        }
-
-        if (idx == 5) {
             //1 in 10 chance to return an engineer
             return new Engineer();
         } else {

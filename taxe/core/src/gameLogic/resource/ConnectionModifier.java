@@ -4,11 +4,12 @@ package gameLogic.resource;
 import gameLogic.map.Station;
 
 public class ConnectionModifier extends Resource {
+    public final static int CONNECTION_LENGTH_LIMIT = 250;
     private Station station1;
     private Station station2;
 
     public ConnectionModifier() {
-        this.name = "Modify connection";
+        this.name = "Connection modifier";
         this.station1 = null;
         this.station2 = null;
     }

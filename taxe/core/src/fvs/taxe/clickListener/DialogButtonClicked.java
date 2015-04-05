@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
@@ -29,7 +30,6 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
     private Skip skip;
     private Engineer engineer;
     private ConnectionModifier connectionModifier;
-    private JunctionModifier junctionModifier;
 
     public DialogButtonClicked(Context context, Player player, Train train) {
         //This constructor is used when a train dialog button is clicked.
@@ -41,7 +41,6 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
         this.skip = null;
         this.engineer = null;
         this.connectionModifier = null;
-        this.junctionModifier = null;
     }
 
     public DialogButtonClicked(Context context, Player player, Obstacle obstacle) {
@@ -54,7 +53,6 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
         this.obstacle = obstacle;
         this.engineer = null;
         this.connectionModifier = null;
-        this.junctionModifier = null;
     }
 
     public DialogButtonClicked(Context context, Player player, Skip skip) {
@@ -67,7 +65,6 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
         this.obstacle = null;
         this.engineer = null;
         this.connectionModifier = null;
-        this.junctionModifier = null;
     }
 
     public DialogButtonClicked(Context context, Player player, Engineer engineer) {
@@ -80,7 +77,6 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
         this.obstacle = null;
         this.skip = null;
         this.connectionModifier = null;
-        this.junctionModifier = null;
     }
 
     public DialogButtonClicked(Context context, Player player, ConnectionModifier connectionModifier) {
@@ -91,19 +87,8 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
         this.obstacle = null;
         this.skip = null;
         this.connectionModifier = connectionModifier;
-        this.junctionModifier = null;
     }
 
-    public DialogButtonClicked(Context context, Player player, JunctionModifier junctionModifier) {
-        this.currentPlayer = player;
-        this.train = null;
-        this.engineer = null;
-        this.context = context;
-        this.obstacle = null;
-        this.skip = null;
-        this.connectionModifier = null;
-        this.junctionModifier = junctionModifier;
-    }
 
     @Override
     public void clicked(Button button) {
@@ -468,11 +453,24 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
 
                             //Checks whether a connection exists between the two selected stations
                             if (!context.getGameLogic().getMap().doesConnectionExist(connectionModifier.getStation1().getName(), connectionModifier.getStation2().getName())) {
-                                // add connection
-                                Game.getInstance().getMap().addConnection(connectionModifier.getStation1().getName(), connectionModifier.getStation2().getName());
-                                Game.getInstance().getMap().updateDijkstra();
-                                currentPlayer.removeResource(connectionModifier);
-
+                                float distance = Vector2.dst(connectionModifier.getStation1().getLocation().getX(),
+                                        connectionModifier.getStation1().getLocation().getY(),
+                                        connectionModifier.getStation2().getLocation().getX(),
+                                        connectionModifier.getStation2().getLocation().getY());
+                                if (distance < ConnectionModifier.CONNECTION_LENGTH_LIMIT) {
+                                    Game.getInstance().getMap().addConnection(connectionModifier.getStation1().getName(), connectionModifier.getStation2().getName());
+                                    Game.getInstance().getMap().updateDijkstra();
+                                    currentPlayer.removeResource(connectionModifier);
+                                } else {
+                                    //If the connection is too long then placement is cancelled and the user is informed of this
+                                    UnifiedDialog dia = new UnifiedDialog("Invalid Selection", context.getSkin(), "redwin");
+                                    dia.text("You have selected two stations which are too far apart." +
+                                            "\nPlease use the Connection modifier again.").align(Align.center);
+                                    dia.button("OK", "OK");
+                                    dia.show(context.getStage());
+                                    connectionModifier.setStation1(null);
+                                    connectionModifier.setStation2(null);
+                                }
                             } else {
                                 //If the connection does not exist then placement is cancelled and the user is informed of this
                                 UnifiedDialog dia = new UnifiedDialog("Invalid Selection", context.getSkin(), "redwin");
@@ -549,10 +547,32 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
 
                             //Checks whether a connection exists between the two selected stations
                             if (context.getGameLogic().getMap().doesConnectionExist(connectionModifier.getStation1().getName(), connectionModifier.getStation2().getName())) {
-                                // add connection
-                                Game.getInstance().getMap().removeConnection(connectionModifier.getStation1(), connectionModifier.getStation2());
-                                Game.getInstance().getMap().updateDijkstra();
-                                currentPlayer.removeResource(connectionModifier);
+                                //check if any train uses this connection
+                                boolean connectionUsed = false;
+                                for (Player player : Game.getInstance().getPlayerManager().getAllPlayers()) {
+                                    for (Train train : player.getTrains()) {
+                                        if(Game.getInstance().getMap().doesUseConnection(connectionModifier.getStation1(), connectionModifier.getStation2(), train.getRoute())) {
+                                            connectionUsed = true;
+                                            break;
+                                        }
+
+                                    }
+                                }
+                                if (!connectionUsed) {
+                                    //remove connection and update dijkstra
+                                    Game.getInstance().getMap().removeConnection(connectionModifier.getStation1(), connectionModifier.getStation2());
+                                    Game.getInstance().getMap().updateDijkstra();
+                                    currentPlayer.removeResource(connectionModifier);
+                                } else {
+                                    //If the connection does not exist then placement is cancelled and the user is informed of this
+                                    UnifiedDialog dia = new UnifiedDialog("Invalid Selection", context.getSkin(), "redwin");
+                                    dia.text("You have selected a connection that is used by a train." +
+                                            "\nPlease use the Connection modifier again.").align(Align.center);
+                                    dia.button("OK", "OK");
+                                    dia.show(context.getStage());
+                                    connectionModifier.setStation1(null);
+                                    connectionModifier.setStation2(null);
+                                }
 
                             } else {
                                 //If the connection does not exist then placement is cancelled and the user is informed of this

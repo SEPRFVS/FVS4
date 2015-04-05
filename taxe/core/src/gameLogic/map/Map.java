@@ -184,7 +184,7 @@ public class Map {
                                     || (train.getNextStation() == toBlock.getStation2() && train.getLastStation() == toBlock.getStation1())) {
                                 canBlock = false;
                             }
-                        }catch(Exception e){}
+                        } catch(Exception e) {}
                     }
                 }
             } while (!canBlock);
@@ -233,5 +233,20 @@ public class Map {
     public boolean inShortestPath(Station s1, Station s2, Station s3) {
         //This method calls the relevant method from Dijkstra's algorithm which checks whether or not s3 is in the shortest path from s1 to s2
         return dijkstra.inShortestPath(s1, s2, s3);
+    }
+
+    public boolean doesUseConnection(Station station1, Station station2, List<Station> route) {
+        if (route == null || station1 == null || station2 == null || route.size() == 0) return false;
+
+        Station currentStation;
+        Station prevStation = route.get(0);
+        for (int i = 1; i < route.size(); i++) {
+            currentStation = route.get(i);
+            if ((station1 == prevStation && station2 == currentStation) || (station2 == prevStation && station1 == currentStation)) {
+                return true;
+            }
+            prevStation = currentStation;
+        }
+        return false;
     }
 }

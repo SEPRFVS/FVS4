@@ -74,12 +74,6 @@ public class ResourceController {
                 ConnectionClicked listener = new ConnectionClicked(context, connectionModifier);
                 button = new TextButton("Connection modifier", context.getSkin(), "unplaced-resource");
                 button.addListener(listener);
-            } else if (resource instanceof JunctionModifier) {
-                //Creates a clickListener for the button and adds it to the list of buttons
-                JunctionModifier junctionModifier  = (JunctionModifier) resource;
-                JunctionModifierClicked listener = new JunctionModifierClicked(context, junctionModifier);
-                button = new TextButton("Junction modifier", context.getSkin(), "unplaced-resource");
-                button.addListener(listener);
             }
             
             if (button != null) {
