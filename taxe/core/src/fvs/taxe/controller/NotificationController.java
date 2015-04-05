@@ -14,6 +14,7 @@ import gameLogic.goal.Goal;
 import gameLogic.map.Connection;
 import gameLogic.map.Station;
 import gameLogic.player.Player;
+import gameLogic.resource.ConnectionModifier;
 import gameLogic.resource.Train;
 
 public class NotificationController {
@@ -89,6 +90,18 @@ public class NotificationController {
 	public void showEngineerMessage(Connection connection, Player player) {
 		String message = "@" + player.getName().replace(" ", "") + ": Keeping @RailControl happy by fixing track problems between #" + connection.getStation1().getName() + " & #" + connection.getStation2().getName();
 		showNotification(message);
+	}
+	
+	public void showNewConnectionMessage(ConnectionModifier connectionModifier, Player player) {
+		String message = "@" + player.getName().replace(" ", "") + ": We're building a new @RailControl line from #" + connectionModifier.getStation1().getName() + " to #" + connectionModifier.getStation2().getName() + " #progress";
+		showNotification(message);
+	}
+	
+	public void showRemoveConnectionMessage(ConnectionModifier connectionModifier, Player player) {
+		String message1 = "@DwileFlonking: What's going on at #" + connectionModifier.getStation1().getName() + " @RailControl?";
+		showNotification(message1);
+		String message2 = "@RailControl: Due to cuts at @" + player.getName().replace(" ", "") + ", the #" + connectionModifier.getStation1().getName() + " to #" + connectionModifier.getStation2().getName() + " line has been closed #sorry";
+		showNotification(message2);
 	}
 	
 	public void showNotification(String message) {

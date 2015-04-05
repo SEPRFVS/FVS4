@@ -461,6 +461,8 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                                 if (distance < ConnectionModifier.CONNECTION_LENGTH_LIMIT) {
                                     Game.getInstance().getMap().addConnection(connectionModifier.getStation1().getName(), connectionModifier.getStation2().getName());
                                     Game.getInstance().getMap().updateDijkstra();
+                                    context.getSoundController().playSound("modify");
+                                    context.getNotificationController().showNewConnectionMessage(connectionModifier, context.getGameLogic().getPlayerManager().getCurrentPlayer());
                                     currentPlayer.removeResource(connectionModifier);
                                 } else {
                                     //If the connection is too long then placement is cancelled and the user is informed of this
@@ -565,6 +567,8 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                                     //remove connection and update dijkstra
                                     Game.getInstance().getMap().removeConnection(connectionModifier.getStation1(), connectionModifier.getStation2());
                                     Game.getInstance().getMap().updateDijkstra();
+                                    context.getSoundController().playSound("modify");
+                                    context.getNotificationController().showRemoveConnectionMessage(connectionModifier, context.getGameLogic().getPlayerManager().getCurrentPlayer());
                                     currentPlayer.removeResource(connectionModifier);
                                 } else {
                                     //If the connection does not exist then placement is cancelled and the user is informed of this

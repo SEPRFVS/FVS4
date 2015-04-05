@@ -48,8 +48,6 @@ public class ConnectionClicked extends ReplayClickListener {
             displayingMessage = true;
             if (Game.getInstance().getState() == GameState.NORMAL) {
                 context.getSideBarController().displayMessage("Add or remove a connection on the map.");
-
-
             }
         }
     }

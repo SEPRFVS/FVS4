@@ -32,6 +32,7 @@ public class SoundController {
 		sounds.add(new Tuple<String, Sound>("engineer", Gdx.audio.newSound(Gdx.files.internal("sound/engineer.mp3"))));
 		sounds.add(new Tuple<String, Sound>("obstacle", Gdx.audio.newSound(Gdx.files.internal("sound/obstacle.mp3"))));
 		sounds.add(new Tuple<String, Sound>("open", Gdx.audio.newSound(Gdx.files.internal("sound/open.mp3"))));
+		sounds.add(new Tuple<String, Sound>("modify", Gdx.audio.newSound(Gdx.files.internal("sound/modify.mp3"))));
 	}
 	
 	public void playBackgroundMusic(float volume) {
