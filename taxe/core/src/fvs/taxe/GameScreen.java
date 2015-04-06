@@ -182,6 +182,9 @@ public class GameScreen extends ScreenAdapter {
             gameLogic.dispose();
             game.setScreen(new ReplayScreen(game, context.getReplayManager(), playerNames, gameLogic.getTotalTurns()));
         }
+        
+        game.batch.setProjectionMatrix(stage.getViewport().getCamera().combined);
+        game.shapeRenderer.setProjectionMatrix(game.batch.getProjectionMatrix());
 
         game.batch.begin();
 
