@@ -10,6 +10,7 @@ import gameLogic.player.Player;
 import gameLogic.replay.ReplayManager;
 import gameLogic.resource.Engineer;
 import gameLogic.resource.Resource;
+import Util.FancyString;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -58,7 +59,7 @@ public class DialogNews extends ReplayDialog {
 		    	}
 		    	String col2 = "They have left their rivals ";
 		    	if (names.size() > 1) {
-		    		col2 += String.join(", ", names.subList(0, names.size() - 2)) + " and " + names.get(names.size() - 1);
+		    		col2 += FancyString.join(", ", names.subList(0, names.size() - 2)) + " and " + names.get(names.size() - 1);
 		    	} else {
 		    		col2 += names.get(0);
 		    	}
@@ -72,7 +73,7 @@ public class DialogNews extends ReplayDialog {
 		    	}
 		    	String col1 = "Since ";
 		    	if (names.size() > 1) {
-		    		col1 += String.join(", ", names.subList(0, names.size() - 2)) + " and " + names.get(names.size() - 1);
+		    		col1 += FancyString.join(", ", names.subList(0, names.size() - 2)) + " and " + names.get(names.size() - 1);
 		    	} else {
 		    		col1 += names.get(0);
 		    	}
@@ -82,7 +83,7 @@ public class DialogNews extends ReplayDialog {
 		    	for(String name : names) {
 		    		socialNames.add("@" + name.replace(" ", ""));
 		    	}
-		    	String col3 = "Outspoken social media user, @DwileFlonking, helpfully interjected \"" + String.join(" ", socialNames) + "What now? #future\"";
+		    	String col3 = "Outspoken social media user, @DwileFlonking, helpfully interjected \"" + FancyString.join(" ", socialNames) + "What now? #future\"";
 	        	setStory(context.getSkin(), "Rail transit market stagnates", "No clear winner in battle to be the best", col1, col2, col3);
 	        }
 	    } else if(context.getGameLogic().getPlayerManager().getTurnNumber() == 0) {
@@ -93,7 +94,7 @@ public class DialogNews extends ReplayDialog {
 	    	}
 	    	String col1 = "";
 	    	if (names.size() > 1) {
-	    		col1 = String.join(", ", names.subList(0, names.size() - 1)) + " and " + names.get(names.size() - 1);
+	    		col1 = FancyString.join(", ", names.subList(0, names.size() - 1)) + " and " + names.get(names.size() - 1);
 	    	} else {
 	    		col1 = names.get(0);
 	    	}
