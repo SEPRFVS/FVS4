@@ -95,6 +95,7 @@ public class GameScreen extends ScreenAdapter {
         context.setRouteController(routeController);
         context.setSideBarController(sideBarController);
         context.setNotificationController(new NotificationController(context));
+        context.setReplayControlsController(new ReplayControlsController(context));
 
         //Adds a listener that displays a flash message whenever the turn ends
         gameLogic.getPlayerManager().subscribeTurnChanged(new TurnListener() {
@@ -170,19 +171,6 @@ public class GameScreen extends ScreenAdapter {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
-            context.getReplayManager().playSingle();
-        }
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            ArrayList<String> playerNames = new ArrayList<String>();
-            for(Player player : gameLogic.getPlayerManager().getAllPlayers()) {
-            	playerNames.add(player.getName());
-            }
-            gameLogic.dispose();
-            game.setScreen(new ReplayScreen(game, context.getReplayManager(), playerNames, gameLogic.getTotalTurns()));
-        }
-
         game.batch.begin();
 
         //Draws the map background
@@ -220,12 +208,13 @@ public class GameScreen extends ScreenAdapter {
             stationController.displayNumberOfTrainsAtStations();
         }
 
+        sideBarController.drawContent();
+        
         //Causes all the actors to perform their actions (i.e trains to move)
         stage.act(Gdx.graphics.getDeltaTime());
-
+        //Ensure replay controls are accessible
+        context.getReplayControlsController().moveToTop();
         stage.draw();
-
-        sideBarController.drawContent();
     }
     
     @Override
@@ -249,6 +238,7 @@ public class GameScreen extends ScreenAdapter {
         sideBarController.addEndTurnButton();
         goalController.showCurrentPlayerGoals();
         resourceController.drawPlayerResources(gameLogic.getPlayerManager().getCurrentPlayer());
+        context.getReplayControlsController().showReplayControls();
         
         //Load background music
         game.soundController.addSettingsButton(stage, skin);
