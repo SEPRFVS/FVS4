@@ -99,7 +99,7 @@ public class DialogNews extends ReplayDialog {
 	    		col1 = names.get(0);
 	    	}
 	    	col1 += " have entered the rail market with the hopes of making it big in the transportation industry.";
-	    	String col2 = "There isn't much room left in the industry so we don't know how long they'll survive.  Social media had it's own opinion.";
+	    	String col2 = "There isn't much room left in the industry so we don't know how long they'll survive.  Social media had its own opinion.";
 	    	String col3 = "User @DwileFlonking commented \"New people on the tracks?  Hope they don't crash #awkward\".  Rail Control said they remain \"optimistic\".";
 	    	setStory(context.getSkin(), "Big dreams for small companies","Will newcomers take over the rail market?", col1, col2, col3);
 	    } else {
@@ -110,7 +110,23 @@ public class DialogNews extends ReplayDialog {
 	    			connectionsBlocked++;
 	    		}
 	    	}
-	    	if(connectionsBlocked > 4) {
+	    	int currentPlayerCompletedGoals = 0;
+	    	Goal lastCompleteGoal = null;
+	    	Player currentPlayer = context.getGameLogic().getPlayerManager().getCurrentPlayer();
+    		for(Goal goal : currentPlayer.getGoals()) {
+    			if(goal.getComplete()){
+    				currentPlayerCompletedGoals++;
+    				lastCompleteGoal = goal; //Used to provide goal details
+    			}
+    		}
+    		if (currentPlayerCompletedGoals == 1){
+    			//First complete goal
+				String col1 = "The train set off from " + lastCompleteGoal.getOrigin().getName() + " and arrived in " + lastCompleteGoal.getDestination().getName() + " without a hitch.";
+				String col2 = "Hundreds of rail enthusiasts gathered at both ends of the route to catch a glimpse of this piece of rail history.";
+				String col3 = "The new company\'s chairman stated, \"This marks the start of one of many successful journies for us, and our customers.\"";
+				setStory(context.getSkin(), currentPlayer.getName() + " marks maiden voyage", "A piece of rail history as new company completes its first journey", col1, col2, col3);
+    		} 
+    		else if (connectionsBlocked > 4) {
 	    		String col1 = "Today, " + connectionsBlocked + " pieces of track were completely closed to trains as maintainance has fallen behind.";
 	    		String col2 = "In response to accusations, Rail Control said \"";
 	    		Player mostEngineers = null;
@@ -128,7 +144,7 @@ public class DialogNews extends ReplayDialog {
 	    			}
 	    		}
 	    		if(mostEngineers != null){
-	    			col2 += mostEngineers.getName() + " has been underutilising it's engineers.  They have " + mostEngineersNum + " sat doing nothing.";
+	    			col2 += mostEngineers.getName() + " has been underutilising its engineers.  They have " + mostEngineersNum + " sat doing nothing.";
 	    		} else {
 	    			col2 += "All our engineers are flat out with repairs.  Years of underinvestment have created this situation.";
 	    		}
@@ -146,14 +162,19 @@ public class DialogNews extends ReplayDialog {
 	    		}
 	    		String col1 = "The rail war continues as " + aheadPlayer.getName() + " shows they mean business by delivering their best results yet.";
 	    		int completedGoals = 0;
-	    		for(Goal goal : aheadPlayer.getGoals()) {
-	    			if(goal.getComplete()){
-	    				completedGoals++;
-	    			}
+	    		if (aheadPlayer == currentPlayer){
+	    			completedGoals = currentPlayerCompletedGoals;
+	    		}
+	    		else {
+		    		for(Goal goal : aheadPlayer.getGoals()) {
+		    			if(goal.getComplete()){
+		    				completedGoals++;
+		    			}
+		    		}
 	    		}
 	    		String col2 = completedGoals + " trains have arrived at their destination over the past few days.  We don't yet know about other operators performance but it's a good start.";
 	    		String col3 = "Can they maintain their momentum though?  Their chairman certainly thinks so, \"We always strive to be the best and won't stop until we are.\"";
-	    		setStory(context.getSkin(), aheadPlayer.getName() + " deliver results", "Company posts it's best results to date", col1, col2, col3);
+	    		setStory(context.getSkin(), aheadPlayer.getName() + " deliver results", "Company posts its best results to date", col1, col2, col3);
 	    	}
 	    }
 	     
