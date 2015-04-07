@@ -19,6 +19,7 @@ public class Context {
     private SideBarController sideBarController;
     private SoundController soundController;
     private NotificationController notificationController;
+    private ReplayControlsController replayControlsController;
 
     public Context(StageNamedActor stage, Skin skin, TaxeGame taxeGame, Game gameLogic) {
         this.stage = stage;
@@ -83,5 +84,13 @@ public class Context {
 
 	public void setNotificationController(NotificationController notificationController) {
 		this.notificationController = notificationController;
+	}
+
+	public ReplayControlsController getReplayControlsController() {
+		return replayControlsController;
+	}
+
+	public void setReplayControlsController(ReplayControlsController replayControlsController) {
+		this.replayControlsController = replayControlsController;
 	}
 }

@@ -71,7 +71,7 @@ public class SetupScreen extends ScreenAdapter {
 		
 		//Title
 		Label label = new Label("Enter Team Names", skin, "play-50", Color.BLACK);
-		label.setPosition((TaxeGame.WIDTH / 2) - (label.getWidth() / 2), TaxeGame.HEIGHT - 10.0f - label.getHeight());
+		label.setPosition((TaxeGame.WIDTH / 2) - (label.getWidth() / 2), TaxeGame.HEIGHT - 200.0f - label.getHeight());
 		stage.addActor(label);
 		
 		//Input player names
@@ -79,7 +79,7 @@ public class SetupScreen extends ScreenAdapter {
 		for(Player player : context.getGameLogic().getPlayerManager().getAllPlayers()) {
 			TextField text = new TextField("Player " + player.getPlayerNumber(), skin, "names");
 			text.setName("name" + player.getPlayerNumber());
-			text.setPosition((TaxeGame.WIDTH/2) - (text.getWidth()/2), TaxeGame.HEIGHT - 100.0f - row);
+			text.setPosition((TaxeGame.WIDTH/2) - (text.getWidth()/2), TaxeGame.HEIGHT - 330.0f - row);
 			row += text.getHeight() + 10.0f;
 			stage.addActor(text);
 			inputs.add(text);
@@ -102,11 +102,11 @@ public class SetupScreen extends ScreenAdapter {
 			}
 		});
 		turnTable.add(numTurns).width(30.0f);
-		turnTable.add(new Label("turns or", skin, "defaultblack"));
+		turnTable.add(new Label("turns or ", skin, "defaultblack"));
 		endless = new TextButton("Endless Mode", skin, "onoff");
 		turnTable.add(endless);
 		
-		turnTable.setPosition((TaxeGame.WIDTH/2) - (turnTable.getWidth()/2), TaxeGame.HEIGHT - 100.0f - row);
+		turnTable.setPosition((TaxeGame.WIDTH/2) - (turnTable.getWidth()/2), TaxeGame.HEIGHT - 330.0f - row);
 		row += turnTable.getHeight() + 10.0f;
 		stage.addActor(turnTable);
 		
@@ -150,7 +150,7 @@ public class SetupScreen extends ScreenAdapter {
 			}
 		});
 		button.setWidth(60.0f);
-		button.setPosition((TaxeGame.WIDTH/2) - (button.getWidth()/2), TaxeGame.HEIGHT - 110.0f - row - button.getHeight());
+		button.setPosition((TaxeGame.WIDTH/2) - (button.getWidth()/2), TaxeGame.HEIGHT - 350.0f - row - button.getHeight());
 		stage.addActor(button);
 		
 		context.getSoundController().addSettingsButton(stage, skin);

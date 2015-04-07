@@ -107,4 +107,8 @@ public class ReplayManager {
             }
         }
     }
+    
+    public void exitReplay() {
+    	playPosition = 0;
+    }
 }
