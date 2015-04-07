@@ -12,12 +12,14 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import fvs.taxe.ReplayScreen;
 import fvs.taxe.TaxeGame;
 import fvs.taxe.dialog.UnifiedDialog;
+import gameLogic.Game;
 import gameLogic.player.Player;
 
 public class ReplayControlsController {
 	
 	private Table controlTable;
 	private Context context;
+	private static Game playingLogic;
 	
 	public ReplayControlsController(Context context) {
 		this.context = context;
@@ -56,12 +58,14 @@ public class ReplayControlsController {
 	private void addGameScreenControls() {
 		TextButton replay = new TextButton("Start Replay", context.getSkin());
     	replay.addListener(new ClickListener() {
-    		@Override
+    		@SuppressWarnings("static-access")
+			@Override
     		public void clicked(InputEvent event, float x, float y) {
     			ArrayList<String> playerNames = new ArrayList<String>();
                 for(Player player : context.getGameLogic().getPlayerManager().getAllPlayers()) {
                 	playerNames.add(player.getName());
                 }
+                playingLogic = context.getGameLogic().getInstance();
                 context.getGameLogic().dispose();
                 context.getTaxeGame().setScreen(new ReplayScreen(context.getTaxeGame(), context.getReplayManager(), playerNames, context.getGameLogic().getTotalTurns()));
     		}
@@ -71,6 +75,21 @@ public class ReplayControlsController {
 	
 	//Add controls to use whilst replay is taking place
 	private void addReplayScreenControls() {
+		//Exit replay mode
+		TextButton exit = new TextButton("End Replay", context.getSkin());
+		exit.addListener(new ClickListener() {
+			@SuppressWarnings("static-access")
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				context.getGameLogic().dispose();
+				context.getGameLogic().setInstance(playingLogic);
+				context.getReplayManager().exitReplay();
+				context.getTaxeGame().setScreen(context.getTaxeGame().gamescreen);
+			}
+		});
+		addActor(exit);
+		
+		//Act the next click
 		TextButton advance = new TextButton(">", context.getSkin());
 		advance.addListener(new ClickListener() {
 			@Override

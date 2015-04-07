@@ -60,6 +60,12 @@ public class Game {
             }
         });
     }
+    
+    //Allow the instance to be set when exiting the replay logic
+    public static Game setInstance(Game game) {
+    	instance = game;
+    	return instance;
+    }
 
     public static Game getInstance() {
         if (instance == null) {
