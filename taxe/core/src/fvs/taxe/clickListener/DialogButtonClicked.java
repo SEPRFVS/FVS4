@@ -273,6 +273,12 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                             TrainController trainController = new TrainController(context);
                             trainController.setTrainsVisible(null, true);
 
+                            //Resets the station selection
+                            if (obstacle.getStation1() != null) {
+                                obstacle.getStation1().getActor().setSelected(false);
+                                obstacle.setStation1(null);
+                            }
+
                             //Resets cursor
                             Gdx.input.setCursorImage(null, 0, 0);
 
@@ -375,6 +381,12 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                             //Makes all trains visible
                             TrainController trainController = new TrainController(context);
                             trainController.setTrainsVisible(null, true);
+
+                            //Resets the station selection
+                            if (engineer.getStation1() != null) {
+                                engineer.getStation1().getActor().setSelected(false);
+                                engineer.setStation1(null);
+                            }
 
                             //Resets cursor
                             Gdx.input.setCursorImage(null, 0, 0);
@@ -507,6 +519,12 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                             //Resets cursor
                             Gdx.input.setCursorImage(null, 0, 0);
 
+                            //Resets the station selection
+                            if (connectionModifier.getStation1() != null) {
+                                connectionModifier.getStation1().getActor().setSelected(false);
+                                connectionModifier.setStation1(null);
+                            }
+
                             //Unsubscribes from the StationClickListener as this would cause a lot of errors and unexpected behaviour is not called from the correct context
                             StationController.unsubscribeStationClick(stationListener);
                             Game.getInstance().setState(GameState.NORMAL);
@@ -614,6 +632,11 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
 
                             //Resets cursor
                             Gdx.input.setCursorImage(null, 0, 0);
+
+                            if (connectionModifier.getStation1() != null) {
+                                connectionModifier.getStation1().getActor().setSelected(false);
+                                connectionModifier.setStation1(null);
+                            }
 
                             //Unsubscribes from the StationClickListener as this would cause a lot of errors and unexpected behaviour is not called from the correct context
                             StationController.unsubscribeStationClick(stationListener);
