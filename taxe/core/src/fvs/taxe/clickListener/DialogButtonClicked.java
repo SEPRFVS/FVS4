@@ -8,12 +8,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
+
 import fvs.taxe.Button;
 import fvs.taxe.actor.TrainActor;
 import fvs.taxe.controller.Context;
 import fvs.taxe.controller.StationController;
 import fvs.taxe.controller.TrainController;
-import fvs.taxe.dialog.UnifiedDialog;
+import fvs.taxe.dialog.ReplayDialog;
 import gameLogic.Game;
 import gameLogic.GameState;
 import gameLogic.map.CollisionStation;
@@ -236,7 +237,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                                 //If this is not how you want your obstacles to work you might consider preventing the player from placing obstacles on blocked connections or immediately pausing any train on that connection
                             } else {
                                 //Informs the player that their selection is invalid and cancels placement
-                                UnifiedDialog dia = new UnifiedDialog("Invalid Selection", context.getSkin(), "redwin");
+                                ReplayDialog dia = new ReplayDialog("Invalid Selection", context.getSkin(), "redwin", context.getReplayManager());
                                 dia.text("You have selected two stations which are not connected." +
                                         "\nPlease use the Obstacle again.").align(Align.center);
                                 dia.button("OK", "OK");
@@ -344,7 +345,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                                     currentPlayer.removeResource(engineer);
                                 } else {
                                     //If the connection is not blocked then placement is cancelled and the user is informed
-                                    UnifiedDialog dia = new UnifiedDialog("Invalid Selection", context.getSkin(), "redwin");
+                                    ReplayDialog dia = new ReplayDialog("Invalid Selection", context.getSkin(), "redwin", context.getReplayManager());
                                     dia.text("You have selected a connection which is not blocked." +
                                             "\nPlease use the Engineer again.").align(Align.center);
                                     dia.button("OK", "OK");
@@ -352,7 +353,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                                 }
                             } else {
                                 //If the connection does not exist then placement is cancelled and the user is informed of this
-                                UnifiedDialog dia = new UnifiedDialog("Invalid Selection", context.getSkin(), "redwin");
+                                ReplayDialog dia = new ReplayDialog("Invalid Selection", context.getSkin(), "redwin", context.getReplayManager());
                                 dia.text("You have selected two stations which are not connected." +
                                         "\nPlease use the Engineer again.").align(Align.center);
                                 dia.button("OK", "OK");
@@ -478,7 +479,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                                     currentPlayer.removeResource(connectionModifier);
                                 } else {
                                     //If the connection is too long then placement is cancelled and the user is informed of this
-                                    UnifiedDialog dia = new UnifiedDialog("Invalid Selection", context.getSkin(), "redwin");
+                                    ReplayDialog dia = new ReplayDialog("Invalid Selection", context.getSkin(), "redwin", context.getReplayManager());
                                     dia.text("You have selected two stations which are too far apart." +
                                             "\nPlease use the Connection modifier again.").align(Align.center);
                                     dia.button("OK", "OK");
@@ -486,7 +487,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                                 }
                             } else {
                                 //If the connection does not exist then placement is cancelled and the user is informed of this
-                                UnifiedDialog dia = new UnifiedDialog("Invalid Selection", context.getSkin(), "redwin");
+                                ReplayDialog dia = new ReplayDialog("Invalid Selection", context.getSkin(), "redwin", context.getReplayManager());
                                 dia.text("You have selected two stations which are already connected." +
                                         "\nPlease use the Connection modifier again.").align(Align.center);
                                 dia.button("OK", "OK");
@@ -590,7 +591,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                                     currentPlayer.removeResource(connectionModifier);
                                 } else {
                                     //If the connection does not exist then placement is cancelled and the user is informed of this
-                                    UnifiedDialog dia = new UnifiedDialog("Invalid Selection", context.getSkin(), "redwin");
+                                    ReplayDialog dia = new ReplayDialog("Invalid Selection", context.getSkin(), "redwin", context.getReplayManager());
                                     dia.text("You have selected a connection that is used by a train." +
                                             "\nPlease use the Connection modifier again.").align(Align.center);
                                     dia.button("OK", "OK");
@@ -599,7 +600,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
 
                             } else {
                                 //If the connection does not exist then placement is cancelled and the user is informed of this
-                                UnifiedDialog dia = new UnifiedDialog("Invalid Selection", context.getSkin(), "redwin");
+                                ReplayDialog dia = new ReplayDialog("Invalid Selection", context.getSkin(), "redwin", context.getReplayManager());
                                 dia.text("You have selected two stations which are not connected." +
                                         "\nPlease use the Connection modifier again.").align(Align.center);
                                 dia.button("OK", "OK");
