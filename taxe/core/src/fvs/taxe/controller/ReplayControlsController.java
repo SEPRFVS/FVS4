@@ -2,12 +2,15 @@ package fvs.taxe.controller;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import fvs.taxe.ReplayScreen;
 import fvs.taxe.TaxeGame;
@@ -20,6 +23,7 @@ public class ReplayControlsController {
 	private Table controlTable;
 	private Context context;
 	private static Game playingLogic;
+	private Stage controlStage;
 	
 	public ReplayControlsController(Context context) {
 		this.context = context;
@@ -28,6 +32,12 @@ public class ReplayControlsController {
 	}
 	
 	public void showReplayControls() {
+		//Remove old buttons and actors from stage
+		context.getStage().getActors().removeValue(controlTable, true);
+		controlTable.clear();
+		controlTable.setHeight(0);
+		controlTable.setWidth(0);
+		
 		//Test type of screen
 		if(context.getTaxeGame().getScreen() instanceof ReplayScreen) {
 			//Add replay buttons
@@ -41,7 +51,15 @@ public class ReplayControlsController {
 		controlTable.setHeight(controlTable.getHeight() + 20.0f);
 		controlTable.setWidth(controlTable.getWidth() + 20.0f);
 		controlTable.setPosition(TaxeGame.WIDTH - SideBarController.CONTROLS_WIDTH - controlTable.getWidth(), 0);
-		context.getStage().addActor(controlTable);
+		
+		if(context.getTaxeGame().getScreen() instanceof ReplayScreen) {
+			//Place on control stage if in replay so input cannot overlap with that being used in replay
+			controlStage = new Stage(new FitViewport(TaxeGame.WIDTH, TaxeGame.HEIGHT));
+			controlStage.addActor(controlTable);
+			((ReplayScreen) context.getTaxeGame().getScreen()).setControlStage(controlStage);
+		} else {
+			context.getStage().addActor(controlTable);
+		}
 	}
 	
 	private void addActor(Actor actor) {
@@ -100,7 +118,7 @@ public class ReplayControlsController {
 					UnifiedDialog nomore = new UnifiedDialog("End of Replay", context.getSkin(), "redwin");
 					nomore.text("You have reached the end of the replay");
 					nomore.button("OK");
-					nomore.show(context.getStage());
+					nomore.show(controlStage);
 				}
 			}
 		});
