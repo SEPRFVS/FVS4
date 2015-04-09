@@ -128,6 +128,30 @@ public class ReplayControlsController {
 		});
 		addActor(advance);
 		
+		//Jump through the rest of the turn
+		final TextButton nextTurn = new TextButton(">>", context.getSkin());
+		nextTurn.addListener(new ClickListener(){
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				if(!((TextButton) event.getListenerActor()).isDisabled()) {
+					boolean goAgain = true;
+					int startTurn = context.getGameLogic().getPlayerManager().getTurnNumber();
+					while(goAgain && context.getGameLogic().getPlayerManager().getTurnNumber() == startTurn) {
+						try {
+							context.getReplayManager().playSingle();
+						} catch (IndexOutOfBoundsException e) {
+							UnifiedDialog nomore = new UnifiedDialog("End of Replay", context.getSkin(), "redwin");
+							nomore.text("You have reached the end of the replay");
+							nomore.button("OK");
+							nomore.show(controlStage);
+							goAgain = false;
+						}
+					}
+				}
+			}
+		});
+		addActor(nextTurn);
+		
 		//Add listener to prevent advancing clicks whilst animation is happening
 		context.getGameLogic().subscribeStateChanged(new GameStateListener() {
 			@Override
@@ -135,9 +159,11 @@ public class ReplayControlsController {
 				if(state == GameState.ANIMATING) {
 					//Set all controls which advance game to be disabled
 					advance.setDisabled(true);
+					nextTurn.setDisabled(true);
 				} else {
 					//Set all controls which advance game to be enabled
 					advance.setDisabled(false);
+					nextTurn.setDisabled(false);
 				}
 			}
 			
