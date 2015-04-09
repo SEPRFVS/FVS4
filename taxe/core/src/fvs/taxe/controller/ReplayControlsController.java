@@ -16,6 +16,8 @@ import fvs.taxe.ReplayScreen;
 import fvs.taxe.TaxeGame;
 import fvs.taxe.dialog.UnifiedDialog;
 import gameLogic.Game;
+import gameLogic.GameState;
+import gameLogic.listeners.GameStateListener;
 import gameLogic.player.Player;
 
 public class ReplayControlsController {
@@ -108,21 +110,38 @@ public class ReplayControlsController {
 		addActor(exit);
 		
 		//Act the next click
-		TextButton advance = new TextButton(">", context.getSkin());
+		final TextButton advance = new TextButton(">", context.getSkin());
 		advance.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				try {
-					context.getReplayManager().playSingle();
-				} catch (IndexOutOfBoundsException e) {
-					UnifiedDialog nomore = new UnifiedDialog("End of Replay", context.getSkin(), "redwin");
-					nomore.text("You have reached the end of the replay");
-					nomore.button("OK");
-					nomore.show(controlStage);
+				if(!((TextButton) event.getListenerActor()).isDisabled()) {
+					try {
+						context.getReplayManager().playSingle();
+					} catch (IndexOutOfBoundsException e) {
+						UnifiedDialog nomore = new UnifiedDialog("End of Replay", context.getSkin(), "redwin");
+						nomore.text("You have reached the end of the replay");
+						nomore.button("OK");
+						nomore.show(controlStage);
+					}
 				}
 			}
 		});
 		addActor(advance);
+		
+		//Add listener to prevent advancing clicks whilst animation is happening
+		context.getGameLogic().subscribeStateChanged(new GameStateListener() {
+			@Override
+			public void changed(GameState state) {
+				if(state == GameState.ANIMATING) {
+					//Set all controls which advance game to be disabled
+					advance.setDisabled(true);
+				} else {
+					//Set all controls which advance game to be enabled
+					advance.setDisabled(false);
+				}
+			}
+			
+		});
 	}
 	
 	public void moveToTop() {
