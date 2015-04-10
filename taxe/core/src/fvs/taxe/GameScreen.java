@@ -72,7 +72,7 @@ public class GameScreen extends ScreenAdapter {
         setRandomSeed(rm);
 
         //Initialises the game
-        gameLogic = Game.getInstance();
+        gameLogic = new Game();
         context = new Context(stage, skin, game, gameLogic);
 
         rm.setStage(stage);

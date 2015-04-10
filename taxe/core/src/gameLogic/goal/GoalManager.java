@@ -22,10 +22,9 @@ public class GoalManager {
         this.resourceManager = resourceManager;
     }
 
-    public Goal generateRandom(int turn) {
+    public Goal generateRandom(int turn, Map map) {
         //This routine generates a random goal and calculates the points that should be awarded for completion of the goal
 
-        Map map = Game.getInstance().getMap();
         Station origin;
         Station intermediary;
         int forTurns;
@@ -94,10 +93,10 @@ public class GoalManager {
         return goal;
     }
 
-    public void addRandomGoalToPlayer(Player player) {
+    public void addRandomGoalToPlayer(Player player, Map map) {
         //Needs to check whether the player is skipping their turn, if they are then they should not be given a goal
         if (!player.getSkip()) {
-            player.addGoal(generateRandom(player.getPlayerManager().getTurnNumber()));
+            player.addGoal(generateRandom(player.getPlayerManager().getTurnNumber(), map));
         }
 
 		/* Uncomment to test the appropriateness of the generated points for the goals
@@ -106,12 +105,12 @@ public class GoalManager {
 		}*/
     }
 
-    public ArrayList<Tuple<Player, Goal>> trainArrived(Train train, Player player) {
+    public ArrayList<Tuple<Player, Goal>> trainArrived(Train train, Player player, int turn) {
         //This updates the score when a train arrives at a station by checking if the goals are complete
         ArrayList<Tuple<Player, Goal>> completedGoals = new ArrayList<Tuple<Player, Goal>>();
         for (Goal goal : player.getGoals()) {
             if (goal.isComplete(train)) {
-                if (goal.isBonusCompleted(train)) {
+                if (goal.isBonusCompleted(train, turn)) {
                     player.updateScore(goal.getBonus());
                 } else {
                     player.updateScore(goal.getScore());
