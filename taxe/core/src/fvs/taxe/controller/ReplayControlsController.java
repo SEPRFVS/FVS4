@@ -6,10 +6,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import fvs.taxe.ReplayScreen;
@@ -24,7 +28,7 @@ public class ReplayControlsController {
 	
 	private Table controlTable;
 	private Context context;
-	private static Game playingLogic;
+	private Game playingLogic;
 	private Stage controlStage;
 	
 	public ReplayControlsController(Context context) {
@@ -152,6 +156,49 @@ public class ReplayControlsController {
 		});
 		addActor(nextTurn);
 		
+		//Go to a specific turn
+		final SelectBox<Integer> turns = new SelectBox<Integer>(context.getSkin());
+		Array<Integer> turnNumbers = new Array<Integer>();
+		for(int i = 0; i <= context.getReplayManager().getAvailableTurns(); i++) {
+			turnNumbers.add(i + 1);
+		}
+		turns.setItems(turnNumbers);
+		turns.setSelectedIndex(0);
+		turns.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				//Display a dialog alerting to the fact fast forward is happening and prevent naughty clicking
+				UnifiedDialog ff = new UnifiedDialog("Please wait", context.getSkin(), "greenwin");
+				ff.text("Fast forwarding");
+				ff.show(controlStage);
+				
+				//Move forward to selected turn
+				for(int i = context.getGameLogic().getPlayerManager().getTurnNumber(); i < turns.getSelected(); i++) {
+					while(i == context.getGameLogic().getPlayerManager().getTurnNumber()) {
+						context.getReplayManager().playSingle();
+					}
+					while(context.getGameLogic().getState() == GameState.ANIMATING) {
+						//Holding loop to prevent advancing through animation
+					}
+				}
+				
+				//Update selection box
+				@SuppressWarnings("unchecked")
+				SelectBox<Integer> select = ((SelectBox<Integer>) actor);
+				Array<Integer> turnNumbers = new Array<Integer>();
+				for(int i = 0; i <= context.getReplayManager().getAvailableTurns(); i++) {
+					turnNumbers.add(i + 1);
+				}
+				select.setItems(turnNumbers);
+				select.setSelectedIndex(0);
+				
+				//Remove fast forward message
+				ff.hide();
+			}			
+		});
+		//addActor(new Label("Go to turn ", context.getSkin()));
+		//addActor(turns);
+		
 		//Add listener to prevent advancing clicks whilst animation is happening
 		context.getGameLogic().subscribeStateChanged(new GameStateListener() {
 			@Override
@@ -169,9 +216,4 @@ public class ReplayControlsController {
 			
 		});
 	}
-	
-	public void moveToTop() {
-		controlTable.toFront();
-	}
-
 }

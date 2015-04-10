@@ -156,6 +156,14 @@ public class GameScreen extends ScreenAdapter {
         		}
         	}
         });
+        
+        //Make new turn available for replay
+        gameLogic.getPlayerManager().subscribeTurnChanged(new TurnListener() {
+        	@Override
+        	public void changed() {
+        		context.getReplayManager().setAvailableTurns(gameLogic.getPlayerManager().getTurnNumber());
+        	}
+        });
     }
 
     protected void setRandomSeed(ReplayManager rm) {
@@ -212,8 +220,6 @@ public class GameScreen extends ScreenAdapter {
         
         //Causes all the actors to perform their actions (i.e trains to move)
         stage.act(Gdx.graphics.getDeltaTime());
-        //Ensure replay controls are accessible
-        context.getReplayControlsController().moveToTop();
         stage.draw();
     }
     

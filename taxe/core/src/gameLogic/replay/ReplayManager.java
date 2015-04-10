@@ -16,6 +16,7 @@ public class ReplayManager {
     private long seed;
     private Stage stage;
     private List<Tuple<ReplayType, String>> clicks = new ArrayList<Tuple<ReplayType, String>>();
+    private int availableTurns = 0;
 
     public void setSeed(long seed) {
         this.seed = seed;
@@ -110,5 +111,16 @@ public class ReplayManager {
     
     public void exitReplay() {
     	playPosition = 0;
+    }
+    
+    public void setAvailableTurns(int turnNumber) {
+    	//Test to prevent updating whilst replaying as listener will be active
+    	if(turnNumber > availableTurns) {
+    		availableTurns = turnNumber;
+    	}
+    }
+    
+    public int getAvailableTurns() {
+    	return availableTurns;
     }
 }

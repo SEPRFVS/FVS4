@@ -46,6 +46,7 @@ public class ReplayScreen extends GameScreen {
     	super.render(delta);
     	
     	if(controlStage != null) {
+    		controlStage.act();
     		controlStage.draw();
     	}
     }
