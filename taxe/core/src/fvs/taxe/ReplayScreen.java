@@ -22,7 +22,7 @@ public class ReplayScreen extends GameScreen {
 
         init(replayManager);
 
-        ReplayController replayController = new ReplayController(context, replayManager);
+        //ReplayController replayController = new ReplayController(context, replayManager);
     }
 
     @Override
@@ -46,6 +46,8 @@ public class ReplayScreen extends GameScreen {
     @Override
     public void render(float delta) {
     	super.render(delta);
+
+        replayManager.frame();
     	
     	if(controlStage != null) {
     		controlStage.act();

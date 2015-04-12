@@ -24,6 +24,11 @@ public class ReplayManager {
     private Stage stage;
     private List<Tuple<ReplayType, String>> clicks = new ArrayList<Tuple<ReplayType, String>>();
     private int availableTurns = 0;
+    private Game game;
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
 
     public void setSeed(long seed) {
         this.seed = seed;
@@ -76,7 +81,7 @@ public class ReplayManager {
     }
 
     public void playSingle() {
-        if (Game.getInstance().getState() == GameState.ANIMATING) {
+        if (game.getState() == GameState.ANIMATING) {
             System.out.println("Replay click blocked - game is in animating state.");
             return;
         }

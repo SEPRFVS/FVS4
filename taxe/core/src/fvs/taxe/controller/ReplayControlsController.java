@@ -89,6 +89,8 @@ public class ReplayControlsController {
                 for(Player player : context.getGameLogic().getPlayerManager().getAllPlayers()) {
                 	playerNames.add(player.getName());
                 }
+
+				context.getReplayManager().setGame(context.getGameLogic());
                 context.getTaxeGame().setScreen(new ReplayScreen(context.getTaxeGame(), context.getReplayManager(), playerNames, context.getGameLogic().getTotalTurns()));
     		}
     	});
@@ -150,6 +152,16 @@ public class ReplayControlsController {
 			}
 		});
 		addActor(nextTurn);
+
+		//Jump through the rest of the turn
+		final TextButton play = new TextButton("{?}", context.getSkin());
+		play.addListener(new ClickListener(){
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				context.getReplayManager().replayingToggle();
+			}
+		});
+		addActor(play);
 		
 		//Add listener to prevent advancing clicks whilst animation is happening
 		context.getGameLogic().subscribeStateChanged(new GameStateListener() {
