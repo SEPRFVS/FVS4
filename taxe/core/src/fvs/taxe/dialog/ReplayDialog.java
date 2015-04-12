@@ -10,6 +10,8 @@ public class ReplayDialog extends UnifiedDialog {
     public ReplayDialog(String title, Skin skin, String windowStyleName, ReplayManager replayManager) {
         super(title, skin, windowStyleName);
 
+        // dialogs must not be modal when replaying, as the user will click buttons not in the dialog box
+        this.setModal(false);
         this.replayManager = replayManager;
     }
 

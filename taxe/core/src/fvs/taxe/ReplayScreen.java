@@ -21,6 +21,8 @@ public class ReplayScreen extends GameScreen {
         this.totalTurns = totalTurns;
 
         init(replayManager);
+
+        ReplayController replayController = new ReplayController(context, replayManager);
     }
 
     @Override

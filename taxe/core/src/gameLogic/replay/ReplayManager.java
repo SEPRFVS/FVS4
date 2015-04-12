@@ -1,18 +1,25 @@
 package gameLogic.replay;
 
 import Util.Tuple;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import fvs.taxe.dialog.ReplayDialog;
+import gameLogic.Game;
+import gameLogic.GameState;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReplayManager {
     private int playPosition = 0;
-    private boolean playing = false;
+    private boolean replayingClick = false;
+    private boolean replaying = false;
+    // time in ms between clicks when replaying automatically
+    private float clickInterval = 0.5f;
+    private float timeSinceClick = 0;
     private long seed;
     private Stage stage;
     private List<Tuple<ReplayType, String>> clicks = new ArrayList<Tuple<ReplayType, String>>();
@@ -27,13 +34,13 @@ public class ReplayManager {
     }
 
     private void addClick(ReplayType type, String s) {
-        if (playing) return;
+        if (replayingClick) return;
 
         clicks.add(new Tuple<ReplayType, String>(type, s));
     }
 
     public void addClick(String actorId) {
-        if (playing) return;
+        if (replayingClick) return;
 
         System.out.println("Click on "+ actorId +" added");
         addClick(ReplayType.ACTOR_CLICK, actorId);
@@ -48,17 +55,42 @@ public class ReplayManager {
         this.stage = stage;
     }
 
-    public void playSingle() {
-        playing = true;
+    public void replayingToggle() {
+        replaying = !replaying;
+    }
 
-        if (playPosition > clicks.size()) {
+    /**
+     * this method is called by ReplayScreen on each frame render
+     */
+    public void frame() {
+        if (!replaying) {
+            return;
+        }
+
+        timeSinceClick += Gdx.graphics.getDeltaTime();
+
+        if (timeSinceClick >= clickInterval) {
+            playSingle();
+            timeSinceClick = 0;
+        }
+    }
+
+    public void playSingle() {
+        if (Game.getInstance().getState() == GameState.ANIMATING) {
+            System.out.println("Replay click blocked - game is in animating state.");
+            return;
+        }
+
+        replayingClick = true;
+
+        if (playPosition >= clicks.size()) {
             System.out.println("Played all clicks");
             return;
         }
 
         Tuple<ReplayType, String> click = clicks.get(playPosition);
 
-        System.out.println("playing single..." + String.valueOf(playPosition) + ", actor: " + click.getSecond());
+        System.out.println("replayingClick single..." + String.valueOf(playPosition) + ", actor: " + click.getSecond());
 
 
         switch (click.getFirst()) {
@@ -71,7 +103,7 @@ public class ReplayManager {
         }
 
         playPosition++;
-        playing = false;
+        replayingClick = false;
     }
 
     private void clickActorInStage(String name) {

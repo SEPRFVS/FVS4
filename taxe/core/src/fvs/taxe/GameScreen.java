@@ -44,7 +44,7 @@ public class GameScreen extends ScreenAdapter {
     private float timeAnimated = 0;
     public static final int ANIMATION_TIME = 2;
     private Tooltip tooltip;
-    private Context context;
+    protected Context context;
 
     private StationController stationController;
     private SideBarController sideBarController;
