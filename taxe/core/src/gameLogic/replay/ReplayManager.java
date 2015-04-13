@@ -86,7 +86,9 @@ public class ReplayManager {
     public void frame() {
         if (!replaying) {
             return;
-        } else if(playPosition >= clicks.size()) {
+        }
+        
+        if(isEnd()) {
         	replayingToggle();
         	return;
         }
@@ -98,6 +100,10 @@ public class ReplayManager {
             timeSinceClick = 0;
         }
     }
+    
+    public boolean isEnd() {
+    	return playPosition >= clicks.size();
+    }
 
     public void playSingle() {
         if (game.getState() == GameState.ANIMATING) {
@@ -107,7 +113,7 @@ public class ReplayManager {
 
         replayingClick = true;
 
-        if (playPosition >= clicks.size()) {
+        if (isEnd()) {
             System.out.println("Played all clicks");
             return;
         }

@@ -124,9 +124,9 @@ public class ReplayControlsController {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				if(!((TextButton) event.getListenerActor()).isDisabled()) {
-					try {
+					if(!context.getReplayManager().isEnd()) {
 						context.getReplayManager().playSingle();
-					} catch (IndexOutOfBoundsException e) {
+					} else {
 						UnifiedDialog nomore = new UnifiedDialog("End of Replay", context.getSkin(), "redwin");
 						nomore.text("You have reached the end of the replay");
 						nomore.button("OK");
@@ -146,9 +146,9 @@ public class ReplayControlsController {
 					boolean goAgain = true;
 					int startTurn = context.getGameLogic().getPlayerManager().getTurnNumber();
 					while(goAgain && context.getGameLogic().getPlayerManager().getTurnNumber() == startTurn) {
-						try {
+						if(!context.getReplayManager().isEnd()) {
 							context.getReplayManager().playSingle();
-						} catch (IndexOutOfBoundsException e) {
+						} else {
 							UnifiedDialog nomore = new UnifiedDialog("End of Replay", context.getSkin(), "redwin");
 							nomore.text("You have reached the end of the replay");
 							nomore.button("OK");
@@ -166,7 +166,15 @@ public class ReplayControlsController {
 		play.addListener(new ClickListener(){
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				context.getReplayManager().replayingToggle();
+				if(!context.getReplayManager().isEnd()) {
+					context.getReplayManager().replayingToggle();
+				} else {
+					UnifiedDialog nomore = new UnifiedDialog("End of Replay", context.getSkin(), "redwin");
+					nomore.text("You have reached the end of the replay");
+					nomore.button("OK");
+					nomore.show(controlStage);
+				}
+				
 			}
 		});
 		addActor(play);
