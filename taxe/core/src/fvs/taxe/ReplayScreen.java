@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import gameLogic.RandomSingleton;
+import gameLogic.listeners.TurnListener;
 import gameLogic.replay.ReplayManager;
 
 public class ReplayScreen extends GameScreen {
@@ -57,5 +58,26 @@ public class ReplayScreen extends GameScreen {
     
     public void setControlStage(Stage controlStage) {
     	this.controlStage = controlStage;
+    }
+    
+    public void jumpToTurn(final int turn) {
+    	//Don't do anything to get to turn 1
+    	if(turn == 0) {
+    		return;
+    	}
+    	
+    	context.getGameLogic().getPlayerManager().subscribeTurnChanged(new TurnListener(){
+			@Override
+			public void changed() {
+				if(context.getGameLogic().getPlayerManager().getTurnNumber() == turn) {
+					context.getReplayManager().replayingToggle();
+					context.getReplayControlsController().disablePlay(false);
+					context.getReplayControlsController().disableJump(false);
+				}
+			}
+		});
+		context.getReplayManager().replayingToggle();
+		context.getReplayControlsController().disablePlay(true);
+		context.getReplayControlsController().disableJump(true);
     }
 }

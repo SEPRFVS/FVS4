@@ -32,7 +32,7 @@ public class ReplayControlsController {
 	private Context context;
 	private Stage controlStage;
 	public boolean advancing = false;
-	private TextButton advance, nextTurn;
+	private TextButton advance, nextTurn, play;
 	private SelectBox<Integer> jump;
 	
 	private GameStateListener changeState = new GameStateListener() {
@@ -184,7 +184,7 @@ public class ReplayControlsController {
 		addActor(nextTurn);
 
 		//Move slowly through all clicks until stopped
-		final TextButton play = new TextButton("{?}", context.getSkin());
+		play = new TextButton("{?}", context.getSkin());
 		play.addListener(new ClickListener(){
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
@@ -215,24 +215,58 @@ public class ReplayControlsController {
 			public void changed(ChangeEvent event, Actor actor) {
 				@SuppressWarnings("unchecked")
 				final int jumpTo = ((SelectBox<Integer>) actor).getSelected() - 1;
-				//TODO allow jump back
-				context.getGameLogic().getPlayerManager().subscribeTurnChanged(new TurnListener(){
-					@Override
-					public void changed() {
-						if(context.getGameLogic().getPlayerManager().getTurnNumber() >= jumpTo) {
-							context.getReplayManager().replayingToggle();
-							play.setDisabled(false);
+				//Test to do nothing if same turn
+				if (jumpTo > context.getGameLogic().getPlayerManager().getTurnNumber()) {
+					context.getGameLogic().getPlayerManager().subscribeTurnChanged(new TurnListener(){
+						@Override
+						public void changed() {
+							if(context.getGameLogic().getPlayerManager().getTurnNumber() == jumpTo) {
+								context.getReplayManager().replayingToggle();
+								play.setDisabled(false);
+								jump.setDisabled(false);
+							}
 						}
-					}
-				});
-				context.getReplayManager().replayingToggle();
-				play.setDisabled(true);
+					});
+					context.getReplayManager().replayingToggle();
+					play.setDisabled(true);
+					jump.setDisabled(true);
+				} else if(jumpTo < context.getGameLogic().getPlayerManager().getTurnNumber()) {
+					//Rewinding is hard, create a new replay window and when it is ready fast forward
+					ArrayList<String> playerNames = new ArrayList<String>();
+	                for(Player player : context.getGameLogic().getPlayerManager().getAllPlayers()) {
+	                	playerNames.add(player.getName());
+	                }
+	                context.getReplayManager().exitReplay();
+					context.getReplayManager().setGame(context.getGameLogic());
+					ReplayScreen newScreen = new ReplayScreen(context.getTaxeGame(), context.getReplayManager(), playerNames, context.getGameLogic().getTotalTurns());
+	                context.getTaxeGame().setScreen(newScreen);
+	                //Jump to correct turn
+	                newScreen.jumpToTurn(jumpTo);
+				}
 			}
 		});
 		addActor(new Label("Jump to ", context.getSkin()));
 		addActor(jump);
 		
+		//Add listener to update Jump each turn
+		context.getGameLogic().getPlayerManager().subscribeTurnChanged(new TurnListener() {
+			@Override
+			public void changed() {
+				if(!advancing) {
+					jump.setSelectedIndex(jump.getSelectedIndex() + 1);
+				}
+			}
+		});
+		
 		//Add listener to prevent advancing clicks whilst animation is happening
 		context.getGameLogic().subscribeStateChanged(changeState);
+	}
+	
+	public void disablePlay(boolean disabled) {
+		play.setDisabled(disabled);
+	}
+	
+	public void disableJump(boolean disabled) {
+		jump.setDisabled(disabled);
 	}
 }
