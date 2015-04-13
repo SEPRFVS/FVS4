@@ -70,6 +70,9 @@ public class ReplayManager {
     public void frame() {
         if (!replaying) {
             return;
+        } else if(playPosition >= clicks.size()) {
+        	replaying = false;
+        	return;
         }
 
         timeSinceClick += Gdx.graphics.getDeltaTime();

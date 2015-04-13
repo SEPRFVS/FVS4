@@ -153,7 +153,7 @@ public class ReplayControlsController {
 		});
 		addActor(nextTurn);
 
-		//Jump through the rest of the turn
+		//Move slowly through all clicks until stopped
 		final TextButton play = new TextButton("{?}", context.getSkin());
 		play.addListener(new ClickListener(){
 			@Override

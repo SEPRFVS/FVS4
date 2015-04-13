@@ -245,6 +245,9 @@ public class GameScreen extends ScreenAdapter {
         goalController.showCurrentPlayerGoals();
         resourceController.drawPlayerResources(gameLogic.getPlayerManager().getCurrentPlayer());
         context.getReplayControlsController().showReplayControls();
+    	
+        //Set GameLogic to current game
+    	context.getReplayManager().setGame(gameLogic);
         
         //Load background music
         game.soundController.addSettingsButton(stage, skin);
