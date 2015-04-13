@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
@@ -33,7 +34,7 @@ public class ReplayControlsController {
 	private Context context;
 	private Stage controlStage;
 	public boolean advancing = false;
-	private TextButton advance, nextTurn, play;
+	private ImageButton advance, nextTurn, play;
 	private SelectBox<Integer> jump;
 	
 	private GameStateListener changeState = new GameStateListener() {
@@ -86,8 +87,8 @@ public class ReplayControlsController {
 		}
 		
 		//Display controls with correct sizing
-		controlTable.setHeight(controlTable.getHeight() + 20.0f);
-		controlTable.setWidth(controlTable.getWidth() + 20.0f);
+		controlTable.setHeight(controlTable.getHeight() + 5.0f);
+		controlTable.setWidth(controlTable.getWidth() + 10.0f);
 		controlTable.setPosition(TaxeGame.WIDTH - SideBarController.CONTROLS_WIDTH - controlTable.getWidth(), 0);
 		
 		if(context.getTaxeGame().getScreen() instanceof ReplayScreen) {
@@ -142,11 +143,11 @@ public class ReplayControlsController {
 		addActor(exit);
 		
 		//Act the next click
-		advance = new TextButton(">", context.getSkin());
+		advance = new ImageButton(context.getSkin(), "play");
 		advance.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				if(!((TextButton) event.getListenerActor()).isDisabled()) {
+				if(!((ImageButton) event.getListenerActor()).isDisabled()) {
 					if(!context.getReplayManager().isEnd()) {
 						context.getReplayManager().playSingle();
 					} else {
@@ -161,11 +162,11 @@ public class ReplayControlsController {
 		addActor(advance);
 		
 		//Jump through the rest of the turn
-		nextTurn = new TextButton(">>", context.getSkin());
+		nextTurn = new ImageButton(context.getSkin(), "fastforward");
 		nextTurn.addListener(new ClickListener(){
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				if(!((TextButton) event.getListenerActor()).isDisabled()) {
+				if(!((ImageButton) event.getListenerActor()).isDisabled()) {
 					boolean goAgain = true;
 					int startTurn = context.getGameLogic().getPlayerManager().getTurnNumber();
 					while(goAgain && context.getGameLogic().getPlayerManager().getTurnNumber() == startTurn) {
@@ -185,7 +186,7 @@ public class ReplayControlsController {
 		addActor(nextTurn);
 
 		//Move slowly through all clicks until stopped
-		play = new TextButton("{?}", context.getSkin());
+		play = new ImageButton(context.getSkin(), "loop");
 		play.addListener(new ClickListener(){
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
@@ -204,7 +205,7 @@ public class ReplayControlsController {
 		context.getReplayManager().subscribeToggleListener(toggle);
 		
 		//Add option to Jump to a turn in the future
-		jump = new SelectBox<Integer>(context.getSkin());
+		jump = new SelectBox<Integer>(context.getSkin(), "replay");
 		Array<Integer> turnNums = new Array<Integer>();
 		for(int i = 0; i <= context.getReplayManager().getAvailableTurns(); i++) {
 			turnNums.add(i + 1);

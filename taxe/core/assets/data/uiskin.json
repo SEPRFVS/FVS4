@@ -102,7 +102,10 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 	default: { imageUp: paint_brush, up: whitebutton, down: greybutton },
 	settings: { imageUp: settings, up: whitebutton, down: greybutton },
-	notification: { imageUp: speech }
+	loop: { imageUp: loop, up: whitebutton, down: greybutton },
+	fastforward: { imageUp: fastforward, up: whitebutton, down: greybutton },
+	notification: { imageUp: speech },
+	play: { imageUp: play, up: whitebutton, down: greybutton }
 },
 com.badlogic.gdx.scenes.scene2d.ui.SplitPane$SplitPaneStyle: {
 	default-vertical: { handle: default-splitpane-vertical },
@@ -178,7 +181,8 @@ com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
 		vScroll: default-scroll,
 		vScrollKnob: default-round-large
 	},
-	notification: { background: speechpanel, hScrollKnob: greytransscrollknob, vScrollKnob: greytransscrollknob }
+	notification: { background: speechpanel, hScrollKnob: greytransscrollknob, vScrollKnob: greytransscrollknob },
+	slim: { background: default-rect, hScrollKnob: greytransscrollknob, vScrollKnob: greytransscrollknob }
 },
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	optional: {
@@ -245,6 +249,12 @@ com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
 		fontColorUnselected: { a: 1, b: 1, g: 1, r: 1 },
 		selection: selection,
 		background: dialogDim
+	},
+	white: {
+		font: default-font,
+		fontColorSelected: { a: 1 },
+		fontColorUnselected: { a: 1, b: 1, g: 1, r: 1 },
+		selection: whitebutton
 	}
 },
 com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle: {
@@ -270,6 +280,13 @@ com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle: {
 		background: default-select,
 		scrollStyle: default,
 		listStyle: default
+	},
+	replay: {
+		font: default-font,
+		fontColor: { a: 1, b: 1, g: 1, r: 1 },
+		background: dropdown,
+		scrollStyle: slim,
+		listStyle: white
 	}
 }
 }
