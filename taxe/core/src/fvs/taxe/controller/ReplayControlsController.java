@@ -33,6 +33,7 @@ public class ReplayControlsController {
 	private Stage controlStage;
 	public boolean advancing = false;
 	private TextButton advance, nextTurn;
+	private SelectBox<Integer> jump;
 	
 	private GameStateListener changeState = new GameStateListener() {
 		@Override
@@ -200,6 +201,36 @@ public class ReplayControlsController {
 		});
 		addActor(play);
 		context.getReplayManager().subscribeToggleListener(toggle);
+		
+		//Add option to Jump to a turn in the future
+		jump = new SelectBox<Integer>(context.getSkin());
+		Array<Integer> turnNums = new Array<Integer>();
+		for(int i = 0; i <= context.getReplayManager().getAvailableTurns(); i++) {
+			turnNums.add(i + 1);
+		}
+		jump.setItems(turnNums);
+		jump.setSelectedIndex(0);
+		jump.addListener(new ChangeListener(){
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				@SuppressWarnings("unchecked")
+				final int jumpTo = ((SelectBox<Integer>) actor).getSelected() - 1;
+				//TODO allow jump back
+				context.getGameLogic().getPlayerManager().subscribeTurnChanged(new TurnListener(){
+					@Override
+					public void changed() {
+						if(context.getGameLogic().getPlayerManager().getTurnNumber() >= jumpTo) {
+							context.getReplayManager().replayingToggle();
+							play.setDisabled(false);
+						}
+					}
+				});
+				context.getReplayManager().replayingToggle();
+				play.setDisabled(true);
+			}
+		});
+		addActor(new Label("Jump to ", context.getSkin()));
+		addActor(jump);
 		
 		//Add listener to prevent advancing clicks whilst animation is happening
 		context.getGameLogic().subscribeStateChanged(changeState);
