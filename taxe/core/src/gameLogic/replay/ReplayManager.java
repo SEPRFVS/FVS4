@@ -1,14 +1,17 @@
 package gameLogic.replay;
 
 import Util.Tuple;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+
 import fvs.taxe.dialog.ReplayDialog;
 import gameLogic.Game;
 import gameLogic.GameState;
+import gameLogic.listeners.ReplayToggleListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +28,7 @@ public class ReplayManager {
     private List<Tuple<ReplayType, String>> clicks = new ArrayList<Tuple<ReplayType, String>>();
     private int availableTurns = 0;
     private Game game;
+    private List<ReplayToggleListener> toggleListeners = new ArrayList<ReplayToggleListener>();
 
     public void setGame(Game game) {
         this.game = game;
@@ -62,6 +66,18 @@ public class ReplayManager {
 
     public void replayingToggle() {
         replaying = !replaying;
+        
+        for(ReplayToggleListener listener : toggleListeners) {
+        	listener.toggled(replaying);
+        }
+    }
+    
+    public void subscribeToggleListener(ReplayToggleListener listener) {
+    	toggleListeners.add(listener);
+    }
+    
+    public void unsubscribeToggleListener(ReplayToggleListener listener) {
+    	toggleListeners.remove(listener);
     }
 
     /**
@@ -71,7 +87,7 @@ public class ReplayManager {
         if (!replaying) {
             return;
         } else if(playPosition >= clicks.size()) {
-        	replaying = false;
+        	replayingToggle();
         	return;
         }
 
@@ -150,7 +166,9 @@ public class ReplayManager {
     }
     
     public void exitReplay() {
+    	//Reset variables to pre-replay state
     	playPosition = 0;
+    	toggleListeners.clear();
     }
     
     public void setAvailableTurns(int turnNumber) {

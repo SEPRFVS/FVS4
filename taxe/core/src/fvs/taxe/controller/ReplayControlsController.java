@@ -22,6 +22,7 @@ import fvs.taxe.dialog.UnifiedDialog;
 import gameLogic.Game;
 import gameLogic.GameState;
 import gameLogic.listeners.GameStateListener;
+import gameLogic.listeners.ReplayToggleListener;
 import gameLogic.listeners.TurnListener;
 import gameLogic.player.Player;
 
@@ -31,6 +32,13 @@ public class ReplayControlsController {
 	private Context context;
 	private Stage controlStage;
 	public boolean advancing = false;
+	
+	private ReplayToggleListener toggle = new ReplayToggleListener() {
+		@Override
+		public void toggled(boolean replaying) {
+			advancing = replaying;
+		}
+	};
 	
 	public ReplayControlsController(Context context) {
 		this.context = context;
@@ -162,12 +170,13 @@ public class ReplayControlsController {
 			}
 		});
 		addActor(play);
+		context.getReplayManager().subscribeToggleListener(toggle);
 		
 		//Add listener to prevent advancing clicks whilst animation is happening
 		context.getGameLogic().subscribeStateChanged(new GameStateListener() {
 			@Override
 			public void changed(GameState state) {
-				if(state == GameState.ANIMATING) {
+				if(state == GameState.ANIMATING || advancing) {
 					//Set all controls which advance game to be disabled
 					advance.setDisabled(true);
 					nextTurn.setDisabled(true);
