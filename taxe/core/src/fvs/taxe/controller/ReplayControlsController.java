@@ -32,11 +32,32 @@ public class ReplayControlsController {
 	private Context context;
 	private Stage controlStage;
 	public boolean advancing = false;
+	private TextButton advance, nextTurn;
+	
+	private GameStateListener changeState = new GameStateListener() {
+		@Override
+		public void changed(GameState state) {
+			if(state == GameState.ANIMATING || advancing) {
+				//Set all controls which advance game to be disabled
+				advance.setDisabled(true);
+				nextTurn.setDisabled(true);
+			} else {
+				//Set all controls which advance game to be enabled
+				advance.setDisabled(false);
+				nextTurn.setDisabled(false);
+			}
+		}
+		
+	};
 	
 	private ReplayToggleListener toggle = new ReplayToggleListener() {
 		@Override
 		public void toggled(boolean replaying) {
 			advancing = replaying;
+			
+			if(!replaying) {
+				changeState.changed(context.getGameLogic().getState());
+			}
 		}
 	};
 	
@@ -119,7 +140,7 @@ public class ReplayControlsController {
 		addActor(exit);
 		
 		//Act the next click
-		final TextButton advance = new TextButton(">", context.getSkin());
+		advance = new TextButton(">", context.getSkin());
 		advance.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
@@ -138,7 +159,7 @@ public class ReplayControlsController {
 		addActor(advance);
 		
 		//Jump through the rest of the turn
-		final TextButton nextTurn = new TextButton(">>", context.getSkin());
+		nextTurn = new TextButton(">>", context.getSkin());
 		nextTurn.addListener(new ClickListener(){
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
@@ -181,20 +202,6 @@ public class ReplayControlsController {
 		context.getReplayManager().subscribeToggleListener(toggle);
 		
 		//Add listener to prevent advancing clicks whilst animation is happening
-		context.getGameLogic().subscribeStateChanged(new GameStateListener() {
-			@Override
-			public void changed(GameState state) {
-				if(state == GameState.ANIMATING || advancing) {
-					//Set all controls which advance game to be disabled
-					advance.setDisabled(true);
-					nextTurn.setDisabled(true);
-				} else {
-					//Set all controls which advance game to be enabled
-					advance.setDisabled(false);
-					nextTurn.setDisabled(false);
-				}
-			}
-			
-		});
+		context.getGameLogic().subscribeStateChanged(changeState);
 	}
 }
