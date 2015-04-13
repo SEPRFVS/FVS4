@@ -187,4 +187,11 @@ public class ReplayManager {
     public int getAvailableTurns() {
     	return availableTurns;
     }
+    
+    public void setClickInterval(float clickInterval) {
+    	this.clickInterval = clickInterval;
+    }
+    public float getClickInterval() {
+    	return clickInterval;
+    }
 }

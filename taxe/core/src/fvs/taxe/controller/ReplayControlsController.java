@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
@@ -257,6 +258,19 @@ public class ReplayControlsController {
 				}
 			}
 		});
+		
+		//Slider to set speed
+		Slider speed = new Slider(0.1f, 2.0f, 0.1f, false, context.getSkin(), "settings");
+		speed.setValue(context.getReplayManager().getClickInterval());
+		speed.addListener(new ChangeListener(){
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				context.getReplayManager().setClickInterval(((Slider) actor).getValue());
+			}
+		});
+		addActor(new Label("    Fast", context.getSkin()));
+		addActor(speed);
+		addActor(new Label("Slow", context.getSkin()));
 		
 		//Add listener to prevent advancing clicks whilst animation is happening
 		context.getGameLogic().subscribeStateChanged(changeState);
