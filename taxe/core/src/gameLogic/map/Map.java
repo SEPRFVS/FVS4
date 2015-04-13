@@ -167,7 +167,7 @@ public class Map {
         return connections.get(index);
     }
 
-    public void blockRandomConnection() {
+    public void blockRandomConnection(List<Player> players) {
         //This blocks a random connection
         int rand = random.nextInt(2);
         if (rand > 0) {
@@ -177,7 +177,7 @@ public class Map {
             do {
                canBlock = true;
                 toBlock = getRandomConnection();
-                for (Player player : Game.getInstance().getPlayerManager().getAllPlayers()) {
+                for (Player player : players) {
                     for (Train train : player.getTrains()) {
                         //In a try catch statement as unplaced trains do not have a nextStation, resulting in null pointer exceptions
                         try {

@@ -44,7 +44,7 @@ public class GameScreen extends ScreenAdapter {
     private float timeAnimated = 0;
     public static final int ANIMATION_TIME = 2;
     private Tooltip tooltip;
-    private Context context;
+    protected Context context;
 
     private StationController stationController;
     private SideBarController sideBarController;
@@ -72,7 +72,7 @@ public class GameScreen extends ScreenAdapter {
         setRandomSeed(rm);
 
         //Initialises the game
-        gameLogic = Game.getInstance();
+        gameLogic = new Game();
         context = new Context(stage, skin, game, gameLogic);
 
         rm.setStage(stage);
@@ -156,6 +156,14 @@ public class GameScreen extends ScreenAdapter {
         		}
         	}
         });
+        
+        //Make new turn available for replay
+        gameLogic.getPlayerManager().subscribeTurnChanged(new TurnListener() {
+        	@Override
+        	public void changed() {
+        		context.getReplayManager().setAvailableTurns(gameLogic.getPlayerManager().getTurnNumber());
+        	}
+        });
     }
 
     protected void setRandomSeed(ReplayManager rm) {
@@ -215,8 +223,6 @@ public class GameScreen extends ScreenAdapter {
         
         //Causes all the actors to perform their actions (i.e trains to move)
         stage.act(Gdx.graphics.getDeltaTime());
-        //Ensure replay controls are accessible
-        context.getReplayControlsController().moveToTop();
         stage.draw();
     }
     
@@ -242,6 +248,9 @@ public class GameScreen extends ScreenAdapter {
         goalController.showCurrentPlayerGoals();
         resourceController.drawPlayerResources(gameLogic.getPlayerManager().getCurrentPlayer());
         context.getReplayControlsController().showReplayControls();
+    	
+        //Set GameLogic to current game
+    	context.getReplayManager().setGame(gameLogic);
         
         //Load background music
         game.soundController.addSettingsButton(stage, skin);

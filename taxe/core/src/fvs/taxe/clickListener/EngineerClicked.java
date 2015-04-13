@@ -28,9 +28,9 @@ public class EngineerClicked extends ReplayClickListener {
     public void clicked(InputEvent event, float x, float y) {
         super.clicked(event, x, y);
 
-        if (Game.getInstance().getState() == GameState.NORMAL) {
+        if (context.getGameLogic().getState() == GameState.NORMAL) {
             // current player can't be passed in as it changes so find out current player at this instant
-            Player currentPlayer = Game.getInstance().getPlayerManager().getCurrentPlayer();
+            Player currentPlayer = context.getGameLogic().getPlayerManager().getCurrentPlayer();
 
             //Creates a dialog and a listener for the result of it
             DialogButtonClicked listener = new DialogButtonClicked(context, currentPlayer, engineer);
@@ -46,7 +46,7 @@ public class EngineerClicked extends ReplayClickListener {
         //This shows the message if there is not one currently being displayed
         if (!displayingMessage) {
             displayingMessage = true;
-            if (Game.getInstance().getState() == GameState.NORMAL) {
+            if (context.getGameLogic().getState() == GameState.NORMAL) {
                 context.getSideBarController().displayMessage("Your Engineer. Used to fix damaged connections.");
 
 
@@ -60,7 +60,7 @@ public class EngineerClicked extends ReplayClickListener {
         //This hides the message currently in the topBar if one is being displayed
         if (displayingMessage) {
             displayingMessage = false;
-            if (Game.getInstance().getState() == GameState.NORMAL) {
+            if (context.getGameLogic().getState() == GameState.NORMAL) {
                 //If the game state is normal then the topBar is cleared by passing it an empty string to display for 0 seconds
                 context.getSideBarController().clearMessage();
             }

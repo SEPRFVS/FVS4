@@ -1,7 +1,7 @@
 package test;
 
 import junit.framework.TestCase;
-
+import gameLogic.Game;
 import gameLogic.goal.Goal;
 import gameLogic.goal.GoalManager;
 import gameLogic.map.Position;
@@ -12,9 +12,9 @@ import gameLogic.resource.ResourceManager;
 import gameLogic.resource.Train;
 
 public class GoalManagerTest extends TestCase {
-	ResourceManager rs = new ResourceManager();
-	GoalManager goalManager=new GoalManager(rs);
-	PlayerManager playerManager = new PlayerManager();
+	Game game = new Game();
+	GoalManager goalManager = game.getGoalManager();
+	PlayerManager playerManager = game.getPlayerManager();
 
 
 	//  playerManager.createPlayers(2);
@@ -34,19 +34,19 @@ public class GoalManagerTest extends TestCase {
 		//player1.addGoal(goal);
 		//player1.addResource(train);
 
-		Goal newGoal1 = goalManager.generateRandom(1);
+		Goal newGoal1 = goalManager.generateRandom(1, game.getMap());
 		System.out.println(newGoal1.toString());
-		Goal newGoal2 = goalManager.generateRandom(3);
+		Goal newGoal2 = goalManager.generateRandom(3, game.getMap());
 		System.out.println(newGoal2.toString());
-		Goal newGoal3 = goalManager.generateRandom(5);
+		Goal newGoal3 = goalManager.generateRandom(5, game.getMap());
 		System.out.println(newGoal3.toString());
-		Goal newGoal4 = goalManager.generateRandom(7);
+		Goal newGoal4 = goalManager.generateRandom(7, game.getMap());
 		System.out.println(newGoal4.toString());
-		Goal newGoal5 = goalManager.generateRandom(9);
+		Goal newGoal5 = goalManager.generateRandom(9, game.getMap());
 		System.out.println(newGoal5.toString());
-		Goal newGoal6 = goalManager.generateRandom(11);
+		Goal newGoal6 = goalManager.generateRandom(11, game.getMap());
 		System.out.println(newGoal6.toString());
-		Goal newGoal7 = goalManager.generateRandom(13);
+		Goal newGoal7 = goalManager.generateRandom(13, game.getMap());
 		System.out.println(newGoal7.toString());
 
 
@@ -57,9 +57,9 @@ public class GoalManagerTest extends TestCase {
 		Player player1 = playerManager.getCurrentPlayer();
 		assertEquals(0,player1.getGoals().size());
 
-		goalManager.addRandomGoalToPlayer(player1);
-		goalManager.addRandomGoalToPlayer(player1);
-		goalManager.addRandomGoalToPlayer(player1);
+		goalManager.addRandomGoalToPlayer(player1, game.getMap());
+		goalManager.addRandomGoalToPlayer(player1, game.getMap());
+		goalManager.addRandomGoalToPlayer(player1, game.getMap());
 
 
 		assertEquals(3, player1.getGoals().size());

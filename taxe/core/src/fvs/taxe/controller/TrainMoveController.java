@@ -73,7 +73,7 @@ public class TrainMoveController {
                     Station nextStation = train.getRoute().get(nextIndex);
 
                     //Checks whether the next connection is blocked, if so the train is paused, if not the train is unpaused.
-                    if (Game.getInstance().getMap().isConnectionBlocked(station, nextStation)) {
+                    if (context.getGameLogic().getMap().isConnectionBlocked(station, nextStation)) {
                         train.getActor().setPaused(true);
                         train.getActor().setRecentlyPaused(false);
                     } else {
@@ -97,7 +97,7 @@ public class TrainMoveController {
         return new RunnableAction() {
             public void run() {
                 //This informs the user that their train has completed a goal, if it has
-                ArrayList<Tuple<Player, Goal>> completedGoals = context.getGameLogic().getGoalManager().trainArrived(train, train.getPlayer());
+                ArrayList<Tuple<Player, Goal>> completedGoals = context.getGameLogic().getGoalManager().trainArrived(train, train.getPlayer(), context.getGameLogic().getPlayerManager().getTurnNumber());
                 for (Tuple<Player, Goal> message : completedGoals) {
                     context.getNotificationController().showGoalComplete(message.getFirst(), message.getSecond());
                     context.getSoundController().playSound("open");

@@ -13,7 +13,7 @@ public class GameTest extends LibGdxTest {
 
     @Before
     public void setUpGame() throws Exception {
-        Game game = Game.getInstance();
+        Game game = new Game();
         game.getPlayerManager();
         pm = game.getPlayerManager();
     }
