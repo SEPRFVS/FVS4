@@ -73,7 +73,7 @@ public class DialogNews extends ReplayDialog {
 		    	}
 		    	String col1 = "Since ";
 		    	if (names.size() > 1) {
-		    		col1 += FancyString.join(", ", names.subList(0, names.size() - 2)) + " and " + names.get(names.size() - 1);
+		    		col1 += FancyString.join(", ", names.subList(0, names.size() - 1)) + " and " + names.get(names.size() - 1);
 		    	} else {
 		    		col1 += names.get(0);
 		    	}
