@@ -2,6 +2,8 @@ package fvs.taxe.dialog;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+
+import fvs.taxe.MainMenuScreen;
 import fvs.taxe.TaxeGame;
 import gameLogic.player.Player;
 import gameLogic.player.PlayerManager;
@@ -43,6 +45,8 @@ public class DialogEndGame extends UnifiedDialog {
         if (obj == "EXIT") {
             //Closes the app and disposes any machine resources used
             Gdx.app.exit();
+        } else {
+        	game.setScreen(new MainMenuScreen(game));
         }
     }
 }
