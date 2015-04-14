@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -34,6 +35,11 @@ public class MainMenuScreen extends ScreenAdapter {
 
         //Loads the gameMap in
         mapTexture = new Texture(Gdx.files.internal("mainmenumap.jpg"));
+      	Image background = new Image(mapTexture);
+      	background.setPosition(0, 0);
+      	background.setSize(TaxeGame.WIDTH, TaxeGame.HEIGHT);
+      	background.setColor(1.0f, 1.0f, 1.0f, 0.3f);
+      	stage.addActor(background);
         
         //Create the menu buttons
         TextButton playButton = new TextButton("Start Game", game.skin, "biggreen");
@@ -75,12 +81,6 @@ public class MainMenuScreen extends ScreenAdapter {
         //Draw transparent map in the background
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
-        game.batch.begin();
-        Color c = game.batch.getColor();
-        game.batch.setColor(c.r, c.g, c.b, (float) 0.3);
-        game.batch.draw(mapTexture, 0, 0, TaxeGame.WIDTH, TaxeGame.HEIGHT);
-        game.batch.setColor(c);
-        game.batch.end();
         
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();

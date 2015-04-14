@@ -6,9 +6,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -36,6 +38,7 @@ public class SetupScreen extends ScreenAdapter {
 	public SetupScreen(TaxeGame game, Context context) {
 		this.game = game;
 		this.context = context;
+		
 		stage = new Stage(new FitViewport(TaxeGame.WIDTH, TaxeGame.HEIGHT));
 		
 		this.skin = game.skin;
@@ -53,24 +56,24 @@ public class SetupScreen extends ScreenAdapter {
 	public void render(float delta) {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 	    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-	    game.batch.begin();
-	    Color c = game.batch.getColor();
-	    game.batch.setColor(c.r, c.g, c.b, (float) 0.3);
-	    game.batch.draw(mapTexture, 0, 0, TaxeGame.WIDTH, TaxeGame.HEIGHT);
-	    game.batch.setColor(c);
-	    game.batch.end();
-	    
-	    game.batch.begin();
-	    game.font.setColor(Color.BLACK);
-	    game.font.draw(game.batch, "Enter Team Names", TaxeGame.WIDTH/2 - 200.0f, TaxeGame.HEIGHT - 250.0f);
-	    game.batch.end();
 	    
 	    stage.draw();
 	}
 	 
 	@Override
 	public void show() {
+		//Background
+		Image background = new Image(mapTexture);
+		background.setPosition(0, 0);
+		background.setSize(TaxeGame.WIDTH, TaxeGame.HEIGHT);
+		background.setColor(1.0f, 1.0f, 1.0f, 0.3f);
+		stage.addActor(background);
+		
+		//Title
+		Label label = new Label("Enter Team Names", skin, "play-50", Color.BLACK);
+		label.setPosition((TaxeGame.WIDTH / 2) - (label.getWidth() / 2), TaxeGame.HEIGHT - 200.0f - label.getHeight());
+		stage.addActor(label);
+		
 		//Input player names
 		float row = 0.0f;
 		for(Player player : context.getGameLogic().getPlayerManager().getAllPlayers()) {
