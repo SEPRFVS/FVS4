@@ -36,7 +36,9 @@ public class DialogEndGame extends UnifiedDialog {
             //If no player has the high score then a tie is declared
             text("IT'S A TIE!");
         }
-
+        
+        button("Main Menu", "MENU");
+        getButtonTable().row();
         button("Exit", "EXIT");
     }
 
