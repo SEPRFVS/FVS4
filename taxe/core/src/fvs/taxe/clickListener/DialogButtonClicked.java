@@ -15,7 +15,6 @@ import fvs.taxe.controller.Context;
 import fvs.taxe.controller.StationController;
 import fvs.taxe.controller.TrainController;
 import fvs.taxe.dialog.ReplayDialog;
-import gameLogic.Game;
 import gameLogic.GameState;
 import gameLogic.map.CollisionStation;
 import gameLogic.map.Station;
@@ -91,7 +90,8 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
     }
 
 
-    @Override
+    @SuppressWarnings("incomplete-switch")
+	@Override
     public void clicked(Button button) {
         switch (button) {
             case TRAIN_DROP:

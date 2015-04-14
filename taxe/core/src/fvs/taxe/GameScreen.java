@@ -1,24 +1,16 @@
 package fvs.taxe;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-import fvs.taxe.clickListener.ReplayClickListener;
 import fvs.taxe.controller.*;
 import fvs.taxe.dialog.DialogEndGame;
 import fvs.taxe.dialog.DialogNews;
-import fvs.taxe.dialog.DialogSettings;
 import gameLogic.Game;
 import gameLogic.GameState;
 import gameLogic.RandomSingleton;
@@ -26,13 +18,7 @@ import gameLogic.listeners.GameStateListener;
 import gameLogic.listeners.TurnListener;
 import gameLogic.map.Connection;
 import gameLogic.map.Map;
-import gameLogic.player.Player;
 import gameLogic.replay.ReplayManager;
-
-import java.awt.event.InputEvent;
-import java.util.ArrayList;
-import java.util.EventListener;
-
 
 public class GameScreen extends ScreenAdapter {
     protected TaxeGame game;

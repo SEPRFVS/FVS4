@@ -7,8 +7,6 @@ import gameLogic.map.Position;
 import gameLogic.map.Station;
 import gameLogic.resource.Train;
 
-import java.util.ArrayList;
-
 public class GoalTest extends TestCase {
 
 	Station origin = new Station("station1", new Position(5, 5));

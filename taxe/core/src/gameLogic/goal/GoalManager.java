@@ -1,6 +1,5 @@
 package gameLogic.goal;
 
-import gameLogic.Game;
 import gameLogic.RandomSingleton;
 import gameLogic.player.Player;
 import gameLogic.map.CollisionStation;

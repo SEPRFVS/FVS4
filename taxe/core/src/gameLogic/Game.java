@@ -10,12 +10,8 @@ import gameLogic.resource.ResourceManager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Game {
-    //This is sort of a super-class that can be accessed throughout the system as many of its methods are static
-    //This is a useful tool to exploit to make implementing certain features easier
-    private static Game instance;
     private PlayerManager playerManager;
     private GoalManager goalManager;
     private ResourceManager resourceManager;
@@ -64,7 +60,6 @@ public class Game {
     }
 
     public void dispose() {
-        instance = null;
     }
 
     // Only the first player should be given goals and resources during init

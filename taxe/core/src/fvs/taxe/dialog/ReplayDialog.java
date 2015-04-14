@@ -1,6 +1,5 @@
 package fvs.taxe.dialog;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import gameLogic.replay.ReplayManager;
 

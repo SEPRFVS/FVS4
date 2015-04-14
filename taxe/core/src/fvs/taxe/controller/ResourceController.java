@@ -1,9 +1,6 @@
 package fvs.taxe.controller;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import fvs.taxe.TaxeGame;
 import fvs.taxe.clickListener.*;
@@ -12,7 +9,6 @@ import gameLogic.player.Player;
 import gameLogic.resource.*;
 
 import java.util.ArrayList;
-import java.util.EventListener;
 import java.util.List;
 
 public class ResourceController {

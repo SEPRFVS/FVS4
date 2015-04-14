@@ -2,10 +2,8 @@ package fvs.taxe.clickListener;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import fvs.taxe.controller.Context;
 import fvs.taxe.dialog.DialogResourceConnectionModifier;
-import gameLogic.Game;
 import gameLogic.GameState;
 import gameLogic.player.Player;
 import gameLogic.resource.ConnectionModifier;

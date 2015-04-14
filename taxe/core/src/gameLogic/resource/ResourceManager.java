@@ -1,7 +1,6 @@
 package gameLogic.resource;
 
 import Util.Tuple;
-import gameLogic.Game;
 import gameLogic.RandomSingleton;
 import gameLogic.player.Player;
 import gameLogic.map.JSONImporter;
@@ -16,7 +15,8 @@ public class ResourceManager {
 
     public ResourceManager() {
         //This calls the JSON importer which sets the train
-        JSONImporter jsonImporter = new JSONImporter(this);
+        @SuppressWarnings("unused")
+		JSONImporter jsonImporter = new JSONImporter(this);
     }
 
     public ArrayList<Tuple<String, Integer>> getTrains() {

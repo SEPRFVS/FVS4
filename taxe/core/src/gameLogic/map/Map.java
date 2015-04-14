@@ -1,7 +1,7 @@
 package gameLogic.map;
 
 import com.badlogic.gdx.math.Vector2;
-import gameLogic.Game;
+
 import gameLogic.RandomSingleton;
 import gameLogic.player.Player;
 import gameLogic.dijkstra.Dijkstra;
@@ -16,7 +16,8 @@ public class Map {
     private List<Connection> connections;
     private Random random;
     private Dijkstra dijkstra;
-    private JSONImporter jsonImporter;
+    @SuppressWarnings("unused")
+	private JSONImporter jsonImporter;
 
     public Map() {
         stations = new ArrayList<Station>();

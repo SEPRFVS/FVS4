@@ -2,7 +2,6 @@ package fvs.taxe.controller;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -21,7 +20,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import fvs.taxe.ReplayScreen;
 import fvs.taxe.TaxeGame;
 import fvs.taxe.dialog.UnifiedDialog;
-import gameLogic.Game;
 import gameLogic.GameState;
 import gameLogic.listeners.GameStateListener;
 import gameLogic.listeners.ReplayToggleListener;

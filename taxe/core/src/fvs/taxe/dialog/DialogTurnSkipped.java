@@ -3,7 +3,6 @@ package fvs.taxe.dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
-import gameLogic.Game;
 import gameLogic.player.PlayerManager;
 import gameLogic.replay.ReplayManager;
 

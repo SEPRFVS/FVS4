@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,7 +23,6 @@ import fvs.taxe.actor.CollisionStationActor;
 import fvs.taxe.actor.StationActor;
 import fvs.taxe.clickListener.TrainClicked;
 import fvs.taxe.dialog.DialogStationMultitrain;
-import gameLogic.Game;
 import gameLogic.GameState;
 import gameLogic.goal.Goal;
 import gameLogic.map.CollisionStation;

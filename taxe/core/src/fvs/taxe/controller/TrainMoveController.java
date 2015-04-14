@@ -2,16 +2,12 @@ package fvs.taxe.controller;
 
 import Util.Tuple;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.ContentModelContainer;
 
 import fvs.taxe.actor.TrainActor;
-import gameLogic.Game;
 import gameLogic.goal.Goal;
 import gameLogic.map.IPositionable;
 import gameLogic.map.Position;

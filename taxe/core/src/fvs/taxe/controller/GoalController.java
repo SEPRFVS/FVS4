@@ -2,7 +2,6 @@ package fvs.taxe.controller;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
@@ -15,7 +14,6 @@ import gameLogic.listeners.PlayerChangedListener;
 import gameLogic.player.PlayerManager;
 import gameLogic.goal.Goal;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 

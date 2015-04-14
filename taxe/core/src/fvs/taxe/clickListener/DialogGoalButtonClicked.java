@@ -14,7 +14,8 @@ public class DialogGoalButtonClicked implements ResourceDialogClickListener {
         this.goal = goal;
     }
 
-    @Override
+    @SuppressWarnings("incomplete-switch")
+	@Override
     public void clicked(Button button) {
         switch (button) {
             case GOAL_DROP:

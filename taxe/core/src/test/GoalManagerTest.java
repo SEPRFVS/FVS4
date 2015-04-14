@@ -8,7 +8,6 @@ import gameLogic.map.Position;
 import gameLogic.map.Station;
 import gameLogic.player.Player;
 import gameLogic.player.PlayerManager;
-import gameLogic.resource.ResourceManager;
 import gameLogic.resource.Train;
 
 public class GoalManagerTest extends TestCase {
