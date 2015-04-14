@@ -145,6 +145,11 @@ public class SideBarController {
     }
 
     public void addEndTurnButton() {
+    	//Don't create a button that's already there
+    	if(endTurnButton != null) {
+    		return;
+    	}
+    	
         //This method adds an endTurn button to the topBar which allows the user to end their turn
         endTurnButton = new TextButton("End Turn", context.getSkin());
         endTurnButton.setPosition(TaxeGame.WIDTH - endTurnButton.getWidth() - 10.0f, TaxeGame.HEIGHT - 33.0f);
