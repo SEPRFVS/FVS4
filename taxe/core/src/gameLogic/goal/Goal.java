@@ -83,13 +83,13 @@ public class Goal {
         }
     }
 
-    public boolean isBonusCompleted(Train train) {
+    public boolean isBonusCompleted(Train train, int turn) {
         //This method returns whether or not a bonus has been completed by checking which bonus the goal has, then passing it to the relevant checking method for that bonus
         if (goingThrough) {
             return wentThroughStation(train);
         }
         if (inTurns) {
-            return completedWithinMaxTurns(train);
+            return completedWithinMaxTurns(train, turn);
         }
         if (withTrain) {
             return completedWithTrain(train);
@@ -107,13 +107,13 @@ public class Goal {
     }
 
 
-    public boolean completedWithinMaxTurns(Train train) {
+    public boolean completedWithinMaxTurns(Train train, int turn) {
         //Checks if a train has completed the goal in a certain number of turns
         boolean completed = false;
         if (this.isComplete(train) && this.inTurns)
             //Checks whether the turnsTime and turnIssued is greater than the currentTurn.
             //This indicates whether it was completed in time for the bonus
-            if ((turnsTime + this.turnIssued) >= gameLogic.Game.getInstance().getPlayerManager().getTurnNumber()) {
+            if ((turnsTime + this.turnIssued) >= turn) {
                 completed = true;
             }
         return completed;

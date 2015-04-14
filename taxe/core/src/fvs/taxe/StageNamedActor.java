@@ -16,14 +16,6 @@ public class StageNamedActor extends Stage {
     // actor from within the stage when in replay mode
     public void addNamedActor(final Actor actor) {
         actor.setName((String.valueOf(actorId)));
-
-        // for debugging only, useful to see the unique name of buttons in their text
-        if (actor instanceof TextButton) {
-            TextButton b = (TextButton)actor;
-            b.setText(b.getName() + ":" + b.getText());
-            b.setSize(b.getWidth() + 50, b.getHeight());
-        }
-
         // uniquely name each actor
         actorId++;
         super.addActor(actor);

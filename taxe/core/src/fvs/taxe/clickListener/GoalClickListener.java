@@ -58,9 +58,9 @@ public class GoalClickListener extends ReplayClickListener {
         }
 
 
-        if (Game.getInstance().getState() == GameState.NORMAL) {
+        if (context.getGameLogic().getState() == GameState.NORMAL) {
             //If the current game state is normal then a dialog is displayed allowing the user to interact with their goal
-            Player currentPlayer = Game.getInstance().getPlayerManager().getCurrentPlayer();
+            Player currentPlayer = context.getGameLogic().getPlayerManager().getCurrentPlayer();
             DialogGoalButtonClicked listener = new DialogGoalButtonClicked(currentPlayer,
                     goal);
             DialogGoal dia = new DialogGoal(goal, context.getSkin(), context.getReplayManager());

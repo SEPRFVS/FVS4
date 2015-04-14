@@ -111,7 +111,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                 pixmap.dispose();
 
                 //Begins the placement of a train
-                Game.getInstance().setState(GameState.PLACING_TRAIN);
+                context.getGameLogic().setState(GameState.PLACING_TRAIN);
 
                 //Hides all trains currently on the map
                 TrainController trainController = new TrainController(context);
@@ -128,7 +128,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                         } else {
                             //This puts the train at the station that the user clicks and adds it to the trains visited history
                             train.setPosition(station.getLocation());
-                            train.addHistory(station, Game.getInstance().getPlayerManager().getTurnNumber());
+                            train.addHistory(station, context.getGameLogic().getPlayerManager().getTurnNumber());
 
                             //Resets the cursor
                             Gdx.input.setCursorImage(null, 0, 0);
@@ -141,7 +141,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
 
                             //Unsubscribes from the listener so that it does not call this code again when it is obviously not necessary, without this placing of trains would never end
                             StationController.unsubscribeStationClick(this);
-                            Game.getInstance().setState(GameState.NORMAL);
+                            context.getGameLogic().setState(GameState.NORMAL);
                         }
                     }
                 };
@@ -161,7 +161,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
 
                             //Unsubscribes from the listener so that it does not call the code when it is not intended to
                             StationController.unsubscribeStationClick(stationListener);
-                            Game.getInstance().setState(GameState.NORMAL);
+                            context.getGameLogic().setState(GameState.NORMAL);
 
                             //Removes itself from the keylisteners of the game as otherwise there would be a lot of null pointer exceptions and unintended behaviour
                             context.getStage().removeListener(this);
@@ -202,7 +202,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
 
                 //Indicates that a resource is currently being placed and to hide all trains
                 //While it would be useful to see trains while placing an obstacle, this was done to remove the possibility of trains preventing the user being able to click a node
-                Game.getInstance().setState(GameState.PLACING_RESOURCE);
+                context.getGameLogic().setState(GameState.PLACING_RESOURCE);
                 final TrainController trainController = new TrainController(context);
                 trainController.setTrainsVisible(null, false);
                 context.getSideBarController().displayMessage("Placing Obstacle");
@@ -285,7 +285,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
 
                             //Unsubscribes from the StationClickListener as this would cause a lot of errors and unexpected behaviour is not called from the correct context
                             StationController.unsubscribeStationClick(stationListener);
-                            Game.getInstance().setState(GameState.NORMAL);
+                            context.getGameLogic().setState(GameState.NORMAL);
 
                             //Resets the topBar
                             context.getSideBarController().clearMessage();
@@ -308,7 +308,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
             case ENGINEER_USE: {
                 //This is called when the player presses a ENGINEER_USE button
 
-                Game.getInstance().setState(GameState.PLACING_RESOURCE);
+            	context.getGameLogic().setState(GameState.PLACING_RESOURCE);
 
                 //Sets the cursor to be the one used for placement of engineers
                 Pixmap pixmap = new Pixmap(Gdx.files.internal("engineer.png"));
@@ -394,7 +394,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
 
                             //Unsubscribes from the StationClickListener as this would cause a lot of errors and unexpected behaviour is not called from the correct context
                             StationController.unsubscribeStationClick(stationListener);
-                            Game.getInstance().setState(GameState.NORMAL);
+                            context.getGameLogic().setState(GameState.NORMAL);
 
                             //Resets the topBar
                             context.getSideBarController().clearMessage();
@@ -441,7 +441,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                 break;
 
             case CONNECTION_PLACE: {
-                Game.getInstance().setState(GameState.PLACING_RESOURCE);
+            	context.getGameLogic().setState(GameState.PLACING_RESOURCE);
 
 //                //Sets the cursor to be the one used for placement of engineers
 //                Pixmap pixmap = new Pixmap(Gdx.files.internal("connection.png"));
@@ -472,8 +472,8 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                                         connectionModifier.getStation2().getLocation().getX(),
                                         connectionModifier.getStation2().getLocation().getY());
                                 if (distance < ConnectionModifier.CONNECTION_LENGTH_LIMIT) {
-                                    Game.getInstance().getMap().addConnection(connectionModifier.getStation1().getName(), connectionModifier.getStation2().getName());
-                                    Game.getInstance().getMap().updateDijkstra();
+                                	context.getGameLogic().getMap().addConnection(connectionModifier.getStation1().getName(), connectionModifier.getStation2().getName());
+                                	context.getGameLogic().getMap().updateDijkstra();
                                     context.getSoundController().playSound("modify");
                                     context.getNotificationController().showNewConnectionMessage(connectionModifier, context.getGameLogic().getPlayerManager().getCurrentPlayer());
                                     currentPlayer.removeResource(connectionModifier);
@@ -528,7 +528,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
 
                             //Unsubscribes from the StationClickListener as this would cause a lot of errors and unexpected behaviour is not called from the correct context
                             StationController.unsubscribeStationClick(stationListener);
-                            Game.getInstance().setState(GameState.NORMAL);
+                            context.getGameLogic().setState(GameState.NORMAL);
 
                             //Resets the topBar
                             context.getSideBarController().clearMessage();
@@ -544,7 +544,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
             }
 
             case CONNECTION_REMOVE: {
-                Game.getInstance().setState(GameState.PLACING_RESOURCE);
+            	context.getGameLogic().setState(GameState.PLACING_RESOURCE);
 
 //                //Sets the cursor to be the one used for placement of engineers
 //                Pixmap pixmap = new Pixmap(Gdx.files.internal("connection.png"));
@@ -573,9 +573,9 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                             if (context.getGameLogic().getMap().doesConnectionExist(connectionModifier.getStation1().getName(), connectionModifier.getStation2().getName())) {
                                 //check if any train uses this connection
                                 boolean connectionUsed = false;
-                                for (Player player : Game.getInstance().getPlayerManager().getAllPlayers()) {
+                                for (Player player : context.getGameLogic().getPlayerManager().getAllPlayers()) {
                                     for (Train train : player.getTrains()) {
-                                        if(Game.getInstance().getMap().doesUseConnection(connectionModifier.getStation1(), connectionModifier.getStation2(), train.getRoute())) {
+                                        if(context.getGameLogic().getMap().doesUseConnection(connectionModifier.getStation1(), connectionModifier.getStation2(), train.getRoute())) {
                                             connectionUsed = true;
                                             break;
                                         }
@@ -584,8 +584,8 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                                 }
                                 if (!connectionUsed) {
                                     //remove connection and update dijkstra
-                                    Game.getInstance().getMap().removeConnection(connectionModifier.getStation1(), connectionModifier.getStation2());
-                                    Game.getInstance().getMap().updateDijkstra();
+                                	context.getGameLogic().getMap().removeConnection(connectionModifier.getStation1(), connectionModifier.getStation2());
+                                	context.getGameLogic().getMap().updateDijkstra();
                                     context.getSoundController().playSound("modify");
                                     context.getNotificationController().showRemoveConnectionMessage(connectionModifier, context.getGameLogic().getPlayerManager().getCurrentPlayer());
                                     currentPlayer.removeResource(connectionModifier);
@@ -641,7 +641,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
 
                             //Unsubscribes from the StationClickListener as this would cause a lot of errors and unexpected behaviour is not called from the correct context
                             StationController.unsubscribeStationClick(stationListener);
-                            Game.getInstance().setState(GameState.NORMAL);
+                            context.getGameLogic().setState(GameState.NORMAL);
 
                             //Resets the topBar
                             context.getSideBarController().clearMessage();

@@ -53,7 +53,7 @@ public class GoalTest extends TestCase {
 	public void testCompletedWithinMaxTurns() throws Exception {
 
 		Goal anotherGoal= new Goal (origin, destination, intermediary, 20, 0, 20, 50, train);
-		assertEquals(false, anotherGoal.completedWithinMaxTurns(train));
+		assertEquals(false, anotherGoal.completedWithinMaxTurns(train, 0));
 
 		Goal yetAnotherGoal = new Goal(destination,origin,intermediary, 20, 10, 20, 50,train);
 		train.addHistory(origin, 20);
@@ -62,7 +62,7 @@ public class GoalTest extends TestCase {
 		train.addHistory(station7, 40);
 		train.addHistory(station8, 56);
 		train.addHistory(destination,60);
-		assertEquals(false, yetAnotherGoal.completedWithinMaxTurns(train));
+		assertEquals(false, yetAnotherGoal.completedWithinMaxTurns(train, 0));
 
 	}
 

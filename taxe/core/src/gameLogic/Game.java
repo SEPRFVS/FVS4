@@ -32,7 +32,7 @@ public class Game {
     //Maximum points for each turn
     public final int MAX_POINTS = 10000;
 
-    private Game() {
+    public Game() {
         //Creates players
         playerManager = new PlayerManager();
         playerManager.createPlayers(CONFIG_PLAYERS);
@@ -52,30 +52,15 @@ public class Game {
             @Override
             public void changed() {
                 Player currentPlayer = playerManager.getCurrentPlayer();
-                goalManager.addRandomGoalToPlayer(currentPlayer);
+                goalManager.addRandomGoalToPlayer(currentPlayer, map);
                 resourceManager.addRandomResourceToPlayer(currentPlayer);
                 resourceManager.addRandomResourceToPlayer(currentPlayer);
                 map.decrementBlockedConnections();
-                map.blockRandomConnection();
+                map.blockRandomConnection(playerManager.getAllPlayers());
             }
         });
-    }
-    
-    //Allow the instance to be set when exiting the replay logic
-    public static Game setInstance(Game game) {
-    	instance = game;
-    	return instance;
-    }
-
-    public static Game getInstance() {
-        if (instance == null) {
-            instance = new Game();
-            // initialisePlayers gives them a goal, and the GoalManager requires an instance of game to exist so this
-            // method can't be called in the constructor
-            instance.initialisePlayers();
-        }
-
-        return instance;
+        
+        initialisePlayers();
     }
 
     public void dispose() {
@@ -86,7 +71,7 @@ public class Game {
     // The second player gets them when turn changes!
     private void initialisePlayers() {
         Player player = playerManager.getAllPlayers().get(0);
-        goalManager.addRandomGoalToPlayer(player);
+        goalManager.addRandomGoalToPlayer(player, map);
         resourceManager.addRandomResourceToPlayer(player);
         resourceManager.addRandomResourceToPlayer(player);
     }
