@@ -25,6 +25,7 @@ public class Player {
         this.pm = pm;
         number = playerNumber;
         score = 0;
+        skip = false;
     }
 
     public void setSkip(boolean skip) {

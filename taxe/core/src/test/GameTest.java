@@ -1,6 +1,7 @@
 package test;
 
 import gameLogic.Game;
+import gameLogic.RandomSingleton;
 import gameLogic.player.Player;
 import gameLogic.player.PlayerManager;
 import org.junit.Before;
@@ -13,6 +14,7 @@ public class GameTest extends LibGdxTest {
 
     @Before
     public void setUpGame() throws Exception {
+        RandomSingleton.setFromSeed(System.currentTimeMillis());
         Game game = new Game();
         game.getPlayerManager();
         pm = game.getPlayerManager();

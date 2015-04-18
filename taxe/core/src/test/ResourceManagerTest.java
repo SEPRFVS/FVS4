@@ -1,14 +1,19 @@
 package test;
 
-import junit.framework.TestCase;
-
 import gameLogic.player.Player;
 import gameLogic.player.PlayerManager;
 import gameLogic.resource.ResourceManager;
 import gameLogic.resource.Train;
+import junit.framework.TestCase;
+import org.junit.Before;
 
 public class ResourceManagerTest extends TestCase {
-	ResourceManager rm = new ResourceManager();
+	ResourceManager rm;
+
+	@Before
+	public void setUp() throws Exception {
+		rm = new ResourceManager();
+	}
 
 	public void testGetRandomTrain() throws Exception {
 		Train train1 = rm.getRandomTrain();

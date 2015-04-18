@@ -1,6 +1,5 @@
 package test;
 
-import junit.framework.TestCase;
 import gameLogic.Game;
 import gameLogic.goal.Goal;
 import gameLogic.goal.GoalManager;
@@ -9,23 +8,34 @@ import gameLogic.map.Station;
 import gameLogic.player.Player;
 import gameLogic.player.PlayerManager;
 import gameLogic.resource.Train;
+import junit.framework.TestCase;
+import org.junit.Before;
 
 public class GoalManagerTest extends TestCase {
-	Game game = new Game();
-	GoalManager goalManager = game.getGoalManager();
-	PlayerManager playerManager = game.getPlayerManager();
+	Game game;
+	GoalManager goalManager;
+	PlayerManager playerManager;
+	Goal goal;
+
+	@Before
+	public void setUp() throws Exception {
+		game = new Game();
+		goalManager = game.getGoalManager();
+		playerManager = game.getPlayerManager();
 
 
-	//  playerManager.createPlayers(2);
-	//  Player player1 = playerManager.getCurrentPlayer();
+		//  playerManager.createPlayers(2);
+		//  Player player1 = playerManager.getCurrentPlayer();
 
-	Train train = new Train("Green", "", "", 100);
+		Train train = new Train("Green", "", "", 100);
 
-	Station station1 = new Station("station1", new Position(5, 5));
-	Station station2 = new Station("station2", new Position(2, 2));
-	Station station3 = new Station("station3", new Position(6, 2));
+		Station station1 = new Station("station1", new Position(5, 5));
+		Station station2 = new Station("station2", new Position(2, 2));
+		Station station3 = new Station("station3", new Position(6, 2));
 
-	Goal goal = new Goal(station1, station2, station3, 0, 0, 0, 0, train);
+		goal = new Goal(station1, station2, station3, 0, 0, 0, 0, train);
+	}
+
 
 	public void testGenerateRandom() throws Exception {
 
@@ -52,11 +62,9 @@ public class GoalManagerTest extends TestCase {
 	}
 
 	public void testAddRandomGoalToPlayer() throws Exception {
-		playerManager.createPlayers(2);
 		Player player1 = playerManager.getCurrentPlayer();
-		assertEquals(0,player1.getGoals().size());
+		assertEquals(1, player1.getGoals().size());
 
-		goalManager.addRandomGoalToPlayer(player1, game.getMap());
 		goalManager.addRandomGoalToPlayer(player1, game.getMap());
 		goalManager.addRandomGoalToPlayer(player1, game.getMap());
 
