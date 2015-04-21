@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import fvs.taxe.controller.Context;
 import gameLogic.GameState;
 import gameLogic.player.Player;
@@ -19,10 +18,6 @@ public class TrainActor extends Image {
     public Train train;
 
     private Rectangle bounds;
-    public boolean facingLeft;
-    private float previousX;
-    private Drawable leftDrawable;
-    private Drawable rightDrawable;
     private Context context;
     private boolean paused;
     private boolean recentlyPaused;
@@ -30,8 +25,6 @@ public class TrainActor extends Image {
     public TrainActor(Train train, Context context) {
         //The constructor initialises all the variables and gathers the relevant image for the actor based on the train it is acting for.
         super(new Texture(Gdx.files.internal(train.getLeftImage())));
-        leftDrawable = getDrawable();
-        rightDrawable = new Image(new Texture(Gdx.files.internal(train.getRightImage()))).getDrawable();
         this.context = context;
 
         IPositionable position = train.getPosition();
@@ -41,8 +34,7 @@ public class TrainActor extends Image {
         setSize(width, height);
         bounds = new Rectangle();
         setPosition(position.getX() - width / 2, position.getY() - height / 2);
-        previousX = getX();
-        facingLeft = true;
+        this.setOrigin(width / 2, height / 2);
         paused = false;
         recentlyPaused = false;
     }
@@ -54,7 +46,7 @@ public class TrainActor extends Image {
             //It renders everything every 1/delta seconds
             super.act(delta);
             updateBounds();
-            updateFacingDirection();
+            setTravelAngle();
 
             Train collision = collided();
             if (collision != null) {
@@ -95,19 +87,12 @@ public class TrainActor extends Image {
     private void updateBounds() {
         bounds.set(getX(), getY(), getWidth(), getHeight());
     }
-
-    public void updateFacingDirection() {
-        float currentX = getX();
-        //This updates the direction that the train is facing and the image representing the train based on which direction it is travelling
-        if (facingLeft && previousX < currentX) {
-            setDrawable(rightDrawable);
-            facingLeft = false;
-        } else if (!facingLeft && previousX > currentX) {
-            setDrawable(leftDrawable);
-            facingLeft = true;
-        }
-
-        previousX = getX();
+    
+    public void setTravelAngle() {
+    	if(train.getNextStation() != null && train.getLastStation() != null) {
+    		double angle = 360.0f - Math.toDegrees(Math.atan2(train.getNextStation().getLocation().getX() - train.getLastStation().getLocation().getX(), train.getNextStation().getLocation().getY() - train.getLastStation().getLocation().getY()));
+    		this.setRotation((float) angle);
+    	}
     }
 
     public Rectangle getBounds() {

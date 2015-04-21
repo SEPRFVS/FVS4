@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Train extends Resource {
-    private String leftImage;
-    private String rightImage;
+    private String image;
     private IPositionable position;
     private TrainActor actor;
     private int speed;
@@ -24,10 +23,9 @@ public class Train extends Resource {
     private List<Tuple<Station, Integer>> history;
 
 
-    public Train(String name, String leftImage, String rightImage, int speed) {
+    public Train(String name, String image, int speed) {
         this.name = name;
-        this.leftImage = leftImage;
-        this.rightImage = rightImage;
+        this.image = image;
         this.speed = speed;
         history = new ArrayList<Tuple<Station, Integer>>();
         route = new ArrayList<Station>();
@@ -38,15 +36,11 @@ public class Train extends Resource {
     }
 
     public String getLeftImage() {
-        return "trains/" + leftImage;
+        return "trains/" + image;
     }
-
-    public String getRightImage() {
-        return "trains/" + rightImage;
-    }
-
+    
     public String getCursorImage() {
-        return "trains/cursor/" + leftImage;
+        return "trains/cursor/" + image;
     }
 
     public void setPosition(IPositionable position) {
