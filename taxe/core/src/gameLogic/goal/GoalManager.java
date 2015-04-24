@@ -33,13 +33,13 @@ public class GoalManager {
         do {
             //This generates a suitable random station to be the origin node of the goal
             origin = map.getRandomStation();
-        } while (origin instanceof CollisionStation);
+        } while (origin instanceof CollisionStation || map.getConnectionsAtStation(origin).isEmpty());
 
         Station destination;
         do {
             //This generates a suitable random station to be the destination node of the goal (i.e not equal to the origin)
             destination = map.getRandomStation();
-        } while (destination == origin || destination instanceof CollisionStation);
+        } while (destination == origin || destination instanceof CollisionStation || map.getConnectionsAtStation(destination).isEmpty());
 
         double shortestDist = map.getShortestDistance(origin, destination); //Stores the shortest distance between two points
         int score = (int) (shortestDist * (Math.pow(1.0001, shortestDist))); //Score by default = shortestDist*1.0001^shortestDist.

@@ -252,4 +252,15 @@ public class Map {
         }
         return false;
     }
+    
+    //Get a list of connections that start or end at a station
+    public List<Connection> getConnectionsAtStation(Station station) {
+    	List<Connection> stationConnections = new ArrayList<Connection>();
+    	for(Connection connection : connections) {
+    		if (connection.getStation1() == station || connection.getStation2() == station) {
+    			stationConnections.add(connection);
+    		}
+    	}
+    	return stationConnections;
+    }
 }
