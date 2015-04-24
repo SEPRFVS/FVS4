@@ -93,6 +93,7 @@ public class ReplayControlsController {
 			//Place on control stage if in replay so input cannot overlap with that being used in replay
 			controlStage = new Stage(new FitViewport(TaxeGame.WIDTH, TaxeGame.HEIGHT));
 			controlStage.addActor(controlTable);
+			context.getSoundController().addSettingsButton(controlStage, context.getSkin());
 			((ReplayScreen) context.getTaxeGame().getScreen()).setControlStage(controlStage);
 		} else {
 			context.getStage().addActor(controlTable);

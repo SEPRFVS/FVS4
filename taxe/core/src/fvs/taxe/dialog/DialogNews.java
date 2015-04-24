@@ -27,6 +27,7 @@ public class DialogNews extends ReplayDialog {
 	public DialogNews(Context context, ReplayManager replayManager) {
 		//Generates a dialog giving news based on scores and events in the past turns
 	    super("THE DAILY RAIL", context.getSkin(), "news", replayManager);
+	    this.setMovable(false);
 	    
 	    Table content = getContentTable();
 	    if(context.getGameLogic().getPlayerManager().getTurnNumber() == context.getGameLogic().getTotalTurns() && context.getGameLogic().getTotalTurns() > 0) {
