@@ -8,7 +8,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
-
 import fvs.taxe.Button;
 import fvs.taxe.actor.TrainActor;
 import fvs.taxe.controller.Context;
@@ -466,7 +465,7 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                             connectionModifier.setStation2(station);
 
                             //Checks whether a connection exists between the two selected stations
-                            if (!context.getGameLogic().getMap().doesConnectionExist(connectionModifier.getStation1().getName(), connectionModifier.getStation2().getName())) {
+                            if (!context.getGameLogic().getMap().doesConnectionExist(connectionModifier.getStation1().getName(), connectionModifier.getStation2().getName()) && connectionModifier.getStation1() != connectionModifier.getStation2()) {
                                 float distance = Vector2.dst(connectionModifier.getStation1().getLocation().getX(),
                                         connectionModifier.getStation1().getLocation().getY(),
                                         connectionModifier.getStation2().getLocation().getX(),

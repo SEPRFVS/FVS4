@@ -1,10 +1,9 @@
 package gameLogic.map;
 
 import com.badlogic.gdx.math.Vector2;
-
 import gameLogic.RandomSingleton;
-import gameLogic.player.Player;
 import gameLogic.dijkstra.Dijkstra;
+import gameLogic.player.Player;
 import gameLogic.resource.Train;
 
 import java.util.ArrayList;
@@ -41,8 +40,8 @@ public class Map {
             String s2 = connection.getStation2().getName();
 
             //Checks whether or not the connection has station 1 and station 2 in its attributes, if so returns true, if not returns false
-            if (s1.equals(stationName) && s2.equals(anotherStationName)
-                    || s1.equals(anotherStationName) && s2.equals(stationName)) {
+            if ((s1.equals(stationName) && s2.equals(anotherStationName))
+                    || (s1.equals(anotherStationName) && s2.equals(stationName))) {
                 return true;
             }
         }
