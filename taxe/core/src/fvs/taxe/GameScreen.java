@@ -150,6 +150,15 @@ public class GameScreen extends ScreenAdapter {
         		context.getReplayManager().setAvailableTurns(gameLogic.getPlayerManager().getTurnNumber());
         	}
         });
+        
+        //We only render this when the screen is created so the buttons are available when it is shown
+        //Initially some of this functionality was in the draw() routine, but it was found that when the player clicked on a button a new one was rendered before the input could be handled
+        //This is why the header texts and the buttons are rendered separately, to prevent these issues from occuring
+        stationController.renderStations();
+        sideBarController.addEndTurnButton();
+        goalController.showCurrentPlayerGoals();
+        resourceController.drawPlayerResources(gameLogic.getPlayerManager().getCurrentPlayer());
+        game.soundController.addSettingsButton(stage, skin);
     }
 
     protected void setRandomSeed(ReplayManager rm) {
@@ -226,20 +235,12 @@ public class GameScreen extends ScreenAdapter {
     	}
     	
     	Gdx.input.setInputProcessor(stage);
-        //We only render this once a turn, this allows the buttons generated to be clickable.
-        //Initially some of this functionality was in the draw() routine, but it was found that when the player clicked on a button a new one was rendered before the input could be handled
-        //This is why the header texts and the buttons are rendered separately, to prevent these issues from occuring
-        stationController.renderStations();
-        sideBarController.addEndTurnButton();
-        goalController.showCurrentPlayerGoals();
-        resourceController.drawPlayerResources(gameLogic.getPlayerManager().getCurrentPlayer());
-        context.getReplayControlsController().showReplayControls();
     	
         //Set GameLogic to current game
     	context.getReplayManager().setGame(gameLogic);
+        context.getReplayControlsController().showReplayControls();
         
         //Load background music
-        game.soundController.addSettingsButton(stage, skin);
         game.soundController.playBackgroundMusic();
         
         if(gameLogic.getPlayerManager().getTurnNumber() == 0) {
