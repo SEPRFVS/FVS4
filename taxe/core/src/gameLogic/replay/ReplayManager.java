@@ -1,20 +1,21 @@
 package gameLogic.replay;
 
 import Util.Tuple;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-
+import fvs.taxe.controller.Context;
 import fvs.taxe.dialog.ReplayDialog;
+import fvs.taxe.dialog.UnifiedDialog;
 import gameLogic.Game;
 import gameLogic.GameState;
 import gameLogic.listeners.ReplayToggleListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class ReplayManager {
     private int playPosition = 0;
@@ -29,7 +30,11 @@ public class ReplayManager {
     private int availableTurns = 0;
     private Game game;
     private List<ReplayToggleListener> toggleListeners = new ArrayList<ReplayToggleListener>();
+    private Context context;
 
+    public void setContext(Context context) {
+        this.context = context;
+    }
     public void setGame(Game game) {
         this.game = game;
     }
@@ -106,34 +111,42 @@ public class ReplayManager {
     }
 
     public void playSingle() {
-        if (game.getState() == GameState.ANIMATING) {
-            System.out.println("Replay click blocked - game is in animating state.");
-            return;
+        try {
+            if (game.getState() == GameState.ANIMATING) {
+                System.out.println("Replay click blocked - game is in animating state.");
+                return;
+            }
+
+            replayingClick = true;
+
+            if (isEnd()) {
+                System.out.println("Played all clicks");
+                return;
+            }
+
+            Tuple<ReplayType, String> click = clicks.get(playPosition);
+
+            System.out.println("replayingClick single..." + String.valueOf(playPosition) + ", actor: " + click.getSecond());
+
+
+            switch (click.getFirst()) {
+                case ACTOR_CLICK:
+                    clickActorInStage(click.getSecond());
+                    break;
+                case DIALOG_BUTTON_CLICK:
+                    clickDialogButton(click.getSecond());
+                    break;
+            }
+
+            playPosition++;
+            replayingClick = false;
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+
+            UnifiedDialog oops = new UnifiedDialog("Oops!", context.getSkin(), "redwin");
+            oops.text("This is embarrassing, but our Replay Player crashed. Press 'End replay' button");
+            oops.show(stage);
         }
-
-        replayingClick = true;
-
-        if (isEnd()) {
-            System.out.println("Played all clicks");
-            return;
-        }
-
-        Tuple<ReplayType, String> click = clicks.get(playPosition);
-
-        System.out.println("replayingClick single..." + String.valueOf(playPosition) + ", actor: " + click.getSecond());
-
-
-        switch (click.getFirst()) {
-            case ACTOR_CLICK:
-                clickActorInStage(click.getSecond());
-                break;
-            case DIALOG_BUTTON_CLICK:
-                clickDialogButton(click.getSecond());
-                break;
-        }
-
-        playPosition++;
-        replayingClick = false;
     }
 
     private void clickActorInStage(String name) {
