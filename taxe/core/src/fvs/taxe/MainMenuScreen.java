@@ -2,6 +2,7 @@ package fvs.taxe;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -39,6 +41,11 @@ public class MainMenuScreen extends ScreenAdapter {
       	background.setSize(TaxeGame.WIDTH, TaxeGame.HEIGHT);
       	background.setColor(1.0f, 1.0f, 1.0f, 0.3f);
       	stage.addActor(background);
+      	
+      	//Create Game title
+      	Label title = new Label("Trains across Europe", game.skin, "play-50", Color.BLACK);
+      	title.setPosition((TaxeGame.WIDTH / 2) - (title.getWidth() / 2), TaxeGame.HEIGHT - 150.0f);
+      	stage.addActor(title);
         
         //Create the menu buttons
         TextButton playButton = new TextButton("Start Game", game.skin, "biggreen");
@@ -65,6 +72,15 @@ public class MainMenuScreen extends ScreenAdapter {
         	}
         });
         stage.addActor(exitButton);
+        
+        //Load FVS logo and attribution
+        Image fvsLogo = new Image(new Texture(Gdx.files.internal("icon/fvs128.png")));
+        fvsLogo.setPosition(10.0f, 10.0f);
+        stage.addActor(fvsLogo);
+        
+        Label dusAcknowledge = new Label("An extention of DUS's extention of an FVS game", game.skin, "play-14", Color.BLACK);
+        dusAcknowledge.setPosition(148.0f, 10.0f);
+        stage.addActor(dusAcknowledge);
         
         //Load background music
         game.soundController.playBackgroundMusic();
