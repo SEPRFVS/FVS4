@@ -4,14 +4,14 @@ import gameLogic.player.Player;
 import gameLogic.player.PlayerManager;
 import gameLogic.resource.ResourceManager;
 import gameLogic.resource.Train;
-import junit.framework.TestCase;
 import org.junit.Before;
+import static org.junit.Assert.*;
 
-public class ResourceManagerTest extends TestCase {
+public class ResourceManagerTest extends LibGdxTest {
 	ResourceManager rm;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		rm = new ResourceManager();
 	}
 

@@ -8,17 +8,17 @@ import gameLogic.map.Station;
 import gameLogic.player.Player;
 import gameLogic.player.PlayerManager;
 import gameLogic.resource.Train;
-import junit.framework.TestCase;
 import org.junit.Before;
+import static org.junit.Assert.*;
 
-public class GoalManagerTest extends TestCase {
+public class GoalManagerTest extends LibGdxTest {
 	Game game;
 	GoalManager goalManager;
 	PlayerManager playerManager;
 	Goal goal;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		game = new Game();
 		goalManager = game.getGoalManager();
 		playerManager = game.getPlayerManager();
