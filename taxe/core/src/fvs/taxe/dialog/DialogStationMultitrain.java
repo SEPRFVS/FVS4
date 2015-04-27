@@ -46,9 +46,13 @@ public class DialogStationMultitrain extends ReplayDialog {
 
         for (Player player : context.getGameLogic().getPlayerManager().getAllPlayers()) {
             for (Resource resource : player.getResources()) {
-                if (!(resource instanceof Train)) continue;
+                if (!(resource instanceof Train))
+                    continue;
 
                 Train train = (Train) resource;
+
+                if (train.getPosition() == null)
+                    continue;
 
                 String trainString = trainString(train);
 
