@@ -1,26 +1,27 @@
 package fvs.taxe.controller;
 
+import Util.Tuple;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
-
-import Util.Tuple;
+import fvs.taxe.TaxeGame;
 import fvs.taxe.clickListener.ReplayClickListener;
 import fvs.taxe.clickListener.StationClickListener;
-import fvs.taxe.TaxeGame;
 import gameLogic.GameState;
 import gameLogic.map.CollisionStation;
 import gameLogic.map.IPositionable;
 import gameLogic.map.Position;
 import gameLogic.map.Station;
 import gameLogic.resource.Train;
+
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RouteController {
     private Context context;
@@ -174,8 +175,25 @@ public class RouteController {
         routingButtons.add(doneRouting);
         routingButtons.add(cancel);
 
+
         context.getStage().addNamedActor(doneRouting);
         context.getStage().addNamedActor(cancel);
+
+        final InputListener keyListener = new InputListener() {
+            @Override
+            public boolean keyDown(InputEvent event, int keycode) {
+                if (keycode == Input.Keys.ESCAPE) {
+                    endRouting();
+                    //Removes itself from the keylisteners of the game as otherwise there would be a lot of null pointer exceptions and unintended behaviour
+                    context.getStage().removeListener(this);
+                }
+                //keyDown requires you to return the boolean true when the function has completed, so this ends the function
+                return true;
+            }
+        };
+
+        //Adds the keyListener to the game
+        context.getStage().addListener(keyListener);
     }
 
     private void confirmed() {
