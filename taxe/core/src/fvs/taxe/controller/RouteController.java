@@ -1,13 +1,11 @@
 package fvs.taxe.controller;
 
 import Util.Tuple;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import fvs.taxe.TaxeGame;
 import fvs.taxe.clickListener.ReplayClickListener;
@@ -178,22 +176,6 @@ public class RouteController {
 
         context.getStage().addNamedActor(doneRouting);
         context.getStage().addNamedActor(cancel);
-
-        final InputListener keyListener = new InputListener() {
-            @Override
-            public boolean keyDown(InputEvent event, int keycode) {
-                if (keycode == Input.Keys.ESCAPE) {
-                    endRouting();
-                    //Removes itself from the keylisteners of the game as otherwise there would be a lot of null pointer exceptions and unintended behaviour
-                    context.getStage().removeListener(this);
-                }
-                //keyDown requires you to return the boolean true when the function has completed, so this ends the function
-                return true;
-            }
-        };
-
-        //Adds the keyListener to the game
-        context.getStage().addListener(keyListener);
     }
 
     private void confirmed() {
