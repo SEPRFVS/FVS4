@@ -166,19 +166,20 @@ public class ReplayControlsController {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				if(!((ImageButton) event.getListenerActor()).isDisabled()) {
-					boolean goAgain = true;
-					int startTurn = context.getGameLogic().getPlayerManager().getTurnNumber();
-					while(goAgain && context.getGameLogic().getPlayerManager().getTurnNumber() == startTurn) {
-						if(!context.getReplayManager().isEnd()) {
-							context.getReplayManager().playSingle();
-						} else {
-							UnifiedDialog nomore = new UnifiedDialog("End of Replay", context.getSkin(), "redwin");
-							nomore.text("You have reached the end of the replay");
-							nomore.button("OK");
-							nomore.show(controlStage);
-							goAgain = false;
+					final int jumpTo = context.getGameLogic().getPlayerManager().getTurnNumber() + 1;
+					context.getGameLogic().getPlayerManager().subscribeTurnChanged(new TurnListener(){
+						@Override
+						public void changed() {
+							if(context.getGameLogic().getPlayerManager().getTurnNumber() == jumpTo) {
+								context.getReplayManager().replayingToggle();
+								play.setDisabled(false);
+								jump.setDisabled(false);
+							}
 						}
-					}
+					});
+					context.getReplayManager().replayingToggle();
+					play.setDisabled(true);
+					jump.setDisabled(true);
 				}
 			}
 		});

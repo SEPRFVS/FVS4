@@ -140,8 +140,10 @@ public class ReplayManager {
 
             playPosition++;
             replayingClick = false;
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
+            replaying = false;
+            
 
             UnifiedDialog oops = new UnifiedDialog("Oops!", context.getSkin(), "redwin");
             oops.text("This is embarrassing, but our Replay Player crashed. Press 'End replay' button");
