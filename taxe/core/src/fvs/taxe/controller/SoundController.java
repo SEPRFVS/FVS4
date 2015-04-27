@@ -25,8 +25,17 @@ public class SoundController {
 	private float musicVolume = 0.2f;
 	
 	public SoundController() {
+		this(true);		
+	}
+	
+	public SoundController(boolean loadAudio) {
 		loadSettings();
-		
+		if(loadAudio) {
+			loadAudio();
+		}
+	}
+	
+	private void loadAudio() {
 		backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("sound/noise.mp3"));
 		sounds.add(new Tuple<String, Sound>("crash", Gdx.audio.newSound(Gdx.files.internal("sound/crash.mp3"))));
 		sounds.add(new Tuple<String, Sound>("engineer", Gdx.audio.newSound(Gdx.files.internal("sound/engineer.mp3"))));

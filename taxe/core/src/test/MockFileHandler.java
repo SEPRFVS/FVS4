@@ -59,6 +59,6 @@ public class MockFileHandler implements Files {
 
     @Override
     public boolean isLocalStorageAvailable() {
-        return false;
+        return true;
     }
 }
