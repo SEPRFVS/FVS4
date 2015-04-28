@@ -28,7 +28,7 @@ public class DialogStationMultitrain extends ReplayDialog {
             }
 
 
-            button(train.getName() + destination + " (Player " + train.getPlayer().getPlayerNumber() + ")", trainString(train));
+            button(train.getName() + destination + " (" + train.getPlayer().getName() + ")", trainString(train));
             getButtonTable().row();
         }
 
