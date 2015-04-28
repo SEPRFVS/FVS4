@@ -1,14 +1,14 @@
 package fvs.taxe.clickListener;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import fvs.taxe.Button;
+import fvs.taxe.TaxeGame;
 import fvs.taxe.actor.TrainActor;
 import fvs.taxe.controller.Context;
 import fvs.taxe.controller.StationController;
@@ -116,6 +116,9 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                 TrainController trainController = new TrainController(context);
                 trainController.setTrainsVisible(null, false);
 
+                final TextButton cancel = new TextButton("Cancel", context.getSkin());
+                cancel.setPosition(TaxeGame.WIDTH - 10.0f - cancel.getWidth(), TaxeGame.HEIGHT - 33.0f);
+
                 //A station click listener is generated to handle the placement of the train
                 final StationClickListener stationListener = new StationClickListener() {
                     @Override
@@ -141,37 +144,35 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                             //Unsubscribes from the listener so that it does not call this code again when it is obviously not necessary, without this placing of trains would never end
                             StationController.unsubscribeStationClick(this);
                             context.getGameLogic().setState(GameState.NORMAL);
+
+                            cancel.remove();
                         }
                     }
                 };
 
-                final InputListener keyListener = new InputListener() {
+
+                //If the cancel button is clicked then the routing is ended but none of the positions are saved as a route in the backend
+                cancel.addListener(new ReplayClickListener(context.getReplayManager(), cancel) {
                     @Override
-                    public boolean keyDown(InputEvent event, int keycode) {
-                        //If the Escape key is pressed while placing a train then it is cancelled
-                        //This is a new addition as the original code did not allow the user to cancel placement of trains once they had begun which was frustrating
-                        if (keycode == Input.Keys.ESCAPE) {
-                            //Sets all of the currently placed trains back to visible
-                            TrainController trainController = new TrainController(context);
-                            trainController.setTrainsVisible(null, true);
+                    public void clicked(InputEvent event, float x, float y) {
+                        super.clicked(event, x, y);
+                        //Sets all of the currently placed trains back to visible
+                        TrainController trainController = new TrainController(context);
+                        trainController.setTrainsVisible(null, true);
 
-                            //Resets the cursor
-                            Gdx.input.setCursorImage(null, 0, 0);
+                        //Resets the cursor
+                        Gdx.input.setCursorImage(null, 0, 0);
 
-                            //Unsubscribes from the listener so that it does not call the code when it is not intended to
-                            StationController.unsubscribeStationClick(stationListener);
-                            context.getGameLogic().setState(GameState.NORMAL);
+                        //Unsubscribes from the listener so that it does not call the code when it is not intended to
+                        StationController.unsubscribeStationClick(stationListener);
+                        context.getGameLogic().setState(GameState.NORMAL);
 
-                            //Removes itself from the keylisteners of the game as otherwise there would be a lot of null pointer exceptions and unintended behaviour
-                            context.getStage().removeListener(this);
-                        }
-                        //keyDown requires you to return the boolean true when the function has completed, so this ends the function
-                        return true;
+                        cancel.remove();
+
                     }
-                };
+                });
+                context.getStage().addNamedActor(cancel);
 
-                //Adds the keyListener to the game
-                context.getStage().addListener(keyListener);
 
                 //Adds the stationClick listener to the stationController's listeners
                 StationController.subscribeStationClick(stationListener);
@@ -198,6 +199,9 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                 Pixmap pixmap = new Pixmap(Gdx.files.internal("BlockageCursor.png"));
                 Gdx.input.setCursorImage(pixmap, 0, 0); // these numbers will need tweaking
                 pixmap.dispose();
+
+                final TextButton cancel = new TextButton("Cancel", context.getSkin());
+                cancel.setPosition(TaxeGame.WIDTH - 10.0f - cancel.getWidth(), TaxeGame.HEIGHT - 33.0f);
 
                 //Indicates that a resource is currently being placed and to hide all trains
                 //While it would be useful to see trains while placing an obstacle, this was done to remove the possibility of trains preventing the user being able to click a node
@@ -261,44 +265,42 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                             obstacle.getStation2().getActor().setSelected(false);
                             obstacle.setStation1(null);
                             obstacle.setStation2(null);
+
+                            cancel.remove();
                         }
                     }
                 };
-                final InputListener keyListener = new InputListener() {
+
+                //If the cancel button is clicked then the routing is ended but none of the positions are saved as a route in the backend
+                cancel.addListener(new ReplayClickListener(context.getReplayManager(), cancel) {
                     @Override
-                    public boolean keyDown(InputEvent event, int keycode) {
-                        //If the Escape key is pressed while placing an obstacle then it is cancelled
-                        if (keycode == Input.Keys.ESCAPE) {
-                            //Makes all trains visible
-                            TrainController trainController = new TrainController(context);
-                            trainController.setTrainsVisible(null, true);
+                    public void clicked(InputEvent event, float x, float y) {
+                        super.clicked(event, x, y);
 
-                            //Resets the station selection
-                            if (obstacle.getStation1() != null) {
-                                obstacle.getStation1().getActor().setSelected(false);
-                                obstacle.setStation1(null);
-                            }
+                        TrainController trainController = new TrainController(context);
+                        trainController.setTrainsVisible(null, true);
 
-                            //Resets cursor
-                            Gdx.input.setCursorImage(null, 0, 0);
-
-                            //Unsubscribes from the StationClickListener as this would cause a lot of errors and unexpected behaviour is not called from the correct context
-                            StationController.unsubscribeStationClick(stationListener);
-                            context.getGameLogic().setState(GameState.NORMAL);
-
-                            //Resets the topBar
-                            context.getSideBarController().clearMessage();
-
-                            //Removes itself from the keylisteners of the game as otherwise there would be a lot of null pointer exceptions and unintended behaviour
-                            context.getStage().removeListener(this);
+                        //Resets the station selection
+                        if (obstacle.getStation1() != null) {
+                            obstacle.getStation1().getActor().setSelected(false);
+                            obstacle.setStation1(null);
                         }
-                        //keyDown requires you to return the boolean true when the function has completed, so this ends the function
-                        return true;
-                    }
-                };
 
-                //Adds the listeners to their relevant entities
-                context.getStage().addListener(keyListener);
+                        //Resets cursor
+                        Gdx.input.setCursorImage(null, 0, 0);
+
+                        //Unsubscribes from the StationClickListener as this would cause a lot of errors and unexpected behaviour is not called from the correct context
+                        StationController.unsubscribeStationClick(stationListener);
+                        context.getGameLogic().setState(GameState.NORMAL);
+
+                        //Resets the topBar
+                        context.getSideBarController().clearMessage();
+
+                        cancel.remove();
+                    }
+                });
+                context.getStage().addNamedActor(cancel);
+
                 StationController.subscribeStationClick(stationListener);
 
                 break;
@@ -318,6 +320,9 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                 final TrainController trainController = new TrainController(context);
                 trainController.setTrainsVisible(null, false);
                 context.getSideBarController().displayMessage("Placing Engineer");
+
+                final TextButton cancel = new TextButton("Cancel", context.getSkin());
+                cancel.setPosition(TaxeGame.WIDTH - 10.0f - cancel.getWidth(), TaxeGame.HEIGHT - 33.0f);
 
                 //Adds a station click listener that handles all the logic
                 final StationClickListener stationListener = new StationClickListener() {
@@ -368,43 +373,44 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                             engineer.getStation2().getActor().setSelected(false);
                             engineer.setStation1(null);
                             engineer.setStation2(null);
+
+                            cancel.remove();
                         }
                     }
                 };
                 StationController.subscribeStationClick(stationListener);
 
-                //Adds a keyListener that triggers when the
-                final InputListener keyListener = new InputListener() {
+
+                //If the cancel button is clicked then the routing is ended but none of the positions are saved as a route in the backend
+                cancel.addListener(new ReplayClickListener(context.getReplayManager(), cancel) {
                     @Override
-                    public boolean keyDown(InputEvent event, int keycode) {
-                        if (keycode == Input.Keys.ESCAPE) {
-                            //Makes all trains visible
-                            TrainController trainController = new TrainController(context);
-                            trainController.setTrainsVisible(null, true);
+                    public void clicked(InputEvent event, float x, float y) {
+                        super.clicked(event, x, y);
 
-                            //Resets the station selection
-                            if (engineer.getStation1() != null) {
-                                engineer.getStation1().getActor().setSelected(false);
-                                engineer.setStation1(null);
-                            }
+                        TrainController trainController = new TrainController(context);
+                        trainController.setTrainsVisible(null, true);
 
-                            //Resets cursor
-                            Gdx.input.setCursorImage(null, 0, 0);
-
-                            //Unsubscribes from the StationClickListener as this would cause a lot of errors and unexpected behaviour is not called from the correct context
-                            StationController.unsubscribeStationClick(stationListener);
-                            context.getGameLogic().setState(GameState.NORMAL);
-
-                            //Resets the topBar
-                            context.getSideBarController().clearMessage();
-
-                            //Removes itself from the keylisteners of the game as otherwise there would be a lot of null pointer exceptions and unintended behaviour
-                            context.getStage().removeListener(this);
+                        //Resets the station selection
+                        if (engineer.getStation1() != null) {
+                            engineer.getStation1().getActor().setSelected(false);
+                            engineer.setStation1(null);
                         }
-                        return true;
+
+                        //Resets cursor
+                        Gdx.input.setCursorImage(null, 0, 0);
+
+                        //Unsubscribes from the StationClickListener as this would cause a lot of errors and unexpected behaviour is not called from the correct context
+                        StationController.unsubscribeStationClick(stationListener);
+                        context.getGameLogic().setState(GameState.NORMAL);
+
+                        //Resets the topBar
+                        context.getSideBarController().clearMessage();
+
+                        cancel.remove();
                     }
-                };
-                this.context.getStage().addListener(keyListener);
+                });
+                context.getStage().addNamedActor(cancel);
+
                 break;
             }
 
@@ -451,6 +457,9 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                 final TrainController trainController = new TrainController(context);
                 trainController.setTrainsVisible(null, false);
                 context.getSideBarController().displayMessage("Placing new connection");
+
+                final TextButton cancel = new TextButton("Cancel", context.getSkin());
+                cancel.setPosition(TaxeGame.WIDTH - 10.0f - cancel.getWidth(), TaxeGame.HEIGHT - 33.0f);
 
                 //Adds a station click listener that handles all the logic
                 final StationClickListener stationListener = new StationClickListener() {
@@ -502,43 +511,46 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                             connectionModifier.getStation2().getActor().setSelected(false);
                             connectionModifier.setStation1(null);
                             connectionModifier.setStation2(null);
+
+                            cancel.remove();
                         }
                     }
                 };
                 StationController.subscribeStationClick(stationListener);
 
-                //Adds a keyListener that triggers when the
-                final InputListener keyListener = new InputListener() {
+
+
+                //If the cancel button is clicked then the routing is ended but none of the positions are saved as a route in the backend
+                cancel.addListener(new ReplayClickListener(context.getReplayManager(), cancel) {
                     @Override
-                    public boolean keyDown(InputEvent event, int keycode) {
-                        if (keycode == Input.Keys.ESCAPE) {
-                            //Makes all trains visible
-                            TrainController trainController = new TrainController(context);
-                            trainController.setTrainsVisible(null, true);
+                    public void clicked(InputEvent event, float x, float y) {
+                        super.clicked(event, x, y);
 
-                            //Resets cursor
-                            Gdx.input.setCursorImage(null, 0, 0);
+                        //Makes all trains visible
+                        TrainController trainController = new TrainController(context);
+                        trainController.setTrainsVisible(null, true);
 
-                            //Resets the station selection
-                            if (connectionModifier.getStation1() != null) {
-                                connectionModifier.getStation1().getActor().setSelected(false);
-                                connectionModifier.setStation1(null);
-                            }
+                        //Resets cursor
+                        Gdx.input.setCursorImage(null, 0, 0);
 
-                            //Unsubscribes from the StationClickListener as this would cause a lot of errors and unexpected behaviour is not called from the correct context
-                            StationController.unsubscribeStationClick(stationListener);
-                            context.getGameLogic().setState(GameState.NORMAL);
-
-                            //Resets the topBar
-                            context.getSideBarController().clearMessage();
-
-                            //Removes itself from the keylisteners of the game as otherwise there would be a lot of null pointer exceptions and unintended behaviour
-                            context.getStage().removeListener(this);
+                        //Resets the station selection
+                        if (connectionModifier.getStation1() != null) {
+                            connectionModifier.getStation1().getActor().setSelected(false);
+                            connectionModifier.setStation1(null);
                         }
-                        return true;
+
+                        //Unsubscribes from the StationClickListener as this would cause a lot of errors and unexpected behaviour is not called from the correct context
+                        StationController.unsubscribeStationClick(stationListener);
+                        context.getGameLogic().setState(GameState.NORMAL);
+
+                        //Resets the topBar
+                        context.getSideBarController().clearMessage();
+
+                        cancel.remove();
                     }
-                };
-                this.context.getStage().addListener(keyListener);
+                });
+                context.getStage().addNamedActor(cancel);
+
                 break;
             }
 
@@ -554,6 +566,9 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                 final TrainController trainController = new TrainController(context);
                 trainController.setTrainsVisible(null, false);
                 context.getSideBarController().displayMessage("Removing an old connection");
+
+                final TextButton cancel = new TextButton("Cancel", context.getSkin());
+                cancel.setPosition(TaxeGame.WIDTH - 10.0f - cancel.getWidth(), TaxeGame.HEIGHT - 33.0f);
 
                 //Adds a station click listener that handles all the logic
                 final StationClickListener stationListener = new StationClickListener() {
@@ -615,43 +630,45 @@ public class DialogButtonClicked implements ResourceDialogClickListener {
                             connectionModifier.getStation2().getActor().setSelected(false);
                             connectionModifier.setStation1(null);
                             connectionModifier.setStation2(null);
+
+                            cancel.remove();
                         }
 
                     }
                 };
                 StationController.subscribeStationClick(stationListener);
 
-                //Adds a keyListener that triggers when the
-                final InputListener keyListener = new InputListener() {
+
+                cancel.addListener(new ReplayClickListener(context.getReplayManager(), cancel) {
                     @Override
-                    public boolean keyDown(InputEvent event, int keycode) {
-                        if (keycode == Input.Keys.ESCAPE) {
-                            //Makes all trains visible
-                            TrainController trainController = new TrainController(context);
-                            trainController.setTrainsVisible(null, true);
+                    public void clicked(InputEvent event, float x, float y) {
+                        super.clicked(event, x, y);
 
-                            //Resets cursor
-                            Gdx.input.setCursorImage(null, 0, 0);
+                        //Makes all trains visible
+                        TrainController trainController = new TrainController(context);
+                        trainController.setTrainsVisible(null, true);
 
-                            if (connectionModifier.getStation1() != null) {
-                                connectionModifier.getStation1().getActor().setSelected(false);
-                                connectionModifier.setStation1(null);
-                            }
+                        //Resets cursor
+                        Gdx.input.setCursorImage(null, 0, 0);
 
-                            //Unsubscribes from the StationClickListener as this would cause a lot of errors and unexpected behaviour is not called from the correct context
-                            StationController.unsubscribeStationClick(stationListener);
-                            context.getGameLogic().setState(GameState.NORMAL);
-
-                            //Resets the topBar
-                            context.getSideBarController().clearMessage();
-
-                            //Removes itself from the keylisteners of the game as otherwise there would be a lot of null pointer exceptions and unintended behaviour
-                            context.getStage().removeListener(this);
+                        if (connectionModifier.getStation1() != null) {
+                            connectionModifier.getStation1().getActor().setSelected(false);
+                            connectionModifier.setStation1(null);
                         }
-                        return true;
+
+                        //Unsubscribes from the StationClickListener as this would cause a lot of errors and unexpected behaviour is not called from the correct context
+                        StationController.unsubscribeStationClick(stationListener);
+                        context.getGameLogic().setState(GameState.NORMAL);
+
+                        //Resets the topBar
+                        context.getSideBarController().clearMessage();
+
+                        cancel.remove();
                     }
-                };
-                this.context.getStage().addListener(keyListener);
+                });
+                context.getStage().addNamedActor(cancel);
+
+
                 break;
             }
 
