@@ -159,6 +159,11 @@ public class GameScreen extends ScreenAdapter {
         goalController.showCurrentPlayerGoals();
         resourceController.drawPlayerResources(gameLogic.getPlayerManager().getCurrentPlayer());
         game.soundController.addSettingsButton(stage, skin);
+        
+        if(gameLogic.getPlayerManager().getTurnNumber() == 0) {
+            //Show news at start of game only
+            new DialogNews(context, context.getReplayManager()).show(stage);
+        }
     }
 
     protected void setRandomSeed(ReplayManager rm) {
@@ -242,11 +247,6 @@ public class GameScreen extends ScreenAdapter {
         
         //Load background music
         game.soundController.playBackgroundMusic();
-        
-        if(gameLogic.getPlayerManager().getTurnNumber() == 0) {
-            //Show news at start of game only
-            new DialogNews(context, context.getReplayManager()).show(stage);
-        }
     }
 
 
