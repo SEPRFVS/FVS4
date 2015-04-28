@@ -135,7 +135,7 @@ public class SideBarController {
         	//Set position based on index in array
         	float position = ((CONTROLS_WIDTH - 20.0f)/gameLogic.getPlayerManager().getAllPlayers().size()) * gameLogic.getPlayerManager().getAllPlayers().indexOf(player);
         	position += TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f;
-        	game.fontTiny.draw(game.batch, player.getName(), position, 39.0f);
+        	game.fontTiny.draw(game.batch, player.getName(), position, 42.0f);
         	game.fontMedium.draw(game.batch, integer.format(player.getScore()), position, 64.0f);
         	if (player == gameLogic.getPlayerManager().getCurrentPlayer()) {
         		//Reset colours
