@@ -101,7 +101,7 @@ public class GameScreen extends ScreenAdapter {
             public void changed(GameState state) {
                 if (gameLogic.getPlayerManager().getTurnNumber() == gameLogic.getTotalTurns() && state == GameState.NORMAL && gameLogic.getTotalTurns() > 0) {
                     //If the game should end due to the turn number or points total then the appropriate dialog is displayed
-                    DialogEndGame dia = new DialogEndGame(GameScreen.this.game, gameLogic.getPlayerManager(), skin);
+                    DialogEndGame dia = new DialogEndGame(GameScreen.this.game, gameLogic.getPlayerManager(), skin, context);
                     dia.show(stage);
                 } else if (gameLogic.getState() == GameState.ROUTING || gameLogic.getState() == GameState.PLACING_TRAIN) {
                     //If the player is routing or place a train then the goals and nodes are colour coded

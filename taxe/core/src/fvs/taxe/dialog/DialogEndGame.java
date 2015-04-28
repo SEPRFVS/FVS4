@@ -1,19 +1,25 @@
 package fvs.taxe.dialog;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 import fvs.taxe.MainMenuScreen;
+import fvs.taxe.ReplayScreen;
 import fvs.taxe.TaxeGame;
+import fvs.taxe.controller.Context;
 import gameLogic.player.Player;
 import gameLogic.player.PlayerManager;
 
 public class DialogEndGame extends UnifiedDialog {
     private TaxeGame game;
+    private Context context;
 
-    public DialogEndGame(TaxeGame game, PlayerManager pm, Skin skin) {
+    public DialogEndGame(TaxeGame game, PlayerManager pm, Skin skin, Context context) {
         super("GAME OVER", skin, "greenwin");
         this.game = game;
+        this.context = context;
 
         double highScore = 0;
         int playerNum = 0;
@@ -39,6 +45,8 @@ public class DialogEndGame extends UnifiedDialog {
         
         button("Main Menu", "MENU");
         getButtonTable().row();
+        button("Replay", "REPLAY");
+        getButtonTable().row();
         button("Exit", "EXIT");
     }
 
@@ -47,6 +55,16 @@ public class DialogEndGame extends UnifiedDialog {
         if (obj == "EXIT") {
             //Closes the app and disposes any machine resources used
             Gdx.app.exit();
+        } else if (obj == "REPLAY") {
+        	//Use copy of code from Start Replay button (could reference in the future)
+        	ArrayList<String> playerNames = new ArrayList<String>();
+            for(Player player : context.getGameLogic().getPlayerManager().getAllPlayers()) {
+            	playerNames.add(player.getName());
+            }
+
+			context.getReplayManager().setGame(context.getGameLogic());
+            context.getTaxeGame().setScreen(new ReplayScreen(context.getTaxeGame(), context.getReplayManager(), playerNames, context.getGameLogic().getTotalTurns()));
+            cancel();
         } else {
         	game.setScreen(new MainMenuScreen(game));
         }
