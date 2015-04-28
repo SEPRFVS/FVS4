@@ -24,9 +24,6 @@ public class Game {
 
     //Number of turns in the game
     private int totalTurns = 30;
-    
-    //Maximum points for each turn
-    public final int MAX_POINTS = 10000;
 
     public Game() {
         //Creates players
