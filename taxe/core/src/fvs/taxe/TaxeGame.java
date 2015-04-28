@@ -20,6 +20,7 @@ public class TaxeGame extends Game {
     public SpriteBatch batch;
     public Skin skin;
     public BitmapFont font;
+    public BitmapFont fontMedium;
 	public BitmapFont fontSmall;
 	public BitmapFont fontTiny;
     public ShapeRenderer shapeRenderer;
@@ -37,6 +38,8 @@ public class TaxeGame extends Game {
 
         // font size 50pt
         font = skin.getFont("play-50");
+        //font size 30pt
+        fontMedium = skin.getFont("play-30");
         //font size 20pt
         fontSmall = skin.getFont("play-20");
 		//font size 14pt

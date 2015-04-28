@@ -5,10 +5,13 @@ import java.text.DecimalFormat;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+import fvs.taxe.MainMenuScreen;
 import fvs.taxe.TaxeGame;
 import gameLogic.Game;
 import fvs.taxe.clickListener.ReplayClickListener;
@@ -127,17 +130,17 @@ public class SideBarController {
         	if (player == gameLogic.getPlayerManager().getCurrentPlayer()) {
         		//Highlight current player
         		game.fontTiny.setColor(Color.RED);
-        		game.font.setColor(Color.RED);
+        		game.fontMedium.setColor(Color.RED);
         	}
         	//Set position based on index in array
         	float position = ((CONTROLS_WIDTH - 20.0f)/gameLogic.getPlayerManager().getAllPlayers().size()) * gameLogic.getPlayerManager().getAllPlayers().indexOf(player);
         	position += TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f;
-        	game.fontTiny.draw(game.batch, player.getName(), position, 24.0f);
-        	game.font.draw(game.batch, integer.format(player.getScore()), position, 64.0f);
+        	game.fontTiny.draw(game.batch, player.getName(), position, 39.0f);
+        	game.fontMedium.draw(game.batch, integer.format(player.getScore()), position, 64.0f);
         	if (player == gameLogic.getPlayerManager().getCurrentPlayer()) {
         		//Reset colours
         		game.fontTiny.setColor(Color.WHITE);
-        		game.font.setColor(Color.WHITE);
+        		game.fontMedium.setColor(Color.WHITE);
         	}
         }
         
@@ -177,5 +180,17 @@ public class SideBarController {
         });
 
         context.getStage().addNamedActor(endTurnButton);
+    }
+    
+    public void addExitGameButton(Stage stage) {
+    	TextButton exitButton = new TextButton("Exit Game", context.getSkin());
+    	exitButton.setPosition(TaxeGame.WIDTH - CONTROLS_WIDTH + 10.0f, 2.0f);
+    	exitButton.addListener(new ClickListener() {
+    		@Override
+    		public void clicked(InputEvent event, float x, float y) {
+    			context.getTaxeGame().setScreen(new MainMenuScreen(context.getTaxeGame()));
+    		}
+    	});
+    	stage.addActor(exitButton);
     }
 }

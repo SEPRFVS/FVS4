@@ -42,6 +42,8 @@ public class ReplayScreen extends GameScreen {
     	if(controlStage != null) {
     		Gdx.input.setInputProcessor(controlStage);
     	}
+    	
+    	context.getSideBarController().addExitGameButton(controlStage);
     }
     
     @Override

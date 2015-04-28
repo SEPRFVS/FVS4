@@ -156,6 +156,7 @@ public class GameScreen extends ScreenAdapter {
         //This is why the header texts and the buttons are rendered separately, to prevent these issues from occuring
         stationController.renderStations();
         sideBarController.addEndTurnButton();
+        sideBarController.addExitGameButton(stage);
         goalController.showCurrentPlayerGoals();
         resourceController.drawPlayerResources(gameLogic.getPlayerManager().getCurrentPlayer());
         game.soundController.addSettingsButton(stage, skin);

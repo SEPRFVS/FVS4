@@ -13,6 +13,7 @@ com.badlogic.gdx.graphics.g2d.BitmapFont: {
 	merriweather-3: { file: Merriweather-Black-3.fnt },
 	merriweather-16: { file: Merriweather-Black-16.fnt },
 	play-50: { file: play-50.fnt },
+	play-30: { file: play-30.fnt },
 	play-20: { file: play-20.fnt },
 	default-font: { file: play-17.fnt },
 	play-14: { file: play-14.fnt }
